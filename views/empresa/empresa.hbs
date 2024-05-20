@@ -1,26 +1,26 @@
-<!-- card examen-->
+<!-- card empresa-->
 <div class="card mt-4">
     <div class="card-header">
-        <i class="fas fa-users me-1"></i> Registro de examenes
+        <i class="fas fa-users me-1"></i> Registro de empresaes
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-12">
+            <div class="col-6">
                 <button id="btn_modal" type="button" class="btn btn-success">Crear nuevo</button>
             </div>
         </div>
         <hr />
-        <table id="tablaExamen" style="white-space: nowrap;">
+        <table id="tablaempresa" style="white-space: nowrap;">
             <thead>
             </thead>
             <tbody>
             </tbody>
         </table>
     </div>
-</div> <!-- end card examen-->
+</div> <!-- end card empresa-->
 
-<!-- modal examen-->
-<div class="modal fade" id="modal_Examen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+<!-- modal empresa-->
+<div class="modal modal-lg fade" id="modal_empresa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
     data-bs-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -31,17 +31,38 @@
             <div class="modal-body">
                 <!--Input modal-->
                 <div class="row">
-                    <div class="col-12">
-                        <label for="examen_nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="examen_nombre" autocomplete="off">
+                    <div class="col-6">
+                        <label for="empresa_nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="empresa_nombre" autocomplete="off">
+                    </div>
+                    <div class="col-6">
+                        <label for="empresa_numero_ruc" class="form-label">RUC</label>
+                        <input type="text" class="form-control" id="empresa_numero_ruc" autocomplete="off">
+                    </div>
+                    <div class="col-6">
+                        <label for="empresa_rubro" class="form-label">Rubro</label>
+                        <input type="text" class="form-control" id="empresa_rubro" autocomplete="off">
+                    </div>
+
+                    <div class="col-6">
+                        <label for="empresa_direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="empresa_direccion" autocomplete="off">
+                    </div>
+                    <div class="col-6">
+                        <label for="empresa_telefono" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control" id="empresa_telefono" autocomplete="off">
+                    </div>
+                    <div class="col-6">
+                        <label for="empresa_correo" class="form-label">Correo</label>
+                        <input type="text" class="form-control" id="empresa_correo" autocomplete="off">
                     </div>
                     <div class="col-12">
-                        <label for="examen_fecha_apertura" class="form-label">Fecha de apertura</label>
-                        <input type="datetime-local" class="form-control" id="examen_fecha_apertura" autocomplete="off">
+                        <label for="empresa_descripcion" class="form-label">Descripción</label>
+                        <textarea type="text" class="form-control" id="empresa_descripcion" autocomplete="off"></textarea>
                     </div>
                     <div class="col-12">
-                        <label for="examen_fecha_cierre" class="form-label">Fecha de cierre</label>
-                        <input type="datetime-local" class="form-control" id="examen_fecha_cierre" autocomplete="off">
+                        <label for="empresa_historia" class="form-label">Historia</label>
+                        <textarea type="text" class="form-control" id="empresa_historia" autocomplete="off"></textarea>
                     </div>
                 </div>
                 <!--Input modal end-->
@@ -61,6 +82,6 @@
             </div>
         </div>
     </div>
-</div> <!-- end modal examen -->
+</div> <!-- end modal empresa -->
 
 <script src="/controladores/empresa.js" type="module"></script>
