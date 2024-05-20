@@ -1,0 +1,79 @@
+<!-- card empresa_producto-->
+<div class="card mt-4">
+    <div class="card-header">
+        <i class="fas fa-users me-1"></i> Registro de Productos
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+                <button id="btn_modal" type="button" class="btn btn-success">Crear nuevo</button>
+            </div>
+        </div>
+        <hr />
+        <table id="tablaempresa_producto" style="white-space: nowrap;">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- end card empresa_producto-->
+
+<!-- modal empresa_producto-->
+<div class="modal fade" id="modal_empresa_producto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!--Input modal-->
+                <div class="row">
+                    <div class="col-12">
+                        <label for="empresa_producto_nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="empresa_producto_nombre" autocomplete="off">
+                    </div>
+                    <div class="col-12">
+                        <label for="empresa_producto_numero_ruc" class="form-label">Categoría</label>
+                        <input type="text" class="form-control" id="empresa_producto_numero_ruc" autocomplete="off">
+                    </div>
+                    <div class="col-6">
+                        <label for="empresa_producto_rubro" class="form-label">Stock</label>
+                        <input type="number" class="form-control" id="empresa_producto_rubro" autocomplete="off">
+                    </div>
+
+                    <div class="col-6">
+                        <label for="empresa_producto_direccion" class="form-label">Precio</label>
+                        <input type="number" class="form-control" id="empresa_producto_direccion" autocomplete="off">
+                    </div>
+                    <div class="col-6">
+                        <label for="empresa_producto_direccion" class="form-label">Moneda</label>
+                        <input type="text" class="form-control" id="empresa_producto_direccion" autocomplete="off">
+                    </div>
+                    <div class="col-6">
+                        <label for="empresa_producto_direccion" class="form-label">Estado</label>
+                        <input type="text" class="form-control" id="empresa_producto_direccion" autocomplete="off">
+                    </div>
+                </div>
+                <!--Input modal end-->
+                <!--Mensaje de alerta-->
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div id="mensajeError" class="alert alert-danger" role="alert"
+                            style="margin-bottom: 10px; display: none">
+                            A simple danger alert—check it out!
+                        </div>
+                    </div>
+                </div> <!--Mensaje de alerta end-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="btnGuardar" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div> <!-- end modal empresa_producto -->
+
+<script src="/controladores/empresa_producto.js" type="module"></script>
