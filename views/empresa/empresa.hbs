@@ -1,0 +1,66 @@
+<!-- card examen-->
+<div class="card mt-4">
+    <div class="card-header">
+        <i class="fas fa-users me-1"></i> Registro de examenes
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button id="btn_modal" type="button" class="btn btn-success">Crear nuevo</button>
+            </div>
+        </div>
+        <hr />
+        <table id="tablaExamen" style="white-space: nowrap;">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- end card examen-->
+
+<!-- modal examen-->
+<div class="modal fade" id="modal_Examen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Marca</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!--Input modal-->
+                <div class="row">
+                    <div class="col-12">
+                        <label for="examen_nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="examen_nombre" autocomplete="off">
+                    </div>
+                    <div class="col-12">
+                        <label for="examen_fecha_apertura" class="form-label">Fecha de apertura</label>
+                        <input type="datetime-local" class="form-control" id="examen_fecha_apertura" autocomplete="off">
+                    </div>
+                    <div class="col-12">
+                        <label for="examen_fecha_cierre" class="form-label">Fecha de cierre</label>
+                        <input type="datetime-local" class="form-control" id="examen_fecha_cierre" autocomplete="off">
+                    </div>
+                </div>
+                <!--Input modal end-->
+                <!--Mensaje de alerta-->
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div id="mensajeError" class="alert alert-danger" role="alert"
+                            style="margin-bottom: 10px; display: none">
+                            A simple danger alert—check it out!
+                        </div>
+                    </div>
+                </div> <!--Mensaje de alerta end-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="btnGuardar" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div> <!-- end modal examen -->
+
+<script src="/controladores/empresa.js" type="module"></script>
