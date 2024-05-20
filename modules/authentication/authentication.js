@@ -17,11 +17,7 @@ router.post('/signup', passport.authenticate('local.signup', {
 
 // SINGIN
 router.get('/signin', (req, res) => {
-<<<<<<< HEAD
   res.render('empresa_colaborador/empresa_colaborador');
-=======
-  res.render('empresa_redes/empresa_redes');
->>>>>>> 5b2170a3537611d89d4173985850f8e2f50633b9
 });
 
 router.post('/signin', (req, res, next) => {
