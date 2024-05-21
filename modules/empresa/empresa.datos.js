@@ -1,23 +1,22 @@
 import pool from "../../database/conection-db.js";
 
 class CD_Empresa {
-  
   //CREATE
   async createEmpresa(data) {
     let message = "success";
     let rows = [];
     try {
-       [rows] = await pool.query(
+      [rows] = await pool.query(
         "SELECT * FROM expo_empresa WHERE empresa_numero_ruc  = ? or empresa_correo = ?",
         [data.ruc, data.correo]
       );
       if (rows.length > 0) {
         message = "Correo o número ruc ya existente";
       } else {
-         [rows] = await pool.query(
+        [rows] = await pool.query(
           "INSERT INTO expo_empresa (empresa_nombre , empresa_numero_ruc, empresa_rubro, empresa_direccion, empresa_telefono, empresa_correo, empresa_descripcion, empresa_historia, empresa_usuario_id) VALUES (?,?,?,?,?,?,?,?,?)",
           [
-            data.nombre ,
+            data.nombre,
             data.numero_ruc,
             data.rubro,
             data.direccion,
@@ -25,16 +24,16 @@ class CD_Empresa {
             data.correo,
             data.descripcion,
             data.historia,
-            data.usuario_id
+            data.usuario_id,
           ]
         );
       }
     } catch (error) {
-      message = "Algo salió mal en CD: "+error.message;
+      message = "Algo salió mal en CD: " + error.message;
     }
     return { message: message, rows: rows };
   }
-  
+
   //READ GENERAL
   async getEmpresas() {
     let message = "success";
@@ -42,11 +41,11 @@ class CD_Empresa {
     try {
       [rows] = await pool.query("SELECT * FROM expo_empresa");
     } catch (error) {
-      message = "Algo salió mal en CD: "+error.message;
+      message = "Algo salió mal en CD: " + error.message;
     }
     return { message: message, rows: rows };
   }
-  
+
   //READ ID
   async getEmpresa(id) {
     let message = "success";
@@ -56,15 +55,15 @@ class CD_Empresa {
         "SELECT * FROM expo_empresa WHERE empresa_id = ?",
         [id]
       );
-      if (rows.length==0) {
+      if (rows.length == 0) {
         message = "Empresa no encontrada";
       }
     } catch (error) {
-      message = "Algo salió mal en CD: "+error.message;
+      message = "Algo salió mal en CD: " + error.message;
     }
     return { message: message, rows: rows };
   }
-  
+
   //UPDATE
   async updateEmpresa(id, data) {
     let sql = "UPDATE expo_empresa SET ";
@@ -108,26 +107,20 @@ class CD_Empresa {
       updates.push("empresa_usuario_id = ?");
       params.push(data.usuario_id);
     }
-    if (updates.length === 0) {
-      message = "No se proporcionaron datos para actualizar.";        
-    }
-
     sql += updates.join(", ");
     sql += " WHERE empresa_id = ?";
     params.push(id);
-
     try {
       [rows] = await pool.query(sql, params);
       if (rows.affectedRows === 0) {
         message = "Empresa no encontrada";
       }
     } catch (error) {
-        message = "Algo salió mal en CD: " + error.message;
+      message = "Algo salió mal en CD: " + error.message;
     }
     return { message: message, rows: rows };
   }
 
-  
   //DELETE
   async deleteEmpresa(id) {
     let message = "success";
@@ -137,11 +130,11 @@ class CD_Empresa {
         "DELETE FROM expo_empresa WHERE empresa_id = (?)",
         [id]
       );
-      if (rows.affectedRows == 0) { 
+      if (rows.affectedRows == 0) {
         message = "Empresa no encontrada";
       }
     } catch (error) {
-      message = "Algo salió mal en CD: "+error.message;
+      message = "Algo salió mal en CD: " + error.message;
     }
     return { message: message, rows: rows };
   }
