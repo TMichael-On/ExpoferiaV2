@@ -14,14 +14,17 @@ class CN_Empresa {
     //READ GENERAL
     async getEmpresas() {
         const result = await objCapaDato.getEmpresas();
-        var objDto = new EmpresaDto(result);
+        var objDto = new EmpresaDto(result.rows);
         result.rows = objDto.getData()
         return result
     }
 
     //READ ID
     async getEmpresa(id) {        
-        return await objCapaDato.getEmpresa(id);
+        const result = await objCapaDato.getEmpresa(id);
+        var objDto = new EmpresaDto(result.rows);
+        result.rows = objDto.getData()
+        return result
     }
 
     //UPDATE 

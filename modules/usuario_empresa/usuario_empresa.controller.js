@@ -4,7 +4,7 @@ import CN_UsuarioEmpresa from "./usuario_empresa.negocio.js";
 export const createUsuarioEmpresa = async (req, res) => {  
     const objCapaEmpresa = new CN_UsuarioEmpresa();
     try {
-      const rows = await objCapaEmpresa.createUsuarioEmpresa(req);
+      const rows = await objCapaEmpresa.createUsuarioEmpresa(req.body);
       res.json(rows);
     } catch (error) {
       return res.status(500).json({ message: "Something goes wrong in CP" });
@@ -26,7 +26,7 @@ export const getUsuarioEmpresas = async (req, res) => {
 export const getUsuarioEmpresa = async (req, res) => {    
     const objCapaEmpresa = new CN_UsuarioEmpresa();
     try {
-      const rows = await objCapaEmpresa.getUsuarioEmpresa(req);
+      const rows = await objCapaEmpresa.getUsuarioEmpresa(req.params.id);
       res.json(rows);
     } catch (error) {
       return res.status(500).json({ message: "Something goes wrong in CP" });
@@ -37,7 +37,7 @@ export const getUsuarioEmpresa = async (req, res) => {
 export const updateUsuarioEmpresa = async (req, res) => {    
     const objCapaEmpresa = new CN_UsuarioEmpresa();
     try {
-      const rows = await objCapaEmpresa.updateUsuarioEmpresa(req);
+      const rows = await objCapaEmpresa.updateUsuarioEmpresa(req.params.id, req.body);
       res.json(rows);
     } catch (error) {
       return res.status(500).json({ message: "Something goes wrong in CP" });
@@ -48,7 +48,7 @@ export const updateUsuarioEmpresa = async (req, res) => {
 export const deleteUsuarioEmpresa = async (req, res) => {    
     const objCapaEmpresa = new CN_UsuarioEmpresa();
     try {
-      const rows = await objCapaEmpresa.deleteUsuarioEmpresa(req);
+      const rows = await objCapaEmpresa.deleteUsuarioEmpresa(req.params.id);
       res.json(rows);
     } catch (error) {
       return res.status(500).json({ message: "Something goes wrong in CP" });
