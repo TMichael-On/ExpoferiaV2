@@ -1,4 +1,5 @@
 import CD_EmpresaColaborador from "./empresa_colaborador.datos.js";
+import EmpresaColaboradorDto from "./empresa_colaborador.dto.js";
 
 var objCapaDato = new CD_EmpresaColaborador();
 
@@ -11,12 +12,18 @@ class CN_EmpresaColaborador {
 
     //READ GENERAL
     async getEmpresaColaboradores() {        
-        return await objCapaDato.getEmpresaColaboradores();
+        const result = await objCapaDato.getEmpresaColaboradores();
+        var objDto = new EmpresaColaboradorDto(result.rows);
+        result.rows = objDto.getData()
+        return result
     }
 
     //READ ID
     async getEmpresaColaborador(id) {        
-        return await objCapaDato.getEmpresaColaborador(id);
+        const result = await objCapaDato.getEmpresaColaborador(id);    
+        var objDto = new EmpresaColaboradorDto(result.rows);
+        result.rows = objDto.getData()
+        return result
     }
 
     //UPDATE 

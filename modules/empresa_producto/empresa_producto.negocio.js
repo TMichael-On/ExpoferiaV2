@@ -1,4 +1,5 @@
 import CD_EmpresaProducto from "./empresa_producto.datos.js";
+import EmpresaProductoDto from "./empresa_producto.dto.js";
 
 var objCapaDato = new CD_EmpresaProducto();
 
@@ -11,12 +12,18 @@ class CN_EmpresaProducto {
 
     //READ GENERAL
     async getEmpresaProductos() {
-        return await objCapaDato.getEmpresaProductos();
+        const result = await objCapaDato.getEmpresaProductos();
+        var objDto = new EmpresaProductoDto(result.rows);
+        result.rows = objDto.getData()
+        return result
     }
 
     //READ ID
     async getEmpresaProducto(id) {
-        return await objCapaDato.getEmpresaProducto(id);
+        const result = await objCapaDato.getEmpresaProducto(id);
+        var objDto = new EmpresaProductoDto(result.rows);
+        result.rows = objDto.getData()
+        return result
     }
 
     //UPDATE 

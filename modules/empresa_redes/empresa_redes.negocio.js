@@ -1,4 +1,5 @@
 import CD_EmpresaRedes from "./empresa_redes.datos.js";
+import EmpresaRedesDto from "./empresa_redes.dto.js"
 
 var objCapaDato = new CD_EmpresaRedes();
 
@@ -11,12 +12,18 @@ class CN_EmpresaRedes {
 
     //READ GENERAL
     async getEmpresasRedes() {
-        return await objCapaDato.getEmpresasRedes();
+        const result = await objCapaDato.getEmpresasRedes();
+        var objDto = new EmpresaRedesDto(result.rows);
+        result.rows = objDto.getData()
+        return result
     }
 
     //READ ID
     async getEmpresaRedes(id) {        
-        return await objCapaDato.getEmpresaRedes(id);
+        const result = await objCapaDato.getEmpresaRedes(id);
+        var objDto = new EmpresaRedesDto(result.rows);
+        result.rows = objDto.getData()
+        return result
     }
 
     //UPDATE 
