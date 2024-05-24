@@ -12,15 +12,19 @@ passport.use('local.signin', new LocalStrategy({
   passwordField: 'password',
   passReqToCallback: true
 }, async (req, username, password, done) => {
-  const rows = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
+  const [rows] = await pool.query('SELECT * FROM expo_usuario_empresa WHERE usuario_correo = ?', [username]);
   if (rows.length > 0) {
     const user = rows[0];
-    const validPassword = await helpers.matchPassword(password, user.password)
-    if (validPassword) {
-      done(null, user, req.flash('success', 'Welcome ' + user.username));
-    } else {
-      done(null, false, req.flash('message', 'Incorrect Password'));
+    if(password == user.usuario_contrasena){
+      done(null, user);
     }
+        
+    // const validPassword = await helpers.matchPassword(password, user.password)
+    // if (validPassword) {
+    //   done(null, user, req.flash('success', 'Welcome ' + user.username));
+    // } else {
+    //   done(null, false, req.flash('message', 'Incorrect Password'));
+    // }
   } else {
     return done(null, false, req.flash('message', 'The Username does not exists.'));
   }
@@ -45,7 +49,7 @@ passport.use('local.signup', new LocalStrategy({
 }));
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user.usuario_id);
 });
 
 passport.deserializeUser(async (id, done) => {

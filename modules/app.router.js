@@ -11,10 +11,10 @@ const router = Router();
 
 router.use("/", authentication);
 router.use("/empresa", empresa);
-router.use("/empresa-colaborador", empresa_colaborador);
-router.use("/empresa-producto", empresa_producto);
-router.use("/empresa-redes", empresa_redes);
-router.use("/usuario-empresa", usuario_empresa);
+router.use("/colaborador", empresa_colaborador);
+router.use("/producto", empresa_producto);
+router.use("/redes", empresa_redes);
+router.use("/usuario", usuario_empresa);
 
 router.get("/prueba", (req, res) => {
     res.render('new/1')

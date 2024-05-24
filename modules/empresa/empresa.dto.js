@@ -9,15 +9,15 @@ export class EmpresaDto {
             return this.datos.map(data => {
                 return {
                     'id': data.empresa_id ?? '',
-                    'nombre': data.empresa_nombre ?? '',
-                    'numero_ruc': data.empresa_numero_ruc ?? '',
-                    'rubro': data.empresa_rubro ?? '',
-                    'direccion': data.empresa_direccion ?? '',
-                    'telefono': data.empresa_telefono ?? '',
-                    'correo': data.empresa_correo ?? '',
-                    'descripcion': data.empresa_descripcion ?? '',
-                    'historia': data.empresa_historia ?? '',
-                    'usuario_id': data.empresa_usuario_id ?? '',
+                    'Nombre': data.empresa_nombre ?? '',
+                    'RUC': data.empresa_numero_ruc ?? '',
+                    'Rubro': data.empresa_rubro ?? '',
+                    'Dirección': data.empresa_direccion ?? '',
+                    'Teléfono': data.empresa_telefono ?? '',
+                    'Correo': data.empresa_correo ?? '',
+                    'Descripción': data.empresa_descripcion ?? '',
+                    'Historia': data.empresa_historia ?? '',
+                    'Opciones': data.empresa_id ?? '',
                 };
             });
         } else {

@@ -99,7 +99,13 @@ export const deleteEmpresaColaborador = async (req, res) => {
   }
 };
 
+//PRUEBA
 export const prueba = async (req, res) => {
   const result = "PRUEBA";
   res.json({ result });
+};
+
+//VIEW
+export const view = async (req, res) => {
+  res.render('empresa_colaborador/empresa_colaborador');
 };

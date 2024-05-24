@@ -93,3 +93,8 @@ export const deleteUsuarioEmpresa = async (req, res) => {
       .json({ message: "Algo salió mal en CP: " + error.message });
   }
 };
+
+//VIEW
+export const view = async (req, res) => {
+  res.render('empresa_redes/usuario_empresa');
+};

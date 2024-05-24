@@ -60,7 +60,7 @@ export const getEmpresas = async (req, res) => {
   }
 };
 
-//READ
+//READ BY ID
 export const getEmpresa = async (req, res) => {
   const objCapaEmpresa = new CN_Empresa();
   try {
@@ -108,4 +108,9 @@ export const deleteEmpresa = async (req, res) => {
 export const prueba = async (req, res) => {
   const result = "PRUEBA";
   res.json({ result });
+};
+
+//VIEW
+export const view = async (req, res) => {
+  res.render('empresa/empresa');
 };

@@ -107,3 +107,8 @@ export const prueba = async (req, res) => {
   const result = "PRUEBA";
   res.json({ result });
 };
+
+//VIEW
+export const view = async (req, res) => {
+  res.render('empresa_producto/empresa_producto');
+};

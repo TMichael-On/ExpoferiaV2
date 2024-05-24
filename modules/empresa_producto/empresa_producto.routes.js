@@ -5,20 +5,23 @@ import {
     getEmpresaProducto,
     getEmpresaProductos,
     prueba,
-    updateEmpresaProducto
+    updateEmpresaProducto,
+    view
 } from "./empresa_producto.controller.js";
 
 const router = Router();
 //CREATE
 router.post("/create", createEmpresaProducto);
 //GET GENERAL
-router.get("", getEmpresaProductos);
+router.get("/list", getEmpresaProductos);
 //GET ID
 router.get("/:id", getEmpresaProducto);
 //UPDATE
 router.patch("/:id", updateEmpresaProducto);
 //DELETE
 router.delete("/:id", deleteEmpresaProducto);
+//VIEW
+router.get("/", view);
 
 //PRUEBA
 router.get("/prueba", prueba);
