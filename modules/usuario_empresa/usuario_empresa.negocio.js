@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 import CD_UsuarioEmpresa from "./usuario_empresa.datos.js";
 import UsuarioEmpresaDto from "./usuario_empresa.dto.js" 
 
@@ -7,8 +8,30 @@ class CN_UsuarioEmpresa {
 
     //CREATE
     async createUsuarioEmpresa(data) {    
+        let errors = [];
+        if (!data.nombre) {
+          errors.push("El nombre es requerido");
+        }
+        if (!data.apellido) {
+          errors.push("El apellido es requerido");
+        }
+        if (!data.correo) {
+          errors.push("El correo es requerido");
+        }
+        if (!data.telefono) {
+          errors.push("El teléfono es requerido");
+        }
+        if (!data.contrasena) {
+          errors.push("La contraseña es requerida");
+        }
+        if (errors.length > 0) {
+          return { message: "Failed", error: "Datos requeridos", rows: [] }
+        }
         try {
-            return await objCapaDato.createUsuarioEmpresa(data);
+            // Cifrar contraseña
+            const passwordHash = await bcrypt.hash(data.contrasena, 10)
+            data.contrasena = passwordHash
+            return await objCapaDato.createUsuarioEmpresa(data)
         } catch (error) {
             return { message: "Algo salió mal en CN.", error: error.message };
         }

@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs"
-
+// await bcrypt.hash(password, 10)
 class helpers {
   async encryptPassword(password){
     const salt = await bcrypt.genSalt(10);
