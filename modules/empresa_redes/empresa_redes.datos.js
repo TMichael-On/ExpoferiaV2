@@ -73,21 +73,25 @@ class CD_EmpresaRedes {
       updates.push("empresa_id = ?");
       params.push(data.empresa_id);
     }
-    sql += updates.join(", ");
-    sql += " WHERE redes_id = ?";
-    params.push(id);
+    if (updates.length === 0) {
+      return { message: "Sin datos para actualizar", rows: [] };
+    } else {
+      sql += updates.join(", ");
+      sql += " WHERE redes_id = ?";
+      params.push(id);
 
-    try {
-      [rows] = await pool.query(sql, params);
-      if (rows.affectedRows === 0) {
-        message = "Redes no encontradas";
-        return { message, rows: {} };
+      try {
+        [rows] = await pool.query(sql, params);
+        if (rows.affectedRows === 0) {
+          message = "Redes no encontradas";
+          return { message, rows: {} };
+        }
+      } catch (error) {
+        message = "Algo salió mal en CD: :+error.message " + error.message;
       }
-    } catch (error) {
-      message = "Algo salió mal en CD: :+error.message " + error.message;
-    }
 
-    return { message: message, rows: rows };
+      return { message: message, rows: rows };
+    }
   }
 
   //DELETE

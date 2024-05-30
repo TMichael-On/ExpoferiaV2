@@ -53,35 +53,17 @@ export const getEmpresaColaborador = async (req, res) => {
 export const updateEmpresaColaborador = async (req, res) => {
   const objCapaEmpresaColaborador = new CN_EmpresaColaborador();
   const data = req.body;
-  let errors = [];
-  if (!data.nombre_completo) {
-    errors.push("Nombre is required");
-  }
-  if (!data.telefono) {
-    errors.push("Teléfono is required");
-  }
-  if (!data.area) {
-    errors.push("Área is required");
-  }
-  if (!data.empresa_id) {
-    errors.push("Empresa is required");
-  }
-  if (errors.length > 0) {
-    return res
-      .status(400)
-      .json({ message: "Failed", error: "Datos requeridos", rows: [] });
-  }
-  try {
-    const result = await objCapaEmpresaColaborador.updateEmpresaColaborador(
-      req.params.id,
-      data
-    );
-    res.json(result);
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Algo error ocurrio en CP: " + error.message });
-  }
+    try {
+      const result = await objCapaEmpresaColaborador.updateEmpresaColaborador(
+        req.params.id,
+        data
+      );
+      res.json(result);
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ message: "Algo error ocurrio en CP: " + error.message });
+    }
 };
 
 //DELETE
@@ -107,5 +89,5 @@ export const prueba = async (req, res) => {
 
 //VIEW
 export const view = async (req, res) => {
-  res.render('empresa_colaborador/empresa_colaborador');
+  res.render("empresa_colaborador/empresa_colaborador");
 };
