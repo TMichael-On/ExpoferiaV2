@@ -77,11 +77,11 @@ export const getEmpresa = async (req, res) => {
 export const updateEmpresa = async (req, res) => {
   const objCapaEmpresa = new CN_Empresa();
   const data = req.body;
-  if (Object.keys(data).length === 0) {
-    return res
-      .status(400)
-      .json({ message: "Failed", error: "Datos requeridos", rows: [] });
-  }
+  // if (Object.keys(data).length === 0) {
+  //   return res
+  //     .status(400)
+  //     .json({ message: "Failed", error: "Datos requeridos", rows: [] });
+  // }
   try {
     const result = await objCapaEmpresa.updateEmpresa(req.params.id, data);
     res.json(result);

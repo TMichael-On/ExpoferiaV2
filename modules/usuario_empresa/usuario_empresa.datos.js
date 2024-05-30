@@ -93,18 +93,22 @@ class CD_UsuarioEmpresa {
       updates.push("usuario_correo = ?");
       params.push(data.correo);
     }
-    sql += updates.join(", ");
-    sql += " WHERE usuario_id = ?";
-    params.push(id);
-    try {
-      [rows] = await pool.query(sql, params);
-      if (rows.affectedRows === 0) {
-        message = "Usuario no encontrado";
+    if (updates.length === 0) {
+      return { message: "Sin datos para actualizar", rows: [] };
+    } else {
+      sql += updates.join(", ");
+      sql += " WHERE usuario_id = ?";
+      params.push(id);
+      try {
+        [rows] = await pool.query(sql, params);
+        if (rows.affectedRows === 0) {
+          message = "Usuario no encontrado";
+        }
+      } catch (error) {
+        message = "Algo salió mal en CD: :+error.message " + error.message;
       }
-    } catch (error) {
-      message = "Algo salió mal en CD: :+error.message " + error.message;
+      return { message: message, rows: rows };
     }
-    return { message: message, rows: rows };
   }
 
   //DELETE

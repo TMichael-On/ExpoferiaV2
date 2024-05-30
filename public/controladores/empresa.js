@@ -2,112 +2,215 @@ import Utilidades from "../peticiones/utilidades.js";
 
 const objUtilidades = new Utilidades();
 
-let dataExamen = {
-    headings: [
-        'Nombre', 'RUC', 'Rubro', 'Dirección', 'Teléfono',
-        'Correo', 'Descripción', 'Historia', 'Opciones'
-    ],
+let dataEmpresa = {
+  headings: [
+    "Nombre",
+    "RUC",
+    "Rubro",
+    "Dirección",
+    "Teléfono",
+    "Correo",
+    "Descripción",
+    "Historia",
+    "Opciones",
+  ],
 };
 
 var opciones = {
-    searchable: true,
-    data: dataExamen,
-    columns: [
-        {
-            select: 8,
-            render: function (data, td, id, cellIndex) {
-                if (data.length !== 0) {
-                    return `<button type='button' class='btn btn-danger btn-sm ms-2 btn-eliminar' data-row='${[data[0].data]}'><i class='fas fa-trash'></i></button>`;
-                }
-            }
+  searchable: true,
+  data: dataEmpresa,
+  columns: [
+    {
+      select: 8,
+      render: function (data, td, id, cellIndex) {
+        if (data.length !== 0) {
+          return `<button type='button' class='btn btn-primary btn-sm ms-2 btn-ver' data-row='${data[0].data}'><i class='fas fa-eye'></i></button>
+          <button type='button' class='btn btn-warning btn-sm ms-2 btn-editar' data-row='${data[0].data}'><i class='fas fa-edit'></i></button>
+          <button type='button' class='btn btn-danger btn-sm ms-2 btn-eliminar' data-row='${data[0].data}'><i class='fas fa-trash'></i></button>
+          `;
         }
-    ]
-}
-
+      },
+    },
+  ],
+};
 
 $(document).ready(function () {
-    var table
-    if (simpleDatatables) {
-        table = new simpleDatatables.DataTable('#tablaEmpresa', opciones);
+  var table;
+  if (simpleDatatables) {
+    table = new simpleDatatables.DataTable("#tablaEmpresa", opciones);
+  }
+
+  (async () => {
+    const jsonData = await objUtilidades.fetchResultListar("empresa/list");
+    if (jsonData.message == "success") {
+      table.insert(jsonData.rows);
+    } else {
+      Swal.fire({
+        title: "Error",
+        text: "Algo salio mal al cargar la información",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
     }
+  })();
 
-    (async () => {
-        const jsonData = await objUtilidades.fetchResultListar('empresa/list')
-        if (jsonData.message == "success") {
-            table.insert(jsonData.rows);
-        } else {
-            Swal.fire({
-                title: 'Error',
-                text: 'Algo salio mal al cargar la información',
-                icon: 'error',
-                confirmButtonText: 'OK',
-            });
+  $("#btn_modal").on("click", function () {
+    $("#modal_empresa").modal("show");
+  });
+
+  $("#btnGuardar").on("click", async function () {
+    var data_empresa = {
+      nombre: $("#empresa_nombre").val(),
+      numero_ruc: $("#empresa_numero_ruc").val(),
+      rubro: $("#empresa_rubro").val(),
+      direccion: $("#empresa_direccion").val(),
+      telefono: $("#empresa_telefono").val(),
+      correo: $("#empresa_correo").val(),
+      descripcion: $("#empresa_descripcion").val(),
+      historia: $("#empresa_historia").val(),
+      usuario_id: 8,
+    };
+    const jsonData = await objUtilidades.fetchResultGuardar(
+      "empresa/create",
+      data_empresa
+    );
+    console.log(jsonData);
+    if (jsonData.message == "success") {
+      $("#mensajeError").hide();
+      location.reload();
+    } else {
+      $("#mensajeError").text(jsonData.message);
+      $("#mensajeError").show();
+    }
+  });
+
+  $(document).on("click", ".btn-ver", async function () {
+    var btn = $(this);
+    var idRow = btn.data("row");
+    try {
+      const jsonData = await objUtilidades.fetchResultVer("empresa/", idRow);
+      if (jsonData.message === "success") {
+        const rowData = jsonData.rows[0];
+        const dto = {
+          Nombre: rowData.Nombre,
+          RUC: rowData.RUC,
+          Rubro: rowData.Rubro,
+          Dirección: rowData.Dirección,
+          Teléfono: rowData.Teléfono,
+          Correo: rowData.Correo,
+          Descripción: rowData.Descripción,
+          Historia: rowData.Historia,
+        };
+        // debugger
+        $("#modal_ver_nombre").text(dto.Nombre);
+        $("#modal_ver_ruc").text(dto.RUC);
+        $("#modal_ver_rubro").text(dto.Rubro);
+        $("#modal_ver_direccion").text(dto.Dirección);
+        $("#modal_ver_telefono").text(dto.Teléfono);
+        $("#modal_ver_correo").text(dto.Correo);
+        $("#modal_ver_descripcion").text(dto.Descripción);
+        $("#modal_ver_historia").text(dto.Historia);
+
+        $("#modal_ver_empresa").modal("show");
+      } else {
+        console.error("Error al obtener los datos:", jsonData.message);
+      }
+    } catch (error) {
+      console.error("Error al obtener los datos:", error);
+    }
+  });
+
+  $(document).on("click", ".btn-editar", function () {
+    $("#modal_editar_empresa").modal("show");
+    var btn = $(this);
+    var idEmpresa = btn.data("row");
+    $("#btnGuardarEditar")
+      .off("click")
+      .on("click", async function () {
+        let data_empresa = {};
+
+        if ($("#empresa_nombre_editar").val().trim() !== "") {
+          data_empresa.nombre = $("#empresa_nombre_editar").val().trim();
         }
-    })()
-
-
-    $('#btn_modal').on("click", function () {
-        $('#modal_empresa').modal("show")
-    })
-
-    $('#btnGuardar').on("click", async function () {
-        var data_empresa = {
-            'nombre': $('#empresa_nombre').val(),
-            'numero_ruc': $('#empresa_numero_ruc').val(),
-            'rubro': $('#empresa_rubro').val(),
-            'direccion': $('#empresa_direccion').val(),
-            'telefono': $('#empresa_telefono').val(),
-            'correo': $('#empresa_correo').val(),
-            'descripcion': $('#empresa_descripcion').val(),
-            'historia': $('#empresa_historia').val(),
-            'usuario_id': 1,
+        if ($("#empresa_numero_ruc_editar").val().trim() !== "") {
+          data_empresa.numero_ruc = $("#empresa_numero_ruc_editar")
+            .val()
+            .trim();
         }
-        const jsonData = await objUtilidades.fetchResultGuardar('empresa/create', data_empresa)
-        console.log(jsonData)
-        if (jsonData.message == "success") {
-            $('#mensajeError').hide();
+        if ($("#empresa_rubro_editar").val().trim() !== "") {
+          data_empresa.rubro = $("#empresa_rubro_editar").val().trim();
+        }
+        if ($("#empresa_direccion_editar").val().trim() !== "") {
+          data_empresa.direccion = $("#empresa_direccion_editar").val().trim();
+        }
+        if ($("#empresa_telefono_editar").val().trim() !== "") {
+          data_empresa.telefono = $("#empresa_telefono_editar").val().trim();
+        }
+        if ($("#empresa_correo_editar").val().trim() !== "") {
+          data_empresa.correo = $("#empresa_correo_editar").val().trim();
+        }
+        if ($("#empresa_descripcion_editar").val().trim() !== "") {
+          data_empresa.descripcion = $("#empresa_descripcion_editar")
+            .val()
+            .trim();
+        }
+        if ($("#empresa_historia_editar").val().trim() !== "") {
+          data_empresa.historia = $("#empresa_historia_editar").val().trim();
+        }
+        if (data_empresa.length !== 0) {
+          data_empresa.usuario_id = 8;
+          const jsonData = await objUtilidades.fetchResultEditar(
+            "empresa",
+            idEmpresa,
+            data_empresa
+          );
+          if (jsonData.message == "success") {
+            $("#mensajeError").hide();
             location.reload();
-        } else {
-            $('#mensajeError').text(jsonData.message);
-            $('#mensajeError').show();
-        }
-    })
+          } else {
+            $("#mensajeError").text(jsonData.message);
+            $("#mensajeError").show();
+          }
+        } else $("#modal_editar_empresa").modal("dismiss");
+      });
+  });
 
-    $(document).on("click", ".btn-eliminar", async function () {
-        debugger
-        var btn = $(this);
-        var idEmpresa = btn.data("row");
-        try {
+  $(document).on("click", ".btn-eliminar", async function () {
+    var btn = $(this);
+    var idEmpresa = btn.data("row");
+    try {
+      Swal.fire({
+        title: "Eliminar",
+        text: "Seguro de eliminar este registro?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Aceptar",
+        cancelButtonText: "Cancelar",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Cargando",
+            html: "Por favor, espera...",
+            showConfirmButton: false,
+          });
+          const jsonData = await objUtilidades.fetchResultEliminar(
+            "empresa",
+            idEmpresa
+          );
+          if (jsonData.message == "success") {
+            location.reload();
+          } else {
             Swal.fire({
-                title: 'Eliminar',
-                text: 'Seguro de eliminar este registro?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Aceptar',
-                cancelButtonText: 'Cancelar'
-            }).then(async (result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: 'Cargando',
-                        html: 'Por favor, espera...',
-                        showConfirmButton: false
-                    });
-                    const jsonData = await objUtilidades.fetchResultEliminar('empresa', idEmpresa)
-                    if (jsonData.message == "success") {
-                        location.reload();
-                    } else {
-                        Swal.fire({
-                            title: 'Error',
-                            text: 'Algo salio mal al eliminar el registro',
-                            icon: 'error',
-                            confirmButtonText: 'OK',
-                        });
-                    }
-                }
+              title: "Error",
+              text: "Algo salio mal al eliminar el registro",
+              icon: "error",
+              confirmButtonText: "OK",
             });
-        } catch (error) {
-            console.error('Error al obtener los datos:', error);
+          }
         }
-    });
-
-})
+      });
+    } catch (error) {
+      console.error("Error al obtener los datos:", error);
+    }
+  });
+});
