@@ -61,6 +61,18 @@ class CN_UsuarioEmpresa {
         }
     }
 
+    //READ ID
+    async getUsuarioEmpresaCorreo(correo) {
+        try {
+            const result = await objCapaDato.getUsuarioEmpresaCorreo(correo); 
+            // var objDto = new UsuarioEmpresaDto(result.rows);
+            // result.rows = objDto.getData()
+            return result
+        } catch (error) {
+            return { message: "Algo salió mal en CN.", error: error.message };
+        }
+    }
+
     //UPDATE 
     async updateUsuarioEmpresa(id, data) {
         try {
