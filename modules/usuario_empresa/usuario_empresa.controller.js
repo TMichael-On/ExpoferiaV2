@@ -1,32 +1,12 @@
 import CN_UsuarioEmpresa from "./usuario_empresa.negocio.js";
 
+const objUsuarioEmpresa = new CN_UsuarioEmpresa();
+
 //CREATE
-export const createUsuarioEmpresa = async (req, res) => {
-  const objCapaEmpresa = new CN_UsuarioEmpresa();
-  const data = req.body;
-  let errors = [];
-  if (!data.nombre) {
-    errors.push("Nombre is required");
-  }
-  if (!data.apellido) {
-    errors.push("Apellido is required");
-  }
-  if (!data.correo) {
-    errors.push("Correo is required");
-  }
-  if (!data.telefono) {
-    errors.push("Telefono is required");
-  }
-  if (!data.contrasena) {
-    errors.push("Contrasena is required");
-  }
-  if (errors.length > 0) {
-    return res
-      .status(400)
-      .json({ message: "Failed", error: "Datos requeridos", rows: [] });
-  }
+export const createUsuarioEmpresa = async (req, res) => {  
+  const data = req.body; 
   try {
-    const rows = await objCapaEmpresa.createUsuarioEmpresa(data);
+    const rows = await objUsuarioEmpresa.createUsuarioEmpresa(data);
     return res.status(200).json(rows);
   } catch (error) {
     return res
@@ -36,10 +16,9 @@ export const createUsuarioEmpresa = async (req, res) => {
 };
 
 //READ GENERAL
-export const getUsuarioEmpresas = async (req, res) => {
-  const objCapaEmpresa = new CN_UsuarioEmpresa();
+export const getUsuarioEmpresas = async (req, res) => {  
   try {
-    const rows = await objCapaEmpresa.getUsuarioEmpresas();    
+    const rows = await objUsuarioEmpresa.getUsuarioEmpresas();    
     return res.status(200).json(rows);
   } catch (error) {
     return res
@@ -48,11 +27,11 @@ export const getUsuarioEmpresas = async (req, res) => {
   }
 };
 
-//READ ID
+//READ
 export const getUsuarioEmpresa = async (req, res) => {
   const objCapaEmpresa = new CN_UsuarioEmpresa();
   try {
-    const rows = await objCapaEmpresa.getUsuarioEmpresa(req.params.id);
+    const rows = await objUsuarioEmpresa.getUsuarioEmpresa(req.params.id);
     return res.status(200).json(rows);
   } catch (error) {
     return res
@@ -75,8 +54,7 @@ export const getUsuarioEmpresaCorreo = async (req, res) => {
 };
 
 //UPDATE
-export const updateUsuarioEmpresa = async (req, res) => {
-  const objCapaEmpresa = new CN_UsuarioEmpresa();
+export const updateUsuarioEmpresa = async (req, res) => {  
   const data = req.body;
   if (Object.keys(data).length === 0) {
     return res
@@ -85,7 +63,7 @@ export const updateUsuarioEmpresa = async (req, res) => {
   }
 
   try {
-    const rows = await objCapaEmpresa.updateUsuarioEmpresa(req.params.id, data);
+    const rows = await objUsuarioEmpresa.updateUsuarioEmpresa(req.params.id, data);
     return res.status(200).json(rows);
   } catch (error) {
     return res
@@ -95,10 +73,9 @@ export const updateUsuarioEmpresa = async (req, res) => {
 };
 
 //DELETE
-export const deleteUsuarioEmpresa = async (req, res) => {
-  const objCapaEmpresa = new CN_UsuarioEmpresa();
+export const deleteUsuarioEmpresa = async (req, res) => {  
   try {
-    const rows = await objCapaEmpresa.deleteUsuarioEmpresa(req.params.id);
+    const rows = await objUsuarioEmpresa.deleteUsuarioEmpresa(req.params.id);
     return res.status(200).json(rows);
   } catch (error) {
     return res

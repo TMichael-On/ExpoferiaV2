@@ -5,11 +5,13 @@ import empresa_colaborador from "./empresa_colaborador/empresa_colaborador.route
 import empresa_producto from "./empresa_producto/empresa_producto.routes.js";
 import empresa_redes from "./empresa_redes/empresa_redes.routes.js";
 import usuario_empresa from "./usuario_empresa/usuario_empresa.routes.js";
+import auth from "./authentication/auth.routes.js"
 // Importa las demás rutas aquí...
 
 const router = Router();
 
-router.use("/", authentication);
+// router.use("/", authentication);
+router.use("/", auth);
 router.use("/empresa", empresa);
 router.use("/colaborador", empresa_colaborador);
 router.use("/producto", empresa_producto);

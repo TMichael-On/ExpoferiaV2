@@ -6,12 +6,12 @@ class CD_UsuarioEmpresa {
     let message = "success";
     let rows = [];
     try {
-      [rows] = await pool.query(
+      const [result] = await pool.query(
         "SELECT * FROM expo_usuario_empresa WHERE usuario_correo = ?",
         [data.correo]
       );
 
-      if (rows.length > 0) {
+      if (result.length > 0) {
         message = "Correo " + data.correo + " ya existente";
       } else {
         [rows] = await pool.query(
