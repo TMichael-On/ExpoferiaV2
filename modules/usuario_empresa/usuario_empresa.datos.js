@@ -61,6 +61,24 @@ class CD_UsuarioEmpresa {
     return { message: message, rows: rows };
   }
 
+  //READ CORREO
+  async getUsuarioEmpresaCorreo(correo) {
+    let message = "success";
+    let rows = [];
+    try {
+      [rows] = await pool.query(
+        "SELECT * FROM expo_usuario_empresa WHERE usuario_correo = (?)",
+        [correo]
+      );
+      if (rows.length === 0) {
+        message = "Usuario no encontrado";
+      }
+    } catch (error) {
+      message = "Algo salió mal en CD: " + error.message;
+    }
+    return { message: message, rows: rows };
+  }
+
   //UPDATE
   async updateUsuarioEmpresa(id, data) {
     let sql = "UPDATE expo_usuario_empresa SET ";

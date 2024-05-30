@@ -48,11 +48,24 @@ export const getUsuarioEmpresas = async (req, res) => {
   }
 };
 
-//READ
+//READ ID
 export const getUsuarioEmpresa = async (req, res) => {
   const objCapaEmpresa = new CN_UsuarioEmpresa();
   try {
     const rows = await objCapaEmpresa.getUsuarioEmpresa(req.params.id);
+    return res.status(200).json(rows);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Algo salió mal en CP: " + error.message });
+  }
+};
+
+//READ CORREO
+export const getUsuarioEmpresaCorreo = async (req, res) => {
+  const objCapaEmpresa = new CN_UsuarioEmpresa();
+  try {
+    const rows = await objCapaEmpresa.getUsuarioEmpresaCorreo(req.params.correo);
     return res.status(200).json(rows);
   } catch (error) {
     return res

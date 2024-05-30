@@ -133,7 +133,6 @@ $(document).ready(function () {
       .off("click")
       .on("click", async function () {
         let data_empresa_producto = {};
-
         if ($("#empresa_producto_nombre_editar").val().trim() !== "") {
           data_empresa_producto.nombre_completo = $(
             "#empresa_producto_nombre_editar"

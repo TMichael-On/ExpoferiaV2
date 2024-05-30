@@ -3,6 +3,7 @@ import {
     createUsuarioEmpresa,
     deleteUsuarioEmpresa,
     getUsuarioEmpresa,
+    getUsuarioEmpresaCorreo,
     getUsuarioEmpresas,
     updateUsuarioEmpresa,
     view
@@ -16,6 +17,8 @@ router.post("/create", createUsuarioEmpresa);
 router.get("/list", getUsuarioEmpresas);
 //GET ID
 router.get("/:id", getUsuarioEmpresa);
+//POST ID
+router.post("/:correo", getUsuarioEmpresaCorreo);
 //UPDATE
 router.patch("/:id", updateUsuarioEmpresa);
 //DELETE
