@@ -37,7 +37,6 @@ class CD_EmpresaProducto {
     let rows = [];
     try {
       [rows] = await pool.query("SELECT * FROM expo_empresa_producto");
-      message = "success";
     } catch (error) {
       message = "Algo salió mal en CD: " + error.message;
       rows = [];
@@ -54,7 +53,7 @@ class CD_EmpresaProducto {
         "SELECT * FROM expo_empresa_producto WHERE producto_id = ?",
         [id]
       );
-      if (rows.length > 0) {
+      if (rows.length === 0) {
         message = "Producto no encontrado";
       }
     } catch (error) {
@@ -98,19 +97,23 @@ class CD_EmpresaProducto {
       updates.push("empresa_id = ?");
       params.push(data.empresa_id);
     }
-    sql += updates.join(", ");
-    sql += " WHERE producto_id = ?";
-    params.push(id);
-    try {
-      [rows] = await pool.query(sql, params);
-      if (rows.affectedRows === 0) {
-        message = "Producto no encontrado";
+    if (updates.length === 0) {
+      return { message: "Sin datos para actualizar", rows: [] };
+    } else {
+      sql += updates.join(", ");
+      sql += " WHERE producto_id = ?";
+      params.push(id);
+      try {
+        [rows] = await pool.query(sql, params);
+        if (rows.affectedRows === 0) {
+          message = "Producto no encontrado";
+        }
+      } catch (error) {
+        message = "Algo salió mal en CD: :+error.message " + error.message;
       }
-    } catch (error) {
-      message = "Algo salió mal en CD: :+error.message " + error.message;
-    }
 
-    return { message: message, rows: rows };
+      return { message: message, rows: rows };
+    }
   }
 
   //DELETE

@@ -107,18 +107,22 @@ class CD_Empresa {
       updates.push("empresa_usuario_id = ?");
       params.push(data.usuario_id);
     }
-    sql += updates.join(", ");
-    sql += " WHERE empresa_id = ?";
-    params.push(id);
-    try {
-      [rows] = await pool.query(sql, params);
-      if (rows.affectedRows === 0) {
-        message = "Empresa no encontrada";
+    if (updates.length === 0) {
+      return { message: "Sin datos para actualizar", rows: [] };
+    } else {
+      sql += updates.join(", ");
+      sql += " WHERE empresa_id = ?";
+      params.push(id);
+      try {
+        [rows] = await pool.query(sql, params);
+        if (rows.affectedRows === 0) {
+          message = "Empresa no encontrada";
+        }
+      } catch (error) {
+        message = "Algo salió mal en CD: " + error.message;
       }
-    } catch (error) {
-      message = "Algo salió mal en CD: " + error.message;
+      return { message: message, rows: rows };
     }
-    return { message: message, rows: rows };
   }
 
   //DELETE

@@ -9,13 +9,13 @@ export class EmpresaProductoDto {
             return this.datos.map(data => {
                 return {
                     "id" : data.producto_id ?? '',
-                    "nombre" : data.producto_nombre ?? '',
-                    "categoria" : data.producto_categoria ?? '',
-                    "stock" : data.producto_stock ?? '',
-                    "precio" : data.producto_precio ?? '',
-                    "moneda" : data.producto_moneda ?? '',
-                    "estado" : data.producto_estado ?? '',
-                    "empresa_id" : data.empresa_id ?? ''
+                    "Nombre" : data.producto_nombre ?? '',
+                    "Categoría" : data.producto_categoria ?? '',
+                    "Stock" : data.producto_stock ?? '',
+                    "Precio" : data.producto_precio ?? '',
+                    "Moneda" : data.producto_moneda ?? '',
+                    "Estado" : data.producto_estado ?? '',
+                    'Opciones': data.empresa_id ?? '',
                 };
             });
         } else {

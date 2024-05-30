@@ -1,79 +1,413 @@
 <!-- card empresa_producto-->
 <div class="card mt-4">
-    <div class="card-header">
-        <i class="fas fa-users me-1"></i> Registro de Productos
+  <div class="card-header">
+    <i class="fas fa-users me-1"></i>
+    Registro de Productos
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-6">
+        <button id="btn_modal" type="button" class="btn btn-success">Crear nuevo</button>
+      </div>
     </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-6">
-                <button id="btn_modal" type="button" class="btn btn-success">Crear nuevo</button>
-            </div>
-        </div>
-        <hr />
-        <table id="tablaempresa_producto" style="white-space: nowrap;">
-            <thead>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
-</div> <!-- end card empresa_producto-->
+    <hr />
+    <table id="tablaempresa_producto" style="white-space: nowrap;">
+      <thead>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- end card empresa_producto-->
 
 <!-- modal empresa_producto-->
-<div class="modal fade" id="modal_empresa_producto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-    data-bs-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title" id="exampleModalLabel">Producto</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!--Input modal-->
-                <div class="row">
-                    <div class="col-12">
-                        <label for="empresa_producto_nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="empresa_producto_nombre" autocomplete="off">
-                    </div>
-                    <div class="col-12">
-                        <label for="empresa_producto_numero_ruc" class="form-label">Categoría</label>
-                        <input type="text" class="form-control" id="empresa_producto_numero_ruc" autocomplete="off">
-                    </div>
-                    <div class="col-6">
-                        <label for="empresa_producto_rubro" class="form-label">Stock</label>
-                        <input type="number" class="form-control" id="empresa_producto_rubro" autocomplete="off">
-                    </div>
+<div
+  class="modal fade"
+  id="modal_empresa_producto"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="static"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="exampleModalLabel">Producto</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!--Input modal-->
+        <div class="row">
+          <div class="col-12">
+            <label
+              for="empresa_producto_nombre"
+              class="form-label"
+            >Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="empresa_producto_nombre"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-12">
+            <label
+              for="empresa_producto_numero_ruc"
+              class="form-label"
+            >Categoría</label>
+            <input
+              type="text"
+              class="form-control"
+              id="empresa_producto_numero_ruc"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-6">
+            <label for="empresa_producto_rubro" class="form-label">Stock</label>
+            <input
+              type="number"
+              class="form-control"
+              id="empresa_producto_rubro"
+              autocomplete="off"
+            />
+          </div>
 
-                    <div class="col-6">
-                        <label for="empresa_producto_direccion" class="form-label">Precio</label>
-                        <input type="number" class="form-control" id="empresa_producto_direccion" autocomplete="off">
-                    </div>
-                    <div class="col-6">
-                        <label for="empresa_producto_direccion" class="form-label">Moneda</label>
-                        <input type="text" class="form-control" id="empresa_producto_direccion" autocomplete="off">
-                    </div>
-                    <div class="col-6">
-                        <label for="empresa_producto_direccion" class="form-label">Estado</label>
-                        <input type="text" class="form-control" id="empresa_producto_direccion" autocomplete="off">
-                    </div>
-                </div>
-                <!--Input modal end-->
-                <!--Mensaje de alerta-->
-                <div class="row mt-2">
-                    <div class="col-12">
-                        <div id="mensajeError" class="alert alert-danger" role="alert"
-                            style="margin-bottom: 10px; display: none">
-                            A simple danger alert—check it out!
-                        </div>
-                    </div>
-                </div> <!--Mensaje de alerta end-->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button id="btnGuardar" type="button" class="btn btn-primary">Guardar</button>
-            </div>
+          <div class="col-6">
+            <label
+              for="empresa_producto_direccion"
+              class="form-label"
+            >Precio</label>
+            <input
+              type="number"
+              class="form-control"
+              id="empresa_producto_direccion"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-6">
+            <label
+              for="empresa_producto_direccion"
+              class="form-label"
+            >Moneda</label>
+            <input
+              type="text"
+              class="form-control"
+              id="empresa_producto_direccion"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-6">
+            <label
+              for="empresa_producto_direccion"
+              class="form-label"
+            >Estado</label>
+            <input
+              type="text"
+              class="form-control"
+              id="empresa_producto_direccion"
+              autocomplete="off"
+            />
+          </div>
         </div>
+        <!--Input modal end-->
+        <!--Mensaje de alerta-->
+        <div class="row mt-2">
+          <div class="col-12">
+            <div
+              id="mensajeError"
+              class="alert alert-danger"
+              role="alert"
+              style="margin-bottom: 10px; display: none"
+            >
+              A simple danger alert—check it out!
+            </div>
+          </div>
+        </div>
+        <!--Mensaje de alerta end-->
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Cerrar</button>
+        <button
+          id="btnGuardar"
+          type="button"
+          class="btn btn-primary"
+        >Guardar</button>
+      </div>
     </div>
-</div> <!-- end modal empresa_producto -->
+  </div>
+</div>
+<!-- end modal empresa_producto -->
+
+<!-- modal ver empresa_producto-->
+<div
+  class="modal modal-lg fade"
+  id="modal_ver_empresa_producto"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="static"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="exampleModalLabel">Empresa</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!--Input modal-->
+        <div class="row">
+          <div class="col-6">
+            <label
+              for="modal_producto_ver_nombre"
+              class="form-label"
+            >Nombre</label>
+            <p
+              type="text"
+              class="form-control"
+              id="modal_producto_ver_nombre"
+              style="overflow-x: auto; white-space: nowrap;"
+              disabled
+            />
+          </div>
+          <div class="col-6">
+            <label
+              for="modal_producto_ver_categoria"
+              class="form-label"
+            >Categoría</label>
+            <p
+              type="text"
+              class="form-control"
+              id="modal_producto_ver_categoria"
+              style="overflow-x: auto; white-space: nowrap;"
+              disabled
+            />
+          </div>
+          <div class="col-6">
+            <label
+              for="modal_producto_ver_stock"
+              class="form-label"
+            >Stock</label>
+            <p
+              type="text"
+              class="form-control"
+              id="modal_producto_ver_stock"
+              style="overflow-x: auto; white-space: nowrap;"
+              disabled
+            />
+          </div>
+
+          <div class="col-6">
+            <label
+              for="modal_producto_ver_precio"
+              class="form-label"
+            >Precio</label>
+            <p
+              type="text"
+              class="form-control"
+              id="modal_producto_ver_precio"
+              style="overflow-x: auto; white-space: nowrap;"
+              disabled
+            />
+          </div>
+          <div class="col-6">
+            <label
+              for="modal_producto_ver_moneda"
+              class="form-label"
+            >Moneda</label>
+            <p
+              type="text"
+              class="form-control"
+              id="modal_producto_ver_moneda"
+              style="overflow-x: auto; white-space: nowrap;"
+              disabled
+            />
+          </div>
+          <div class="col-6">
+            <label
+              for="modal_producto_ver_estado"
+              class="form-label"
+            >Estado</label>
+            <p
+              type="text"
+              class="form-control"
+              id="modal_producto_ver_estado"
+              style="overflow-x: auto; white-space: nowrap;"
+              disabled
+            />
+          </div>
+        </div>
+        <!--Input modal end-->
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal ver empresa -->
+
+<!-- modal editar empresa-->
+<div
+  class="modal modal-lg fade"
+  id="modal_editar_empresa"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="static"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="exampleModalLabel">Empresa</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!--Input modal-->
+        <div class="row">
+          <div class="col-6">
+            <label for="empresa_nombre_editar" class="form-label">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="empresa_nombre_editar"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-6">
+            <label
+              for="empresa_numero_ruc_editar"
+              class="form-label"
+            >RUC</label>
+            <input
+              type="text"
+              class="form-control"
+              id="empresa_numero_ruc_editar"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-6">
+            <label for="empresa_rubro_editar" class="form-label">Rubro</label>
+            <input
+              type="text"
+              class="form-control"
+              id="empresa_rubro_editar"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="col-6">
+            <label
+              for="empresa_direccion_editar"
+              class="form-label"
+            >Dirección</label>
+            <input
+              type="text"
+              class="form-control"
+              id="empresa_direccion_editar"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-6">
+            <label
+              for="empresa_telefono_editar"
+              class="form-label"
+            >Teléfono</label>
+            <input
+              type="text"
+              class="form-control"
+              id="empresa_telefono_editar"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-6">
+            <label for="empresa_correo_editar" class="form-label">Correo</label>
+            <input
+              type="text"
+              class="form-control"
+              id="empresa_correo_editar"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-12">
+            <label
+              for="empresa_descripcion_editar"
+              class="form-label"
+            >Descripción</label>
+            <textarea
+              type="text"
+              class="form-control"
+              id="empresa_descripcion_editar"
+              autocomplete="off"
+            ></textarea>
+          </div>
+          <div class="col-12">
+            <label
+              for="empresa_historia_editar"
+              class="form-label"
+            >Historia</label>
+            <textarea
+              type="text"
+              class="form-control"
+              id="empresa_historia_editar"
+              autocomplete="off"
+            ></textarea>
+          </div>
+        </div>
+        <!--Input modal end-->
+        <!--Mensaje de alerta-->
+        <div class="row mt-2">
+          <div class="col-12">
+            <div
+              id="mensajeError"
+              class="alert alert-danger"
+              role="alert"
+              style="margin-bottom: 10px; display: none"
+            >
+              A simple danger alert—check it out!
+            </div>
+          </div>
+        </div>
+        <!--Mensaje de alerta end-->
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Cerrar</button>
+        <button
+          id="btnGuardarEditar"
+          type="button"
+          class="btn btn-primary"
+        >Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end editar modal empresa -->
 
 <script src="/controladores/empresa_producto.js" type="module"></script>

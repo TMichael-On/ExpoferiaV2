@@ -9,10 +9,10 @@ export class EmpresaColaboradorDto {
             return this.datos.map(data => {
                 return {
                     "id" : data.colaborador_id ?? '',
-                    "nombre_completo" : data.colaborador_nombre_completo ?? '',
-                    "telefono" : data.colaborador_telefono ?? '',
-                    "area" : data.colaborador_area ?? '',
-                    "empresa_id" : data.empresa_id ?? ''
+                    "Nombre" : data.colaborador_nombre_completo ?? '',
+                    "Teléfono" : data.colaborador_telefono ?? '',
+                    "Área" : data.colaborador_area ?? '',
+                    'Opciones': data.empresa_id ?? '',
                 };
             });
         } else {
