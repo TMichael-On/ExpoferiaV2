@@ -129,4 +129,90 @@
 </div>
 <!-- end modal ver empresa -->
 
+<!-- modal editar empresa-->
+<div
+  class="modal modal-lg fade"
+  id="modal_editar_empresa_redes"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="static"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="exampleModalLabel">Editar redes</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!--Input modal-->
+        <div class="row">
+          <div class="col-12">
+            <label for="empresa_redes_nombre_editar" class="form-label">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="empresa_redes_nombre_editar"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-12">
+            <label
+              for="empresa_redes_url_editar"
+              class="form-label"
+            >Url</label>
+            <input
+              type="text"
+              class="form-control"
+              id="empresa_redes_url_editar"
+              autocomplete="off"
+            />
+          </div>
+          <!-- <div class="col-12">
+            <label for="empresa_redes_empresa_editar" class="form-label">Stock</label>
+            <input
+              type="number"
+              class="form-control"
+              id="empresa_redes_empresa_editar"
+              autocomplete="off"
+            />
+          </div> -->
+        </div>
+        <!--Input modal end-->
+        <!--Mensaje de alerta-->
+        <div class="row mt-2">
+          <div class="col-12">
+            <div
+              id="mensajeError"
+              class="alert alert-danger"
+              role="alert"
+              style="margin-bottom: 10px; display: none"
+            >
+              A simple danger alert—check it out!
+            </div>
+          </div>
+        </div>
+        <!--Mensaje de alerta end-->
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Cerrar</button>
+        <button
+          id="btnGuardarEditar"
+          type="button"
+          class="btn btn-primary"
+        >Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end editar modal empresa -->
 <script src="/controladores/empresa_redes.js" type="module"></script>

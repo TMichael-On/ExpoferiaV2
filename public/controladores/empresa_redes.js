@@ -110,8 +110,8 @@ $(document).ready(function () {
   $(document).on("click", ".btn-editar", function () {
     $("#modal_editar_empresa_redes").modal("show");
     var btn = $(this);
-    // var idProducto = 4;
-    var idProducto = btn.data("row");
+    // var idRedes = 4;
+    var idRedes = btn.data("row");
     $("#btnGuardarEditar")
       .off("click")
       .on("click", async function () {
@@ -123,41 +123,23 @@ $(document).ready(function () {
             .val()
             .trim();
         }
-        if ($("#empresa_redes_categoria_editar").val().trim() !== "") {
-          data_empresa_redes.categoria = $(
-            "#empresa_redes_categoria_editar"
+        if ($("#empresa_redes_url_editar").val().trim() !== "") {
+          data_empresa_redes.url = $(
+            "#empresa_redes_url_editar"
           )
             .val()
             .trim();
         }
-        if ($("#empresa_redes_stock_editar").val().trim() !== "") {
-          data_empresa_redes.stock = $("#empresa_redes_stock_editar")
-            .val()
-            .trim();
-        }
-        if ($("#empresa_redes_precio_editar").val().trim() !== "") {
-          data_empresa_redes.precio = $("#empresa_redes_precio_editar")
-            .val()
-            .trim();
-        }
-        if ($("#empresa_redes_moneda_editar").val().trim() !== "") {
-          data_empresa_redes.moneda = $("#empresa_redes_moneda_editar")
-            .val()
-            .trim();
-        }
-        if ($("#empresa_redes_estado_editar").val().trim() !== "") {
-          data_empresa_redes.estado = $("#empresa_redes_estado_editar")
-            .val()
-            .trim();
-        }
         // if ($("#empresa_redes_empresa_editar").val().trim() !== "") {
-        //   data_empresa.empresa_id = $("#empresa_redes_empresa_editar").val().trim();
+        //   data_empresa_redes.empresa = $("#empresa_redes_empresa_editar")
+        //     .val()
+        //     .trim();
         // }
         if (data_empresa_redes.length !== 0) {
           data_empresa_redes.empresa_id = 5;
           const jsonData = await objUtilidades.fetchResultEditar(
-            "producto",
-            idProducto,
+            "redes",
+            idRedes,
             data_empresa_redes
           );
           if (jsonData.message == "success") {
