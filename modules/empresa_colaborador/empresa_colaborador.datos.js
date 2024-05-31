@@ -21,7 +21,7 @@ class CD_EmpresaColaborador {
     let message = "success";
     let rows = [];
     try {
-      [rows] = await pool.query("SELECT * FROM expo_empresa_colaborador");
+      [rows] = await pool.query("SELECT * FROM expo_empresa_colaborador ORDER BY colaborador_id");
     } catch (error) {
       message = "Algo salió mal en CD: " + error.message;
     }

@@ -29,7 +29,7 @@ class CD_EmpresaRedes {
     let message = "success";
     let rows = [];
     try {
-      [rows] = await pool.query("SELECT * FROM expo_empresa_redes");
+      [rows] = await pool.query("SELECT * FROM expo_empresa_redes ORDER BY redes_id");
     } catch (error) {
       message = "Algo salió mal en CD: " + error.message;
     }
