@@ -43,6 +43,14 @@ $(document).ready(function () {
   (async () => {
     const jsonData = await objUtilidades.fetchResultListar("empresa/list");
     if (jsonData.message == "success") {
+      jsonData.rows = jsonData.rows.map((row) => {
+        for (let key in row) {
+          if (typeof row[key] === "string" && row[key].length > 6) {
+            row[key] = row[key].substring(0, 6) + "...";
+          }
+        }
+        return row;
+      });
       table.insert(jsonData.rows);
     } else {
       Swal.fire({
