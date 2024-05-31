@@ -2,7 +2,7 @@ import Utilidades from "../peticiones/utilidades.js";
 
 const objUtilidades = new Utilidades();
 
-let dataEmpresaproducto = {
+let dataEmpresaProducto = {
   headings: [
     "Nombre",
     "Categoría",
@@ -16,7 +16,7 @@ let dataEmpresaproducto = {
 
 var opciones = {
   searchable: true,
-  data: dataEmpresaproducto,
+  data: dataEmpresaProducto,
   columns: [
     {
       select: 6,
@@ -66,15 +66,17 @@ $(document).ready(function () {
   });
 
   $("#btnGuardar").on("click", async function () {
-    var data_empresa_producto = {
-      nombre_completo: $("#empresa_producto_nombre").val(),
-      telefono: $("#empresa_producto_telefono").val(),
-      area: $("#empresa_producto_area").val(),
-      empresa_id: 1,
+    var data_empresa = {
+      nombre: $("#empresa_producto_nombre").val(),
+      categoria: $("#empresa_producto_categoria").val(),
+      stock: $("#empresa_producto_stock").val(),
+      precio: $("#empresa_producto_precio").val(),
+      moneda: $("#empresa_producto_moneda").val(),
+      empresa_id: 5,
     };
     const jsonData = await objUtilidades.fetchResultGuardar(
       "producto/create",
-      data_empresa_producto
+      data_empresa
     );
     console.log(jsonData);
     if (jsonData.message == "success") {
@@ -89,8 +91,8 @@ $(document).ready(function () {
   $(document).on("click", ".btn-ver", async function () {
     $("#modal_ver_empresa_producto").modal("show");
     var btn = $(this);
-    var idRow = 4;
-    // var idRow = btn.data("row");
+    // var idRow = 4;
+    var idRow = btn.data("row");
     console.log("Click ver: ", idRow);
     try {
       const jsonData = await objUtilidades.fetchResultVer("producto", idRow);
@@ -127,28 +129,43 @@ $(document).ready(function () {
   $(document).on("click", ".btn-editar", function () {
     $("#modal_editar_empresa_producto").modal("show");
     var btn = $(this);
-    var idProducto = 4;
-    // var idEmpresa = btn.data("row");
+    // var idProducto = 4;
+    var idProducto = btn.data("row");
     $("#btnGuardarEditar")
       .off("click")
       .on("click", async function () {
         let data_empresa_producto = {};
         if ($("#empresa_producto_nombre_editar").val().trim() !== "") {
-          data_empresa_producto.nombre_completo = $(
+          data_empresa_producto.nombre = $(
             "#empresa_producto_nombre_editar"
           )
             .val()
             .trim();
         }
-        if ($("#empresa_producto_telefono_editar").val().trim() !== "") {
-          data_empresa_producto.telefono = $(
-            "#empresa_producto_telefono_editar"
+        if ($("#empresa_producto_categoria_editar").val().trim() !== "") {
+          data_empresa_producto.categoria = $(
+            "#empresa_producto_categoria_editar"
           )
             .val()
             .trim();
         }
-        if ($("#empresa_producto_area_editar").val().trim() !== "") {
-          data_empresa_producto.area = $("#empresa_producto_area_editar")
+        if ($("#empresa_producto_stock_editar").val().trim() !== "") {
+          data_empresa_producto.stock = $("#empresa_producto_stock_editar")
+            .val()
+            .trim();
+        }
+        if ($("#empresa_producto_precio_editar").val().trim() !== "") {
+          data_empresa_producto.precio = $("#empresa_producto_precio_editar")
+            .val()
+            .trim();
+        }
+        if ($("#empresa_producto_moneda_editar").val().trim() !== "") {
+          data_empresa_producto.moneda = $("#empresa_producto_moneda_editar")
+            .val()
+            .trim();
+        }
+        if ($("#empresa_producto_estado_editar").val().trim() !== "") {
+          data_empresa_producto.estado = $("#empresa_producto_estado_editar")
             .val()
             .trim();
         }
@@ -156,7 +173,7 @@ $(document).ready(function () {
         //   data_empresa.empresa_id = $("#empresa_producto_empresa_editar").val().trim();
         // }
         if (data_empresa_producto.length !== 0) {
-          data_empresa_producto.usuario_id = 5;
+          data_empresa_producto.empresa_id = 5;
           const jsonData = await objUtilidades.fetchResultEditar(
             "producto",
             idProducto,
@@ -176,7 +193,7 @@ $(document).ready(function () {
   $(document).on("click", ".btn-eliminar", async function () {
     // debugger;
     var btn = $(this);
-    var idEmpresa = btn.data("row");
+    var idProducto = btn.data("row");
     try {
       Swal.fire({
         title: "Eliminar",
@@ -193,8 +210,8 @@ $(document).ready(function () {
             showConfirmButton: false,
           });
           const jsonData = await objUtilidades.fetchResultEliminar(
-            "empresa",
-            idEmpresa
+            "producto",
+            idProducto
           );
           if (jsonData.message == "success") {
             location.reload();

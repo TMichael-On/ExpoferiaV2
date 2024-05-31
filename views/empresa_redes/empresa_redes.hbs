@@ -58,5 +58,75 @@
         </div>
     </div>
 </div> <!-- end modal empresa_redes -->
+<!-- modal ver empresa_redes-->
+<div
+  class="modal modal-lg fade"
+  id="modal_ver_empresa_redes"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-bs-backdrop="static"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="exampleModalLabel">Empresa</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!--Input modal-->
+        <div class="row">
+          <div class="col-12">
+            <label for="modal_redes_ver_nombre" class="form-label"
+              >Nombre</label
+            >
+            <p
+              type="text"
+              class="form-control"
+              id="modal_redes_ver_nombre"
+              style="overflow-x: auto; white-space: nowrap"
+              disabled
+            />
+          </div>
+          <div class="col-12">
+            <label for="modal_redes_ver_url" class="form-label">Url</label>
+            <p
+              type="text"
+              class="form-control"
+              id="modal_redes_ver_url"
+              style="overflow-x: auto; white-space: nowrap"
+              disabled
+            />
+          </div>
+          <!-- <div class="col-12">
+            <label
+              for="modal_redes_ver_empresa"
+              class="form-label"
+            >Empresa</label>
+            <p
+              type="text"
+              class="form-control"
+              id="modal_redes_ver_empresa"
+              style="overflow-x: auto; white-space: nowrap;"
+              disabled
+            />
+          </div> -->
+        </div>
+        <!--Input modal end-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal ver empresa -->
 
 <script src="/controladores/empresa_redes.js" type="module"></script>

@@ -36,6 +36,14 @@ $(document).ready(function () {
   (async () => {
     const jsonData = await objUtilidades.fetchResultListar("colaborador/list");
     if (jsonData.message == "success") {
+      jsonData.rows = jsonData.rows.map((row) => {
+        for (let key in row) {
+          if (typeof row[key] === "string" && row[key].length > 6) {
+            row[key] = row[key].substring(0, 6) + "...";
+          }
+        }
+        return row;
+      });
       table.insert(jsonData.rows);
     } else {
       Swal.fire({
@@ -75,8 +83,8 @@ $(document).ready(function () {
   $(document).on("click", ".btn-ver", async function () {
     $("#modal_ver_empresa_colaborador").modal("show");
     var btn = $(this);
-    var idRow = 1;
-    // var idRow = btn.data("row");
+    // var idRow = 1;
+    var idRow = btn.data("row");
     console.log("Click ver: ", idRow);
     try {
       const jsonData = await objUtilidades.fetchResultVer(
@@ -106,8 +114,8 @@ $(document).ready(function () {
   $(document).on("click", ".btn-editar", function () {
     $("#modal_editar_empresa_colaborador").modal("show");
     var btn = $(this);
-    var idColaborador = 1;
-    // var idEmpresa = btn.data("row");
+    // var idColaborador = 1;
+    var idColaborador = btn.data("row");
     $("#btnGuardarEditar")
       .off("click")
       .on("click", async function () {

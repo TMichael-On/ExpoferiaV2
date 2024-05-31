@@ -9,9 +9,9 @@ export class EmpresaRedesDto {
             return this.datos.map(data => {
                 return {
                     "id" : data.redes_id ?? '',
-                    "nombre" : data.redes_nombre ?? '',
-                    "url" : data.redes_url ?? '',
-                    "empresa_id" : data.empresa_id ?? '', 
+                    "Nombre" : data.redes_nombre ?? '',
+                    "Url" : data.redes_url ?? '',
+                    "Opciones" : data.redes_id ?? '',
                 };
             });
         } else {

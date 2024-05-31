@@ -26,7 +26,7 @@ export const createEmpresaProducto = async (req, res) => {
   if (errors.length > 0) {
     return res
       .status(400)
-      .json({ message: "Failed", error: "Datos requeridos", rows: [] });
+      .json({ message: "Failed", error: errors, rows: [] });
   }
   try {
     const result = await objCapaEmpresaProducto.createEmpresaProducto(data);
