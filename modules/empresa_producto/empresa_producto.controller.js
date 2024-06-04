@@ -24,9 +24,7 @@ export const createEmpresaProducto = async (req, res) => {
     errors.push("Empresa is required");
   }
   if (errors.length > 0) {
-    return res
-      .status(400)
-      .json({ message: "Failed", error: errors, rows: [] });
+    return res.status(400).json({ message: "Failed", error: errors, rows: [] });
   }
   try {
     const result = await objCapaEmpresaProducto.createEmpresaProducto(data);
@@ -43,6 +41,21 @@ export const getEmpresaProductos = async (req, res) => {
   const objCapaEmpresaProducto = new CN_EmpresaProducto();
   try {
     const result = await objCapaEmpresaProducto.getEmpresaProductos();
+    res.json(result);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Algo error ocurrio en CP: " + error.message });
+  }
+};
+
+//READ GENERAL ID
+export const getEmpresaProductosId = async (req, res) => {
+  const objCapaEmpresaProducto = new CN_EmpresaProducto();
+  try {
+    const result = await objCapaEmpresaProducto.getEmpresaProductosId(
+      req.params.id
+    );
     res.json(result);
   } catch (error) {
     return res
@@ -110,5 +123,5 @@ export const prueba = async (req, res) => {
 
 //VIEW
 export const view = async (req, res) => {
-  res.render('empresa_producto/empresa_producto');
+  res.render("empresa_producto/empresa_producto");
 };

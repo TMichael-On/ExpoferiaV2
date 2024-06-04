@@ -21,7 +21,24 @@ class CD_EmpresaColaborador {
     let message = "success";
     let rows = [];
     try {
-      [rows] = await pool.query("SELECT * FROM expo_empresa_colaborador ORDER BY colaborador_id");
+      [rows] = await pool.query(
+        "SELECT * FROM expo_empresa_colaborador ORDER BY colaborador_id"
+      );
+    } catch (error) {
+      message = "Algo salió mal en CD: " + error.message;
+    }
+    return { message: message, rows: rows };
+  }
+
+  //READ GENERAL ID
+  async getEmpresaColaboradoresId(id) {
+    let message = "success";
+    let rows = [];
+    try {
+      [rows] = await pool.query(
+        "SELECT * FROM expo_empresa_colaborador WHERE empresa_id = ? ORDER BY colaborador_id",
+        [id]
+      );
     } catch (error) {
       message = "Algo salió mal en CD: " + error.message;
     }

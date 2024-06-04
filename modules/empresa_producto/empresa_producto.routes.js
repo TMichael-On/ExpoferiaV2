@@ -1,12 +1,13 @@
 import { Router } from "express";
 import {
-    createEmpresaProducto,
-    deleteEmpresaProducto,
-    getEmpresaProducto,
-    getEmpresaProductos,
-    prueba,
-    updateEmpresaProducto,
-    view
+  createEmpresaProducto,
+  deleteEmpresaProducto,
+  getEmpresaProducto,
+  getEmpresaProductos,
+  getEmpresaProductosId,
+  prueba,
+  updateEmpresaProducto,
+  view,
 } from "./empresa_producto.controller.js";
 
 const router = Router();
@@ -14,6 +15,8 @@ const router = Router();
 router.post("/create", createEmpresaProducto);
 //GET GENERAL
 router.get("/list", getEmpresaProductos);
+//GET GENERAL ID
+router.get("/list/:id", getEmpresaProductosId);
 //GET ID
 router.get("/:id", getEmpresaProducto);
 //UPDATE

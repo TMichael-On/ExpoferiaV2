@@ -4,37 +4,44 @@ import EmpresaProductoDto from "./empresa_producto.dto.js";
 var objCapaDato = new CD_EmpresaProducto();
 
 class CN_EmpresaProducto {
+  //CREATE
+  async createEmpresaProducto(data) {
+    return await objCapaDato.createEmpresaProducto(data);
+  }
 
-    //CREATE
-    async createEmpresaProducto(data) {
-        return await objCapaDato.createEmpresaProducto(data);
-    }
+  //READ GENERAL
+  async getEmpresaProductos() {
+    const result = await objCapaDato.getEmpresaProductos();
+    var objDto = new EmpresaProductoDto(result.rows);
+    result.rows = objDto.getData();
+    return result;
+  }
 
-    //READ GENERAL
-    async getEmpresaProductos() {
-        const result = await objCapaDato.getEmpresaProductos();
-        var objDto = new EmpresaProductoDto(result.rows);
-        result.rows = objDto.getData()
-        return result
-    }
+  //READ GENERAL ID
+  async getEmpresaProductosId(id) {
+    const result = await objCapaDato.getEmpresaProductosId(id);
+    var objDto = new EmpresaProductoDto(result.rows);
+    result.rows = objDto.getData();
+    return result;
+  }
 
-    //READ ID
-    async getEmpresaProducto(id) {
-        const result = await objCapaDato.getEmpresaProducto(id);
-        var objDto = new EmpresaProductoDto(result.rows);
-        result.rows = objDto.getData()
-        return result
-    }
+  //READ ID
+  async getEmpresaProducto(id) {
+    const result = await objCapaDato.getEmpresaProducto(id);
+    var objDto = new EmpresaProductoDto(result.rows);
+    result.rows = objDto.getData();
+    return result;
+  }
 
-    //UPDATE 
-    async updateEmpresaProducto(id, data) {
-        return await objCapaDato.updateEmpresaProducto(id, data);
-    }
+  //UPDATE
+  async updateEmpresaProducto(id, data) {
+    return await objCapaDato.updateEmpresaProducto(id, data);
+  }
 
-    //DELETE 
-    async deleteEmpresaProducto(id) {
-        return await objCapaDato.deleteEmpresaProducto(id);
-    }
+  //DELETE
+  async deleteEmpresaProducto(id) {
+    return await objCapaDato.deleteEmpresaProducto(id);
+  }
 }
 
 export default CN_EmpresaProducto;

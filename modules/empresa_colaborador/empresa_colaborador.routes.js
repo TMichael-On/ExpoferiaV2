@@ -4,6 +4,7 @@ import {
     deleteEmpresaColaborador,
     getEmpresaColaborador,
     getEmpresasRedes,
+    getEmpresasRedesId,
     prueba,
     updateEmpresaColaborador,
     view
@@ -14,6 +15,8 @@ const router = Router();
 router.post("/create", createEmpresaColaborador);
 //GET GENERAL
 router.get("/list", getEmpresasRedes);
+//GET GENERAL ID
+router.get("/list/:id", getEmpresasRedesId);
 //GET ID
 router.get("/:id", getEmpresaColaborador);
 //UPDATE
