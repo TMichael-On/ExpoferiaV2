@@ -11245,11 +11245,11 @@ body {
 #img {
   width: 200px;
   height: 200px;
-  border-radius: 50%;
-  border: 5px solid #ff5722; /* Borde llamativo de color naranja */
+  /* border-radius: 50%; */
+  border: 5px solid #ff5722; 
   object-fit: cover;
   display: block;
-  margin: 0 auto; /* Centrando la imagen */
+  margin: 0 auto; 
 }
 
 .img-container {

@@ -35,7 +35,9 @@ $(document).ready(function () {
   }
 
   (async () => {
-    const jsonData = await objUtilidades.fetchResultListar("redes/list");
+    const idEmpresa = 5;
+    let ruta = "redes/list/" + idEmpresa;
+    const jsonData = await objUtilidades.fetchResultListar(ruta);
     if (jsonData.message == "success") {
       jsonData.rows = jsonData.rows.map((row) => {
         for (let key in row) {
