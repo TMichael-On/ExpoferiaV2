@@ -107,14 +107,61 @@ $(document).ready(function () {
     });
   });
 
+  $(document).ready(function () {
+    let cropper;
+    let imgElement = document.getElementById("img");
+    const defaultFile = "../../public/sb-admin/image/default.jpg";
+  
+    $("#empresa_cargarimage_editar").on("change", function (e) {
+      console.log("Se cargó una imagen");
+      if (e.target.files && e.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const image = document.getElementById('imagen_a_recortar');
+          image.src = event.target.result;
+          $('#modal_recortar_imagen_editar').modal('show');
+  
+          if (cropper) {
+            cropper.destroy();
+          }
+  
+          cropper = new Cropper(image, {
+            aspectRatio: 1,
+            viewMode: 1,
+            minContainerWidth: 400,
+            minContainerHeight: 400,
+          });
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      } else {
+        imgElement.src = defaultFile;
+      }
+    });
+  
+    $("#modal_recortar_imagen_editar").on("click", function () {
+      const canvas = cropper.getCroppedCanvas({
+        width: 200,
+        height: 200,
+      });
+      imgElement.src = canvas.toDataURL();
+      $('#modal_recortar_imagen_editar').modal('hide');
+    });
+  });
+
   $("#btnGuardar").on("click", async function () {
     let imageLoad = "default.jpg";
     let youtubeLoad = "https://www.youtube.com/";
-    let ruta = "public/sb-admin/image";
     if ($("#empresa_cargarvideo").val())
       youtubeLoad = $("#empresa_cargarvideo").val();
-    if ($("#empresa_cargarvideo").val()) {
-      let name;
+    if ($("#empresa_cargarimage").val()) {
+      let name = $("#empresa_nombre").val();
+      let date = new Date();
+      let year = date.getFullYear();
+      let month = ("0" + (date.getMonth() + 1)).slice(-2);
+      let day = ("0" + date.getDate()).slice(-2);
+      let hour = ("0" + date.getHours()).slice(-2);
+      let minute = ("0" + date.getMinutes()).slice(-2);
+      imageLoad = `img_${name}_${year}${month}${day}${hour}${minute}.png`;
     }
     var data_empresa = {
       nombre: $("#empresa_nombre").val(),
@@ -135,6 +182,7 @@ $(document).ready(function () {
     );
     console.log(jsonData);
     if (jsonData.message == "success") {
+      let ruta = "public/sb-admin/image/"+imageLoad;
       $("#mensajeError").hide();
       location.reload();
     } else {
@@ -159,6 +207,8 @@ $(document).ready(function () {
           Correo: rowData.Correo,
           Descripción: rowData.Descripción,
           Historia: rowData.Historia,
+          Imagen: rowData.Imagen,
+          Video: rowData.Video,
         };
         // debugger
         $("#modal_ver_nombre").text(dto.Nombre);
@@ -168,6 +218,7 @@ $(document).ready(function () {
         $("#modal_ver_telefono").text(dto.Teléfono);
         $("#modal_ver_correo").text(dto.Correo);
         $("#modal_ver_descripcion").text(dto.Descripción);
+        $("#modal_ver_video").text(dto.Video);
         $("#modal_ver_historia").text(dto.Historia);
 
         $("#modal_ver_empresa").modal("show");

@@ -43,11 +43,11 @@
       </div>
       <div class="modal-body">
         <!--Input modal-->
-          <img
-            src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
-            alt="avatar"
-            id="img"
-          />
+        <img
+          src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
+          alt="avatar"
+          id="img"
+        />
         <div class="row">
           <div class="col-6">
             <label for="empresa_nombre" class="form-label">Nombre (*)</label>
@@ -76,7 +76,6 @@
               autocomplete="off"
             />
           </div>
-
           <div class="col-6">
             <label for="empresa_direccion" class="form-label">Dirección (*)</label>
             <input
@@ -179,27 +178,6 @@
 </div>
 <!-- end modal empresa -->
 
-<!-- Modal para recortar la imagen -->
-<div class="modal fade" id="modal_recortar_imagen" tabindex="-1" aria-labelledby="modalRecortarImagenLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalRecortarImagenLabel">Recortar Imagen</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="img-container">
-          <img id="imagen_a_recortar" src="" alt="Imagen a recortar" style="max-width: 100%;">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" id="btn_recortar_imagen">Recortar y Guardar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- modal ver empresa-->
 <div
   class="modal modal-lg fade"
@@ -221,11 +199,11 @@
         ></button>
       </div>
       <div class="modal-body">
-          <img
-            src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
-            alt="avatar"
-            id="img"
-          />
+        <img
+          src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
+          alt="avatar"
+          id="img"
+        />
         <!--Input modal-->
         <div class="row">
           <div class="col-6">
@@ -292,6 +270,16 @@
               disabled
             />
           </div>
+          <div class="col-6">
+            <label for="modal_ver_video" class="form-label">Canal de YouTube</label>
+            <p
+              type="text"
+              class="form-control"
+              id="modal_ver_video"
+              style="overflow-x: auto; white-space: nowrap;"
+              disabled
+            />
+          </div>
           <div class="col-12">
             <label
               for="modal_ver_descripcion"
@@ -352,11 +340,11 @@
       </div>
       <div class="modal-body">
         <!--Input modal-->
-          <img
-            src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
-            alt="avatar"
-            id="img"
-          />
+        <img
+          src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
+          alt="avatar"
+          id="img"
+        />
         <div class="row">
           <div class="col-6">
             <label for="empresa_nombre_editar" class="form-label">Nombre</label>
@@ -422,23 +410,23 @@
               autocomplete="off"
             />
           </div>
-          
+
           <div class="col-6">
-            <label for="empresa_cargarvideo" class="form-label">Subir enlace de
+            <label for="empresa_cargarvideo_editar" class="form-label">Subir enlace de
               YouTube</label>
             <input
               type="text"
               class="form-control"
-              id="empresa_cargarvideo"
+              id="empresa_cargarvideo_editar"
               autocomplete="off"
             />
           </div>
           <div class="col-6">
-            <label for="empresa_cargarimage" class="form-label">Subir imagen</label>
+            <label for="empresa_cargarimage_editar" class="form-label">Subir imagen</label>
             <input
               type="file"
               class="form-control"
-              id="empresa_cargarimage"
+              id="empresa_cargarimage_editar"
               autocomplete="off"
               name="archivo"
             />
@@ -502,5 +490,95 @@
   </div>
 </div>
 <!-- end editar modal empresa -->
+
+<!-- Modal para recortar la imagen -->
+<div
+  class="modal fade"
+  id="modal_recortar_imagen"
+  tabindex="-1"
+  aria-labelledby="modalRecortarImagenLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalRecortarImagenLabel">Recortar Imagen</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="img-container">
+          <img
+            id="imagen_a_recortar"
+            src=""
+            alt="Imagen a recortar"
+            style="max-width: 100%;"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Cancelar</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="btn_recortar_imagen"
+        >Recortar y Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para recortar la imagen editar-->
+<div
+  class="modal fade"
+  id="modal_recortar_imagen_editar"
+  tabindex="-1"
+  aria-labelledby="modalRecortarImagenLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalRecortarImagenLabel">Recortar Imagen</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="img-container">
+          <img
+            id="imagen_a_recortar_editar"
+            src="img"
+            alt="Imagen a recortar"
+            style="max-width: 100%;"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Cancelar</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="btn_recortar_imagen"
+        >Recortar y Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="/controladores/empresa.js" type="module"></script>

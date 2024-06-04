@@ -17,6 +17,8 @@ export class EmpresaDto {
                     'Correo': data.empresa_correo ?? '',
                     'Descripción': data.empresa_descripcion ?? '',
                     'Historia': data.empresa_historia ?? '',
+                    'Imagen': data.empresa_imagen ?? '',
+                    'Video': data.empresa_video ?? '',
                     'Opciones': data.empresa_id ?? '',
                 };
             });
