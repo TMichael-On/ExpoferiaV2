@@ -154,7 +154,7 @@ $(document).ready(function () {
   $(document).on("click", ".btn-eliminar", async function () {
     // debugger;
     var btn = $(this);
-    var idEmpresa = btn.data("row");
+    var idColaborador = btn.data("row");
     try {
       Swal.fire({
         title: "Eliminar",
@@ -171,8 +171,8 @@ $(document).ready(function () {
             showConfirmButton: false,
           });
           const jsonData = await objUtilidades.fetchResultEliminar(
-            "empresa",
-            idEmpresa
+            "colaborador",
+            idColaborador
           );
           if (jsonData.message == "success") {
             location.reload();
