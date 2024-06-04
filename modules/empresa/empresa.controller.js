@@ -125,5 +125,5 @@ export const prueba = async (req, res) => {
 
 //VIEW
 export const view = async (req, res) => {
-  res.render("empresa/empresa");
+  res.render("empresa/empresa", { alwaysTrue: false });
 };
