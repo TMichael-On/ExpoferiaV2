@@ -29,7 +29,24 @@ class CD_EmpresaRedes {
     let message = "success";
     let rows = [];
     try {
-      [rows] = await pool.query("SELECT * FROM expo_empresa_redes ORDER BY redes_id");
+      [rows] = await pool.query(
+        "SELECT * FROM expo_empresa_redes ORDER BY redes_id"
+      );
+    } catch (error) {
+      message = "Algo salió mal en CD: " + error.message;
+    }
+    return { message: message, rows: rows };
+  }
+
+  //READ GENERAL ID
+  async getEmpresasRedesId(id) {
+    let message = "success";
+    let rows = [];
+    try {
+      [rows] = await pool.query(
+        "SELECT * FROM expo_empresa_redes WHERE empresa_id = ? ORDER BY redes_id",
+        [id]
+      );
     } catch (error) {
       message = "Algo salió mal en CD: " + error.message;
     }

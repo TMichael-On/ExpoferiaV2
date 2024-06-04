@@ -43,9 +43,14 @@
       </div>
       <div class="modal-body">
         <!--Input modal-->
+          <img
+            src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
+            alt="avatar"
+            id="img"
+          />
         <div class="row">
           <div class="col-6">
-            <label for="empresa_nombre" class="form-label">Nombre</label>
+            <label for="empresa_nombre" class="form-label">Nombre (*)</label>
             <input
               type="text"
               class="form-control"
@@ -54,7 +59,7 @@
             />
           </div>
           <div class="col-6">
-            <label for="empresa_numero_ruc" class="form-label">RUC</label>
+            <label for="empresa_numero_ruc" class="form-label">RUC (*)</label>
             <input
               type="text"
               class="form-control"
@@ -63,7 +68,7 @@
             />
           </div>
           <div class="col-6">
-            <label for="empresa_rubro" class="form-label">Rubro</label>
+            <label for="empresa_rubro" class="form-label">Rubro (*)</label>
             <input
               type="text"
               class="form-control"
@@ -73,7 +78,7 @@
           </div>
 
           <div class="col-6">
-            <label for="empresa_direccion" class="form-label">Dirección</label>
+            <label for="empresa_direccion" class="form-label">Dirección (*)</label>
             <input
               type="text"
               class="form-control"
@@ -82,7 +87,7 @@
             />
           </div>
           <div class="col-6">
-            <label for="empresa_telefono" class="form-label">Teléfono</label>
+            <label for="empresa_telefono" class="form-label">Teléfono (*)</label>
             <input
               type="text"
               class="form-control"
@@ -91,7 +96,7 @@
             />
           </div>
           <div class="col-6">
-            <label for="empresa_correo" class="form-label">Correo</label>
+            <label for="empresa_correo" class="form-label">Correo (*)</label>
             <input
               type="text"
               class="form-control"
@@ -99,11 +104,30 @@
               autocomplete="off"
             />
           </div>
+          <div class="col-6">
+            <label for="empresa_cargarvideo" class="form-label">Subir enlace de
+              YouTube</label>
+            <input
+              type="text"
+              class="form-control"
+              id="empresa_cargarvideo"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-6">
+            <label for="empresa_cargarimage" class="form-label">Subir imagen</label>
+            <input
+              type="file"
+              class="form-control"
+              id="empresa_cargarimage"
+              autocomplete="off"
+              name="archivo"
+            />
+          </div>
+          <div class="col-6">
+          </div>
           <div class="col-12">
-            <label
-              for="empresa_descripcion"
-              class="form-label"
-            >Descripción</label>
+            <label for="empresa_descripcion" class="form-label">Descripción (*)</label>
             <textarea
               type="text"
               class="form-control"
@@ -112,7 +136,7 @@
             ></textarea>
           </div>
           <div class="col-12">
-            <label for="empresa_historia" class="form-label">Historia</label>
+            <label for="empresa_historia" class="form-label">Historia (*)</label>
             <textarea
               type="text"
               class="form-control"
@@ -136,6 +160,7 @@
           </div>
         </div>
         <!--Mensaje de alerta end-->
+        <label>Campos obligatorios (*)</label>
       </div>
       <div class="modal-footer">
         <button
@@ -153,6 +178,27 @@
   </div>
 </div>
 <!-- end modal empresa -->
+
+<!-- Modal para recortar la imagen -->
+<div class="modal fade" id="modal_recortar_imagen" tabindex="-1" aria-labelledby="modalRecortarImagenLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalRecortarImagenLabel">Recortar Imagen</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="img-container">
+          <img id="imagen_a_recortar" src="" alt="Imagen a recortar" style="max-width: 100%;">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="btn_recortar_imagen">Recortar y Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- modal ver empresa-->
 <div
@@ -175,6 +221,11 @@
         ></button>
       </div>
       <div class="modal-body">
+          <img
+            src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
+            alt="avatar"
+            id="img"
+          />
         <!--Input modal-->
         <div class="row">
           <div class="col-6">
@@ -301,6 +352,11 @@
       </div>
       <div class="modal-body">
         <!--Input modal-->
+          <img
+            src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
+            alt="avatar"
+            id="img"
+          />
         <div class="row">
           <div class="col-6">
             <label for="empresa_nombre_editar" class="form-label">Nombre</label>
@@ -312,7 +368,10 @@
             />
           </div>
           <div class="col-6">
-            <label for="empresa_numero_ruc_editar" class="form-label">RUC</label>
+            <label
+              for="empresa_numero_ruc_editar"
+              class="form-label"
+            >RUC</label>
             <input
               type="text"
               class="form-control"
@@ -331,7 +390,10 @@
           </div>
 
           <div class="col-6">
-            <label for="empresa_direccion_editar" class="form-label">Dirección</label>
+            <label
+              for="empresa_direccion_editar"
+              class="form-label"
+            >Dirección</label>
             <input
               type="text"
               class="form-control"
@@ -340,7 +402,10 @@
             />
           </div>
           <div class="col-6">
-            <label for="empresa_telefono_editar" class="form-label">Teléfono</label>
+            <label
+              for="empresa_telefono_editar"
+              class="form-label"
+            >Teléfono</label>
             <input
               type="text"
               class="form-control"
@@ -357,6 +422,29 @@
               autocomplete="off"
             />
           </div>
+          
+          <div class="col-6">
+            <label for="empresa_cargarvideo" class="form-label">Subir enlace de
+              YouTube</label>
+            <input
+              type="text"
+              class="form-control"
+              id="empresa_cargarvideo"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-6">
+            <label for="empresa_cargarimage" class="form-label">Subir imagen</label>
+            <input
+              type="file"
+              class="form-control"
+              id="empresa_cargarimage"
+              autocomplete="off"
+              name="archivo"
+            />
+          </div>
+          <div class="col-6">
+          </div>
           <div class="col-12">
             <label
               for="empresa_descripcion_editar"
@@ -370,7 +458,10 @@
             ></textarea>
           </div>
           <div class="col-12">
-            <label for="empresa_historia_editar" class="form-label">Historia</label>
+            <label
+              for="empresa_historia_editar"
+              class="form-label"
+            >Historia</label>
             <textarea
               type="text"
               class="form-control"

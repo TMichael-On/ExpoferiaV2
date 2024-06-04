@@ -68,7 +68,56 @@ $(document).ready(function () {
     $("#modal_empresa").modal("show");
   });
 
+  $(document).ready(function () {
+    let cropper;
+    let imgElement = document.getElementById("img");
+    const defaultFile = "../../public/sb-admin/image/default.jpg";
+  
+    $("#empresa_cargarimage").on("change", function (e) {
+      console.log("Se cargó una imagen");
+      if (e.target.files && e.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const image = document.getElementById('imagen_a_recortar');
+          image.src = event.target.result;
+          $('#modal_recortar_imagen').modal('show');
+  
+          if (cropper) {
+            cropper.destroy();
+          }
+  
+          cropper = new Cropper(image, {
+            aspectRatio: 1,
+            viewMode: 1,
+            minContainerWidth: 400,
+            minContainerHeight: 400,
+          });
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      } else {
+        imgElement.src = defaultFile;
+      }
+    });
+  
+    $("#btn_recortar_imagen").on("click", function () {
+      const canvas = cropper.getCroppedCanvas({
+        width: 200,
+        height: 200,
+      });
+      imgElement.src = canvas.toDataURL();
+      $('#modal_recortar_imagen').modal('hide');
+    });
+  });
+
   $("#btnGuardar").on("click", async function () {
+    let imageLoad = "default.jpg";
+    let youtubeLoad = "https://www.youtube.com/";
+    let ruta = "public/sb-admin/image";
+    if ($("#empresa_cargarvideo").val())
+      youtubeLoad = $("#empresa_cargarvideo").val();
+    if ($("#empresa_cargarvideo").val()) {
+      let name;
+    }
     var data_empresa = {
       nombre: $("#empresa_nombre").val(),
       numero_ruc: $("#empresa_numero_ruc").val(),
@@ -78,6 +127,8 @@ $(document).ready(function () {
       correo: $("#empresa_correo").val(),
       descripcion: $("#empresa_descripcion").val(),
       historia: $("#empresa_historia").val(),
+      image: imageLoad,
+      video: youtubeLoad,
       usuario_id: 8,
     };
     const jsonData = await objUtilidades.fetchResultGuardar(

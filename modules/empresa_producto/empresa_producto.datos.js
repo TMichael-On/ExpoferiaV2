@@ -36,7 +36,25 @@ class CD_EmpresaProducto {
     let message = "success";
     let rows = [];
     try {
-      [rows] = await pool.query("SELECT * FROM expo_empresa_producto ORDER BY producto_id");
+      [rows] = await pool.query(
+        "SELECT * FROM expo_empresa_producto ORDER BY producto_id"
+      );
+    } catch (error) {
+      message = "Algo salió mal en CD: " + error.message;
+      rows = [];
+    }
+    return { message: message, rows: rows };
+  }
+
+  //READ GENERAL ID
+  async getEmpresaProductosId(id) {
+    let message = "success";
+    let rows = [];
+    try {
+      [rows] = await pool.query(
+        "SELECT * FROM expo_empresa_producto WHERE empresa_id = ? ORDER BY producto_id",
+        [id]
+      );
     } catch (error) {
       message = "Algo salió mal en CD: " + error.message;
       rows = [];

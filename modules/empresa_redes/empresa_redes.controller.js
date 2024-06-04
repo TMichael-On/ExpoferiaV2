@@ -42,6 +42,19 @@ export const getEmpresasRedes = async (req, res) => {
   }
 };
 
+//READ GENERAL ID
+export const getEmpresasRedesId = async (req, res) => {
+  const objCapaEmpresaRedes = new CN_EmpresaRedes();
+  try {
+    const result = await objCapaEmpresaRedes.getEmpresasRedesId(req.params.id);
+    res.json(result);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Algo error ocurrio en CP: " + error.message });
+  }
+};
+
 //READ
 export const getEmpresaRedes = async (req, res) => {
   const objCapaEmpresaRedes = new CN_EmpresaRedes();
@@ -97,5 +110,5 @@ export const prueba = async (req, res) => {
 
 //VIEW
 export const view = async (req, res) => {
-  res.render('empresa_redes/empresa_redes');
+  res.render("empresa_redes/empresa_redes");
 };
