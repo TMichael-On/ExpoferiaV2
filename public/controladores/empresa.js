@@ -17,7 +17,9 @@ let dataEmpresa = {
 };
 
 var opciones = {
-  searchable: true,
+  searchable: false,
+  paging: false,
+  sortable: false,
   data: dataEmpresa,
   columns: [
     {

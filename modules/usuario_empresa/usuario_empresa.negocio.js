@@ -61,7 +61,7 @@ class CN_UsuarioEmpresa {
         }
     }
 
-    //READ ID
+    //READ CORREO
     async getUsuarioEmpresaCorreo(correo) {
         try {
             const result = await objCapaDato.getUsuarioEmpresaCorreo(correo); 
