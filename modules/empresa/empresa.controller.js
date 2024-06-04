@@ -60,6 +60,19 @@ export const getEmpresas = async (req, res) => {
   }
 };
 
+//READ GENERAL ID
+export const getEmpresasId = async (req, res) => {
+  const objCapaEmpresa = new CN_Empresa();
+  try {
+    const result = await objCapaEmpresa.getEmpresasId(req.params.id);
+    res.json(result);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Algo error ocurrio en CP: " + error.message });
+  }
+};
+
 //READ BY ID
 export const getEmpresa = async (req, res) => {
   const objCapaEmpresa = new CN_Empresa();
@@ -112,5 +125,5 @@ export const prueba = async (req, res) => {
 
 //VIEW
 export const view = async (req, res) => {
-  res.render('empresa/empresa');
+  res.render("empresa/empresa");
 };
