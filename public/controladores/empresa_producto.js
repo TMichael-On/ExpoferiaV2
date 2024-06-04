@@ -4,7 +4,7 @@ const objUtilidades = new Utilidades();
 
 let dataEmpresaProducto = {
   headings: [
-    "Nombre",
+    "Producto",
     "Categoría",
     "Stock",
     "Precio",

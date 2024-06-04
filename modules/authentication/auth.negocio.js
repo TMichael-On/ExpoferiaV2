@@ -25,26 +25,28 @@ class CN_Auth {
     }
 
     async login(data) {
-        const { email, password } = data;
-        const userFound = await User.findOne({ email });
+        try {
+            const { correo, contrasena } = data;
 
-        if (!userFound)
-            return res.status(400).json({
-                message: ["The email does not exist"],
-            });
+            const result = await objUsuarioEmpresa.getUsuarioEmpresaCorreo(correo)
+            if (result.message != 'success') {
+                return result
+            }
 
-        const isMatch = await bcrypt.compare(password, userFound.password);
-        if (!isMatch) {
-            return res.status(400).json({
-                message: ["The password is incorrect"],
+            const isMatch = await bcrypt.compare(contrasena, result.rows.usuario_contrasena);
+            if (!isMatch) {
+                return { message: 'La contraseña es incorrecta' };
+            }
+
+            // create access token
+            const id_usuario = userFound.rows.usuario_id
+            const token = await createAccessToken({
+                id: id_usuario,
             });
+            return { message: 'success', token };
+        } catch (error) {
+            return { message: "Algo salió mal en CN.", error: error.message };
         }
-
-        // create access token
-        const id_usuario = userFound
-        const token = await createAccessToken({
-            id: id_usuario,
-        });
     }
 }
 

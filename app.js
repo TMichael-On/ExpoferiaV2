@@ -5,15 +5,21 @@ import { engine } from 'express-handlebars';
 import passport from "passport";
 import sessionMiddleware from './database/session.js';
 import bodyParser from "body-parser";
-import { PORT } from "./database/config.js";
+import { PORT, FRONTEND_URL } from "./database/config.js";
 import app_router from "./modules/app.router.js";
-import path from "path";
+import cors from "cors";
 import "./modules/authentication/passport.js"
 const app = express();
 
 // Middlewares
+app.use(
+  cors({
+    credentials: true,
+    origin: FRONTEND_URL,
+  })
+);
 app.use(morgan("dev"));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //Session
@@ -26,7 +32,7 @@ app.use(passport.session());
 app.use(app_router);
 
 // Settings view
-app.engine('.hbs', engine({extname: '.hbs'}));
+app.engine('.hbs', engine({ extname: '.hbs' }));
 app.set('view engine', '.hbs');
 app.set('views', './views');
 

@@ -13,6 +13,7 @@ export class EmpresaColaboradorDto {
                     "Teléfono" : data.colaborador_telefono ?? '',
                     "Área" : data.colaborador_area ?? '',
                     'Opciones': data.colaborador_id ?? '',
+                    'Empresa': data.empresa_id ?? '',
                 };
             });
         } else {
