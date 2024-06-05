@@ -1,19 +1,28 @@
-class Utilidades {    
+class Utilidades {
 
-    async fetchResultGuardar(ruta, data) {
+    async fetchResultGuardar(ruta, data, isFormData = false) {
         try {
-            // const token = localStorage.getItem('token');
-            const headers = { 'Content-Type': 'application/json' };
+            const headers = {};
+            let bodyData = data;
 
-            // if (token) {
-            //     headers['Authorization'] = `Bearer ${token}`;
-            // }
+            if (isFormData) {
+                // headers['Content-Type'] = 'multipart/form-data';
+                bodyData = new FormData();
+                for (const key in data) {
+                    bodyData.append(key, data[key]);
+                }
+            } else {
+                headers['Content-Type'] = 'application/json';
+                bodyData = JSON.stringify(data);
+            }
+
             const response = await fetch(`/${ruta}`, {
                 method: 'POST',
                 headers: headers,
-                body: JSON.stringify(data)
+                body: bodyData
             });
             const jsonResult = await response.json();
+            console.log(jsonResult)
             return jsonResult;
         } catch (error) {
             console.error('Error al obtener respuesta de la API:', error);
@@ -41,20 +50,20 @@ class Utilidades {
         }
     };
 
-    async fetchResultVer(ruta, id) {        
+    async fetchResultVer(ruta, id) {
         try {
             // debugger
             // const token = localStorage.getItem('token');
-            const headers = {'Content-Type': 'application/json'};
-    
+            const headers = { 'Content-Type': 'application/json' };
+
             // if (token) {
             //     headers['Authorization'] = `Bearer ${token}`;
             // }
             const response = await fetch(`/${ruta}/${id}`, {
                 method: 'GET',
                 headers: headers
-            });            
-            const jsonResult = await response.json();            
+            });
+            const jsonResult = await response.json();
             return jsonResult;
         } catch (error) {
             console.error('Error al procesar la petición:', error);
@@ -62,12 +71,12 @@ class Utilidades {
         }
     };
 
-    async fetchResultEditar(ruta, id, data) {        
+    async fetchResultEditar(ruta, id, data) {
         try {
             // debugger
             // const token = localStorage.getItem('token');
-            const headers = {'Content-Type': 'application/json'};
-    
+            const headers = { 'Content-Type': 'application/json' };
+
             // if (token) {
             //     headers['Authorization'] = `Bearer ${token}`;
             // }
@@ -75,8 +84,8 @@ class Utilidades {
                 method: 'PATCH',
                 headers: headers,
                 body: JSON.stringify(data)
-            });            
-            const jsonResult = await response.json();            
+            });
+            const jsonResult = await response.json();
             return jsonResult;
         } catch (error) {
             console.error('Error al procesar la petición:', error);
@@ -84,20 +93,20 @@ class Utilidades {
         }
     };
 
-    async fetchResultEliminar(ruta, id) {        
+    async fetchResultEliminar(ruta, id) {
         try {
             // debugger
             // const token = localStorage.getItem('token');
-            const headers = {'Content-Type': 'application/json'};
-    
+            const headers = { 'Content-Type': 'application/json' };
+
             // if (token) {
             //     headers['Authorization'] = `Bearer ${token}`;
             // }
             const response = await fetch(`/${ruta}/${id}`, {
                 method: 'DELETE',
                 headers: headers
-            });            
-            const jsonResult = await response.json();            
+            });
+            const jsonResult = await response.json();
             return jsonResult;
         } catch (error) {
             console.error('Error al procesar la petición:', error);

@@ -4,6 +4,7 @@ import CN_Empresa from "./empresa.negocio.js";
 export const createEmpresa = async (req, res) => {
   const objCapaEmpresa = new CN_Empresa();
   const data = req.body;
+  // return res.json(data);
   let errors = [];
   if (!data.nombre) {
     errors.push("Nombre is required");
@@ -38,7 +39,7 @@ export const createEmpresa = async (req, res) => {
       .json({ message: "Failed", error: "Datos requeridos", rows: [] });
   }
   try {
-    const result = await objCapaEmpresa.createEmpresa(data);
+    const result = await objCapaEmpresa.createEmpresa(req);
     res.json(result);
   } catch (error) {
     return res

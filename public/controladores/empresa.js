@@ -38,6 +38,7 @@ var opciones = {
 
 $(document).ready(function () {
   var table;
+  let cropper;
   if (simpleDatatables) {
     table = new simpleDatatables.DataTable("#tablaEmpresa", opciones);
   }
@@ -69,10 +70,10 @@ $(document).ready(function () {
   });
 
   $(document).ready(function () {
-    let cropper;
+    // let cropper;
     let imgElement = document.getElementById("img");
     const defaultFile = "../../public/sb-admin/image/default.jpg";
-  
+
     $("#empresa_cargarimage").on("change", function (e) {
       console.log("Se cargó una imagen");
       if (e.target.files && e.target.files[0]) {
@@ -81,11 +82,11 @@ $(document).ready(function () {
           const image = document.getElementById('imagen_a_recortar');
           image.src = event.target.result;
           $('#modal_recortar_imagen').modal('show');
-  
+
           if (cropper) {
             cropper.destroy();
           }
-  
+
           cropper = new Cropper(image, {
             aspectRatio: 1,
             viewMode: 1,
@@ -98,7 +99,7 @@ $(document).ready(function () {
         imgElement.src = defaultFile;
       }
     });
-  
+
     $("#btn_recortar_imagen").on("click", function () {
       const canvas = cropper.getCroppedCanvas({
         width: 200,
@@ -113,7 +114,7 @@ $(document).ready(function () {
     let cropper;
     let imgElement = document.getElementById("img");
     const defaultFile = "../../public/sb-admin/image/default.jpg";
-  
+
     $("#empresa_cargarimage_editar").on("change", function (e) {
       console.log("Se cargó una imagen");
       if (e.target.files && e.target.files[0]) {
@@ -122,11 +123,11 @@ $(document).ready(function () {
           const image = document.getElementById('imagen_a_recortar');
           image.src = event.target.result;
           $('#modal_recortar_imagen_editar').modal('show');
-  
+
           if (cropper) {
             cropper.destroy();
           }
-  
+
           cropper = new Cropper(image, {
             aspectRatio: 1,
             viewMode: 1,
@@ -139,7 +140,7 @@ $(document).ready(function () {
         imgElement.src = defaultFile;
       }
     });
-  
+
     $("#modal_recortar_imagen_editar").on("click", function () {
       const canvas = cropper.getCroppedCanvas({
         width: 200,
@@ -165,6 +166,7 @@ $(document).ready(function () {
       let minute = ("0" + date.getMinutes()).slice(-2);
       imageLoad = `img_${name}_${year}${month}${day}${hour}${minute}.png`;
     }
+
     var data_empresa = {
       nombre: $("#empresa_nombre").val(),
       numero_ruc: $("#empresa_numero_ruc").val(),
@@ -174,23 +176,29 @@ $(document).ready(function () {
       correo: $("#empresa_correo").val(),
       descripcion: $("#empresa_descripcion").val(),
       historia: $("#empresa_historia").val(),
-      image: imageLoad,
+      image: "",
       video: youtubeLoad,
       usuario_id: 8,
     };
-    const jsonData = await objUtilidades.fetchResultGuardar(
-      "empresa/create",
-      data_empresa
-    );
-    console.log(jsonData);
-    if (jsonData.message == "success") {
-      let ruta = "public/sb-admin/image/"+imageLoad;
-      $("#mensajeError").hide();
-      location.reload();
-    } else {
-      $("#mensajeError").text(jsonData.message);
-      $("#mensajeError").show();
-    }
+    cropper.getCroppedCanvas().toBlob(async blob => {
+      debugger
+      data_empresa.image = blob
+      const jsonData = await objUtilidades.fetchResultGuardar(
+        "empresa/create",
+        data_empresa,
+        true
+      );
+      if (jsonData.message == "success") {
+        let ruta = "public/sb-admin/image/" + imageLoad;
+        $("#mensajeError").hide();
+        // location.reload();
+        console.log('Imagen guardada correctamente')
+      } else {
+        $("#mensajeError").text(jsonData.message);
+        $("#mensajeError").show();
+      }
+    })
+    // console.log(jsonData);
   });
 
   $(document).on("click", ".btn-ver", async function () {

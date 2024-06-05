@@ -1,13 +1,29 @@
 import CD_Empresa from "./empresa.datos.js";
 import EmpresaDto from "./empresa.dto.js";
+import helpers from "../helpers.js";
 
 var objCapaDato = new CD_Empresa();
+var objHelpers = new helpers();
 // var objDto = new EmpresaDto();
 
 class CN_Empresa {
   //CREATE
-  async createEmpresa(data) {
-    return await objCapaDato.createEmpresa(data);
+  async createEmpresa(req) {
+    let message = "success";
+    let result
+    const data = req.body;
+    const img = req.files[0].buffer
+    try {      
+      // result = await objCapaDato.createEmpresa(data);
+      // if (result.message != "success") {
+      //   return result
+      // }
+      const destino = 'imagenes/' + req.files[0].originalname +'.png';
+      await objHelpers.guardarImagen(req.files[0], destino);
+    } catch (error) {
+      message = "Algo salió mal en CN asda: " + error.message;
+    }
+    return { message };
   }
 
   //READ GENERAL
