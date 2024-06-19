@@ -1,17 +1,13 @@
 import CN_EmpresaColaborador from "./empresa_colaborador.negocio.js";
+import CN_Empresa from "../empresa/empresa.negocio.js"
 
+const objCapaEmpresaColaborador = new CN_EmpresaColaborador();
+const objEmpresa = new CN_Empresa
 // CREATE - Capa de Presentación
-export const createEmpresaColaborador = async (req, res) => {
-  const objCapaEmpresaColaborador = new CN_EmpresaColaborador();
-  const data = req.body;
-  if (Object.keys(data).length === 0) {
-    return res
-      .status(400)
-      .json({ message: "Failed", error: "Datos requeridos", rows: [] });
-  }
+export const createEmpresaColaborador = async (req, res) => {    
   try {
     const result = await objCapaEmpresaColaborador.createEmpresaColaborador(
-      data
+      req
     );
     res.json(result);
   } catch (error) {
@@ -22,8 +18,7 @@ export const createEmpresaColaborador = async (req, res) => {
 };
 
 //READ GENERAL
-export const getEmpresasRedes = async (req, res) => {
-  const objCapaEmpresaColaborador = new CN_EmpresaColaborador();
+export const getEmpresasRedes = async (req, res) => {  
   try {
     const result = await objCapaEmpresaColaborador.getEmpresaColaboradores();
     res.json(result);
@@ -35,8 +30,7 @@ export const getEmpresasRedes = async (req, res) => {
 };
 
 //READ GENERAL ID
-export const getEmpresasRedesId = async (req, res) => {
-  const objCapaEmpresaColaborador = new CN_EmpresaColaborador();
+export const getEmpresasRedesId = async (req, res) => {  
   try {
     const result = await objCapaEmpresaColaborador.getEmpresaColaboradoresId(
       req.params.id
@@ -50,8 +44,7 @@ export const getEmpresasRedesId = async (req, res) => {
 };
 
 //READ
-export const getEmpresaColaborador = async (req, res) => {
-  const objCapaEmpresaColaborador = new CN_EmpresaColaborador();
+export const getEmpresaColaborador = async (req, res) => {  
   try {
     const result = await objCapaEmpresaColaborador.getEmpresaColaborador(
       req.params.id
@@ -65,13 +58,11 @@ export const getEmpresaColaborador = async (req, res) => {
 };
 
 //UPDATE
-export const updateEmpresaColaborador = async (req, res) => {
-  const objCapaEmpresaColaborador = new CN_EmpresaColaborador();
-  const data = req.body;
+export const updateEmpresaColaborador = async (req, res) => {    
   try {
     const result = await objCapaEmpresaColaborador.updateEmpresaColaborador(
       req.params.id,
-      data
+      req
     );
     res.json(result);
   } catch (error) {
@@ -82,8 +73,7 @@ export const updateEmpresaColaborador = async (req, res) => {
 };
 
 //DELETE
-export const deleteEmpresaColaborador = async (req, res) => {
-  const objCapaEmpresaColaborador = new CN_EmpresaColaborador();
+export const deleteEmpresaColaborador = async (req, res) => {  
   try {
     const result = await objCapaEmpresaColaborador.deleteEmpresaColaborador(
       req.params.id
@@ -104,5 +94,8 @@ export const prueba = async (req, res) => {
 
 //VIEW
 export const view = async (req, res) => {
+  // const id = 8
+  // const result = await objEmpresa.getEmpresasId(id);
+  // const ID = result.rows[0].id
   res.render("empresa_colaborador/empresa_colaborador");
 };

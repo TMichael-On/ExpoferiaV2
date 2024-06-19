@@ -22,97 +22,75 @@
 <!-- end card empresa_producto-->
 
 <!-- modal empresa_producto-->
-<div
-  class="modal fade"
-  id="modal_empresa_producto"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
-  data-bs-backdrop="static"
->
+<div class="modal fade" id="modal_empresa_producto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  data-bs-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark text-white">
         <h5 class="modal-title" id="exampleModalLabel">Agregar producto</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-datos-tab" data-bs-toggle="tab" data-bs-target="#nav-datos"
+              type="button" role="tab" aria-controls="nav-datos" aria-selected="true">Informacion</button>
+            <button class="nav-link" id="nav-imagen-tab" data-bs-toggle="tab" data-bs-target="#nav-imagen" type="button"
+              role="tab" aria-controls="nav-imagen" aria-selected="false">Imagen</button>
+          </div>
+        </nav>
         <!--Input modal-->
-        <div class="row">
-          <div class="col-12">
-            <label
-              for="empresa_producto_nombre"
-              class="form-label"
-            >Nombre</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_producto_nombre"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-6">
-            <label
-              for="empresa_producto_categoria"
-              class="form-label"
-            >Categoría</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_producto_categoria"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-6">
-            <label for="empresa_producto_stock" class="form-label">Stock</label>
-            <input
-              type="number"
-              class="form-control"
-              id="empresa_producto_stock"
-              autocomplete="off"
-            />
-          </div>
+        <div class="tab-content" id="nav-tabContent">
+          {{!-- Input de datos --}}
+          <div class="tab-pane fade show active" id="nav-datos" role="tabpanel" aria-labelledby="nav-datos-tab"
+            tabindex="0">
+            <div class="row">
+              <input type="hidden" id="empresa_producto_id">
+              <div class="col-12">
+                <label for="empresa_producto_nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="empresa_producto_nombre" autocomplete="off" />
+              </div>
+              <div class="col-6">
+                <label for="empresa_producto_categoria" class="form-label">Categoría</label>
+                <input type="text" class="form-control" id="empresa_producto_categoria" autocomplete="off" />
+              </div>
+              <div class="col-6">
+                <label for="empresa_producto_stock" class="form-label">Stock</label>
+                <input type="number" class="form-control" id="empresa_producto_stock" autocomplete="off" />
+              </div>
 
-          <div class="col-6">
-            <label
-              for="empresa_producto_precio"
-              class="form-label"
-            >Precio</label>
-            <input
-              type="number"
-              class="form-control"
-              id="empresa_producto_precio"
-              autocomplete="off"
-            />
+              <div class="col-6">
+                <label for="empresa_producto_precio" class="form-label">Precio</label>
+                <input type="number" class="form-control" id="empresa_producto_precio" autocomplete="off" />
+              </div>
+              <div class="col-6">
+                <label for="empresa_producto_moneda" class="form-label">Moneda</label>
+                <input type="text" class="form-control" id="empresa_producto_moneda" autocomplete="off" />
+              </div>
+              <div class="col-6">
+                <label for="empresa_producto_estado" class="form-label">Estado</label>
+                <select id="empresa_producto_estado" class="form-select">
+                  <option value="1">Mostrar</option>
+                  <option value="0">Ocultar</option>
+                </select>
+              </div>
+            </div>
           </div>
-          <div class="col-6">
-            <label
-              for="empresa_producto_moneda"
-              class="form-label"
-            >Moneda</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_producto_moneda"
-              autocomplete="off"
-            />
+          {{!-- Input de imagen video --}}
+          <div class="tab-pane fade" id="nav-imagen" role="tabpanel" aria-labelledby="nav-imagen-tab" tabindex="0">
+            <div class="col-12">
+              <label for="e_producto_cargarimage" class="form-label">Subir imagen</label>
+              <img style="width: 80%; aspect-ratio: 1.8;" class="rounded mx-auto d-block img-fluid" id="img_producto"/>
+              <input class="form-control mt-2" type="file" width="100%" id="e_producto_cargarimage" name="archivo"
+                accept="image/png,image/jpg,image/jpeg" />
+            </div>
           </div>
         </div>
         <!--Input modal end-->
         <!--Mensaje de alerta-->
         <div class="row mt-2">
           <div class="col-12">
-            <div
-              id="mensajeError"
-              class="alert alert-danger"
-              role="alert"
-              style="margin-bottom: 10px; display: none"
-            >
+            <div id="mensajeError" class="alert alert-danger" role="alert" style="margin-bottom: 10px; display: none">
               A simple danger alert—check it out!
             </div>
           </div>
@@ -120,261 +98,34 @@
         <!--Mensaje de alerta end-->
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >Cerrar</button>
-        <button
-          id="btnGuardar"
-          type="button"
-          class="btn btn-primary"
-        >Guardar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button id="btnGuardar" type="button" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>
 </div>
 <!-- end modal empresa_producto -->
 
-<!-- modal ver empresa_producto-->
-<div
-  class="modal modal-lg fade"
-  id="modal_ver_empresa_producto"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
-  data-bs-backdrop="static"
->
-  <div class="modal-dialog">
+<!-- Modal para recortar la imagen -->
+<div class="modal fade" id="modal_recortar_imagen" tabindex="-1" aria-labelledby="modalRecortarImagenLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header bg-dark text-white">
-        <h5 class="modal-title" id="exampleModalLabel">Ver producto</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalRecortarImagenLabel">Recortar Imagen</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <!--Input modal-->
-        <div class="row">
-          <div class="col-6">
-            <label
-              for="modal_producto_ver_nombre"
-              class="form-label"
-            >Nombre</label>
-            <p
-              type="text"
-              class="form-control"
-              id="modal_producto_ver_nombre"
-              style="overflow-x: auto; white-space: nowrap;"
-              disabled
-            />
-          </div>
-          <div class="col-6">
-            <label
-              for="modal_producto_ver_categoria"
-              class="form-label"
-            >Categoría</label>
-            <p
-              type="text"
-              class="form-control"
-              id="modal_producto_ver_categoria"
-              style="overflow-x: auto; white-space: nowrap;"
-              disabled
-            />
-          </div>
-          <div class="col-6">
-            <label
-              for="modal_producto_ver_stock"
-              class="form-label"
-            >Stock</label>
-            <p
-              type="text"
-              class="form-control"
-              id="modal_producto_ver_stock"
-              style="overflow-x: auto; white-space: nowrap;"
-              disabled
-            />
-          </div>
-
-          <div class="col-6">
-            <label
-              for="modal_producto_ver_precio"
-              class="form-label"
-            >Precio</label>
-            <p
-              type="text"
-              class="form-control"
-              id="modal_producto_ver_precio"
-              style="overflow-x: auto; white-space: nowrap;"
-              disabled
-            />
-          </div>
-          <div class="col-6">
-            <label
-              for="modal_producto_ver_moneda"
-              class="form-label"
-            >Moneda</label>
-            <p
-              type="text"
-              class="form-control"
-              id="modal_producto_ver_moneda"
-              style="overflow-x: auto; white-space: nowrap;"
-              disabled
-            />
-          </div>
-          <div class="col-6">
-            <label
-              for="modal_producto_ver_estado"
-              class="form-label"
-            >Estado</label>
-            <p
-              type="text"
-              class="form-control"
-              id="modal_producto_ver_estado"
-              style="overflow-x: auto; white-space: nowrap;"
-              disabled
-            />
-          </div>
+        <div class="img-container">
+          <img id="imagen_a_recortar" src="" alt="Imagen a recortar" >
         </div>
-        <!--Input modal end-->
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >Cerrar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="btn_recortar_imagen">Recortar</button>
       </div>
     </div>
   </div>
 </div>
-<!-- end modal ver empresa_producto -->
-
-<!-- modal editar empresa_producto-->
-<div
-  class="modal modal-lg fade"
-  id="modal_editar_empresa_producto"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
-  data-bs-backdrop="static"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-dark text-white">
-        <h5 class="modal-title" id="exampleModalLabel">Editar producto</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <!--Input modal-->
-        <div class="row">
-          <div class="col-6">
-            <label for="empresa_producto_nombre_editar" class="form-label">Nombre</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_producto_nombre_editar"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-6">
-            <label
-              for="empresa_producto_categoria_editar"
-              class="form-label"
-            >Categoria</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_producto_categoria_editar"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-6">
-            <label for="empresa_producto_stock_editar" class="form-label">Stock</label>
-            <input
-              type="number"
-              class="form-control"
-              id="empresa_producto_stock_editar"
-              autocomplete="off"
-            />
-          </div>
-
-          <div class="col-6">
-            <label
-              for="empresa_producto_precio_editar"
-              class="form-label"
-            >Precio</label>
-            <input
-              type="number"
-              class="form-control"
-              id="empresa_producto_precio_editar"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-6">
-            <label
-              for="empresa_producto_moneda_editar"
-              class="form-label"
-            >Moneda</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_producto_moneda_editar"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-6">
-            <label
-              for="empresa_producto_estado_editar"
-              class="form-label"
-            >Estado</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_producto_estado_editar"
-              autocomplete="off"
-            />
-          </div>
-        </div>
-        <!--Input modal end-->
-        <!--Mensaje de alerta-->
-        <div class="row mt-2">
-          <div class="col-12">
-            <div
-              id="mensajeError"
-              class="alert alert-danger"
-              role="alert"
-              style="margin-bottom: 10px; display: none"
-            >
-              A simple danger alert—check it out!
-            </div>
-          </div>
-        </div>
-        <!--Mensaje de alerta end-->
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >Cerrar</button>
-        <button
-          id="btnGuardarEditar"
-          type="button"
-          class="btn btn-primary"
-        >Guardar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end editar modal empresa_producto -->
 
 <script src="/controladores/empresa_producto.js" type="module"></script>

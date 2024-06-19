@@ -1,224 +1,114 @@
 <!-- card empresa_colaborador-->
 <div class="card mt-4">
-    <div class="card-header">
-        <i class="fas fa-users me-1"></i> Registro de Colaboradores
+  <div class="card-header">
+    <i class="fas fa-users me-1"></i> Registro de Colaboradores
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-6">
+        <button id="btn_modal" type="button" class="btn btn-success">Crear nuevo</button>
+      </div>
     </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-6">
-                <button id="btn_modal" type="button" class="btn btn-success">Crear nuevo</button>
-            </div>
-        </div>
-        <hr />
-        <table id="tablaempresa_colaborador" style="white-space: nowrap;">
-            <thead>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
+    <hr />
+    <table id="tablaempresa_colaborador" style="white-space: nowrap;">
+      <thead>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
 </div> <!-- end card empresa_colaborador-->
 
 <!-- modal empresa_colaborador-->
-<div class="modal fade" id="modal_empresa_colaborador" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar colaborador</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!--Input modal-->
-                <div class="row">
-                    <div class="col-12">
-                        <label for="empresa_colaborador_nombre" class="form-label">Nombre Completo</label>
-                        <input type="text" class="form-control" id="empresa_colaborador_nombre" autocomplete="off">
-                    </div>
-                    <div class="col-6">
-                        <label for="empresa_colaborador_telefono" class="form-label">Teléfono</label>
-                        <input type="text" class="form-control" id="empresa_colaborador_telefono" autocomplete="off">
-                    </div>
-                    <div class="col-6">
-                        <label for="empresa_colaborador_area" class="form-label">Área</label>
-                        <input type="text" class="form-control" id="empresa_colaborador_area" autocomplete="off">
-                    </div>
-                </div>
-                <!--Input modal end-->
-                <!--Mensaje de alerta-->
-                <div class="row mt-2">
-                    <div class="col-12">
-                        <div id="mensajeError" class="alert alert-danger" role="alert" style="margin-bottom: 10px; display: none">
-                            A simple danger alert—check it out!
-                        </div>
-                    </div>
-                </div> <!--Mensaje de alerta end-->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button id="btnGuardar" type="button" class="btn btn-primary">Guardar</button>
-            </div>
-        </div>
-    </div>
-</div> <!-- end modal empresa_colaborador -->
-
-<!-- modal ver empresa-->
-<div
-  class="modal modal-lg fade"
-  id="modal_ver_empresa_colaborador"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
-  data-bs-backdrop="static"
->
+<div class="modal fade" id="modal_empresa_colaborador" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" data-bs-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark text-white">
-        <h5 class="modal-title" id="exampleModalLabel">Ver colaborador</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <h5 class="modal-title" id="exampleModalLabel">Colaborador</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-datos-tab" data-bs-toggle="tab" data-bs-target="#nav-datos"
+              type="button" role="tab" aria-controls="nav-datos" aria-selected="true">Información</button>
+            <button class="nav-link" id="nav-imagen-tab" data-bs-toggle="tab" data-bs-target="#nav-imagen" type="button"
+              role="tab" aria-controls="nav-imagen" aria-selected="false">Imagen</button>
+          </div>
+        </nav>
         <!--Input modal-->
-        <div class="row">
-          <div class="col-12">
-            <label for="modal_colaborador_ver_nombre" class="form-label">Nombre Completo</label>
-            <p
-              type="text"
-              class="form-control"
-              id="modal_colaborador_ver_nombre"
-              style="overflow-x: auto; white-space: nowrap;"
-              disabled
-            />
+        <div class="tab-content" id="nav-tabContent">
+          {{!-- Input de datos --}}
+          <div class="tab-pane fade show active" id="nav-datos" role="tabpanel" aria-labelledby="nav-datos-tab"
+            tabindex="0">
+            <div class="row">
+              <input type="hidden" id="empresa_colaborador_id">
+              <div class="col-12">
+                <label for="empresa_colaborador_nombre" class="form-label">Nombre completo</label>
+                <input type="text" class="form-control" id="empresa_colaborador_nombre" autocomplete="off">
+              </div>
+              <div class="col-6">
+                <label for="empresa_colaborador_telefono" class="form-label">Teléfono</label>
+                <input type="text" class="form-control" id="empresa_colaborador_telefono" autocomplete="off">
+              </div>
+              <div class="col-6">
+                <label for="empresa_colaborador_area" class="form-label">Área</label>
+                <input type="text" class="form-control" id="empresa_colaborador_area" autocomplete="off">
+              </div>
+            </div>
           </div>
-          <div class="col-6">
-            <label for="modal_colaborador_ver_telefono" class="form-label">Teléfono</label>
-            <p
-              type="text"
-              class="form-control"
-              id="modal_colaborador_ver_telefono"
-              style="overflow-x: auto; white-space: nowrap;"
-              disabled
-            />
+          {{!-- Input de imagen video --}}
+          <div class="tab-pane fade" id="nav-imagen" role="tabpanel" aria-labelledby="nav-imagen-tab" tabindex="0">
+            <div class="col-12">
+              <label for="e_colaborador_cargarimage" class="form-label">Subir imagen</label>
+              <img style="width: 80%; aspect-ratio: 1.8;" class="rounded mx-auto d-block img-fluid" id="img_colaborador" />
+              <input class="form-control mt-2" type="file" width="100%" id="e_colaborador_cargarimage" name="archivo"
+                accept="image/png,image/jpg,image/jpeg" />
+            </div>
           </div>
-          <div class="col-6">
-            <label for="modal_colaborador_ver_area" class="form-label">Área</label>
-            <p
-              type="text"
-              class="form-control"
-              id="modal_colaborador_ver_area"
-              style="overflow-x: auto; white-space: nowrap;"
-              disabled
-            />
-          </div>
+          <!--Input modal end-->
         </div>
-        <!--Input modal end-->
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end modal ver empresa -->
-
-<!-- modal editar empresa_colaborador-->
-<div
-  class="modal modal-lg fade"
-  id="modal_editar_empresa_colaborador"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
-  data-bs-backdrop="static"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-dark text-white">
-        <h5 class="modal-title" id="exampleModalLabel">Editar colaborador</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <!--Input modal-->
-        <div class="row">
-          <div class="col-12">
-            <label for="empresa_colaborador_nombre_editar" class="form-label">Nombre</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_colaborador_nombre_editar"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-6">
-            <label for="empresa_colaborador_telefono_editar" class="form-label">RUC</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_colaborador_telefono_editar"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-6">
-            <label for="empresa_colaborador_area_editar" class="form-label">Rubro</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_colaborador_area_editar"
-              autocomplete="off"
-            />
-          </div>
-          {{!-- <div class="col-6">
-            <label for="empresa_colaborador_empresa_editar" class="form-label">Rubro</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_colaborador_empresa_editar"
-              autocomplete="off"
-            />
-          </div> --}}
-        <!--Input modal end-->
         <!--Mensaje de alerta-->
         <div class="row mt-2">
           <div class="col-12">
-            <div
-              id="mensajeError"
-              class="alert alert-danger"
-              role="alert"
-              style="margin-bottom: 10px; display: none"
-            >
+            <div id="mensajeError" class="alert alert-danger" role="alert" style="margin-bottom: 10px; display: none">
               A simple danger alert—check it out!
             </div>
           </div>
-        </div>
-        <!--Mensaje de alerta end-->
+        </div> <!--Mensaje de alerta end-->
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >Cerrar</button>
-        <button
-          id="btnGuardarEditar"
-          type="button"
-          class="btn btn-primary"
-        >Guardar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button id="btnGuardar" type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div> <!-- end modal empresa_colaborador -->
+
+<!-- Modal para recortar la imagen -->
+<div class="modal fade" id="modal_recortar_imagen" tabindex="-1" aria-labelledby="modalRecortarImagenLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalRecortarImagenLabel">Recortar Imagen</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="img-container">
+          <img id="imagen_a_recortar" src="" alt="Imagen a recortar" style="max-width: 100%;">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="btn_recortar_imagen">Recortar</button>
       </div>
     </div>
   </div>
 </div>
-<!-- end editar modal empresa -->
 
+<script>
+  console.log({{ ID }})
+</script>
 <script src="/controladores/empresa_colaborador.js" type="module"></script>

@@ -18,14 +18,14 @@ class CN_UsuarioEmpresa {
         if (!data.correo) {
           errors.push("El correo es requerido");
         }
-        if (!data.telefono) {
-          errors.push("El teléfono es requerido");
-        }
+        // if (!data.telefono) {
+        //   errors.push("El teléfono es requerido");
+        // }
         if (!data.contrasena) {
           errors.push("La contraseña es requerida");
         }
         if (errors.length > 0) {
-          return { message: "Failed", error: "Datos requeridos", rows: [] }
+          return { message: "Datos requeridos", rows: [] }
         }
         try {
             // Cifrar contraseña

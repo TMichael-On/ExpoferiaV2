@@ -9,6 +9,8 @@ import {
   updateEmpresa,
   view,
 } from "./empresa.controller.js";
+import  {isAuth} from "../../middleware/auth.middleware.js"
+
 
 const router = Router();
 //CREATE
@@ -16,7 +18,7 @@ router.post("/create", createEmpresa);
 //GET GENERAL
 router.get("/list", getEmpresas);
 //GET GENERAL ID
-router.get("/list/:id", getEmpresasId);
+router.get("/list/:id", isAuth, getEmpresasId);
 //GET ID
 router.get("/:id", getEmpresa);
 //UPDATE

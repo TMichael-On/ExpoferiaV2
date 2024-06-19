@@ -2,14 +2,12 @@ import express from "express";
 import morgan from "morgan";
 import { engine } from 'express-handlebars';
 // const validator = require('express-validator');
-import passport from "passport";
-import sessionMiddleware from './database/session.js';
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 import multer from "multer";
 import { PORT, FRONTEND_URL } from "./database/config.js";
 import app_router from "./modules/app.router.js";
 import cors from "cors";
-import "./modules/authentication/passport.js"
 const app = express();
 
 // Middlewares
@@ -22,14 +20,11 @@ app.use(
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 // Configura multer para manejar formData
 const upload = multer();
 app.use(upload.any()); // Permite manejar cualquier tipo de formData
 
-//Session
-app.use(sessionMiddleware);
-app.use(passport.initialize());
-app.use(passport.session());
 // app.use(validator());
 
 // Routes

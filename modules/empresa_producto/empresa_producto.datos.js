@@ -14,13 +14,15 @@ class CD_EmpresaProducto {
         message = "Producto " + data.nombre + " ya existente";
       } else {
         [rows] = await pool.query(
-          "INSERT INTO expo_empresa_producto (producto_nombre , producto_categoria, producto_stock, producto_precio, producto_moneda, producto_estado, empresa_id) VALUES (?,?,?,?,?,'1',?)",
+          "INSERT INTO expo_empresa_producto (producto_nombre , producto_categoria, producto_stock, producto_precio, producto_moneda, producto_estado,producto_imagen, empresa_id) VALUES (?,?,?,?,?,?,?,?)",
           [
             data.nombre,
             data.categoria,
             data.stock,
             data.precio,
             data.moneda,
+            data.estado,
+            data.image,
             data.empresa_id,
           ]
         );
@@ -111,6 +113,10 @@ class CD_EmpresaProducto {
       updates.push("producto_estado = ?");
       params.push(data.estado);
     }
+    if (data.image !== undefined) {
+      updates.push("producto_imagen = ?");
+      params.push(data.image);
+    }    
     if (data.empresa_id !== undefined) {
       updates.push("empresa_id = ?");
       params.push(data.empresa_id);

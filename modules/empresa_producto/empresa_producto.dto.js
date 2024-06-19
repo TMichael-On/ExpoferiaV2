@@ -15,8 +15,9 @@ export class EmpresaProductoDto {
                     "Precio": data.producto_precio ?? '',
                     "Moneda": data.producto_moneda ?? '',
                     "Estado": data.producto_estado ?? '',
+                    "Imagen": data.producto_imagen ?? '',
                     'Opciones': data.producto_id ?? '',
-                    'Más información':data.producto_id ?? '',
+                    'Más información':data.producto_imagen ?? '',
                     'Cotizar':data.producto_id ?? '',
                 };
             });

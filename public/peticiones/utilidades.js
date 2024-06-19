@@ -3,7 +3,7 @@ class Utilidades {
     async fetchResultGuardar(ruta, data, isFormData = false) {
         try {
             const headers = {};
-            let bodyData = data;
+            let bodyData
 
             if (isFormData) {
                 // headers['Content-Type'] = 'multipart/form-data';
@@ -21,6 +21,9 @@ class Utilidades {
                 headers: headers,
                 body: bodyData
             });
+            if (response.redirected) {
+                window.location.href = response.url;
+            }
             const jsonResult = await response.json();
             console.log(jsonResult)
             return jsonResult;
@@ -71,19 +74,25 @@ class Utilidades {
         }
     };
 
-    async fetchResultEditar(ruta, id, data) {
+    async fetchResultEditar(ruta, id, data, isFormData = false) {
         try {
-            // debugger
-            // const token = localStorage.getItem('token');
-            const headers = { 'Content-Type': 'application/json' };
+            const headers = {};
+            let bodyData
 
-            // if (token) {
-            //     headers['Authorization'] = `Bearer ${token}`;
-            // }
+            if (isFormData) {
+                // headers['Content-Type'] = 'multipart/form-data';
+                bodyData = new FormData();
+                for (const key in data) {
+                    bodyData.append(key, data[key]);
+                }
+            } else {
+                headers['Content-Type'] = 'application/json';
+                bodyData = JSON.stringify(data);
+            }
             const response = await fetch(`/${ruta}/${id}`, {
                 method: 'PATCH',
                 headers: headers,
-                body: JSON.stringify(data)
+                body: bodyData
             });
             const jsonResult = await response.json();
             return jsonResult;

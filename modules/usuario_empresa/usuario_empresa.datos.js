@@ -15,12 +15,11 @@ class CD_UsuarioEmpresa {
         message = "Correo " + data.correo + " ya existente";
       } else {
         [rows] = await pool.query(
-          "INSERT INTO expo_usuario_empresa (usuario_nombre, usuario_apellido, usuario_correo, usuario_telefono, usuario_contrasena, usuario_fecha_registro) VALUES (?,?,?,?,?,current_timestamp())",
+          "INSERT INTO expo_usuario_empresa (usuario_nombre, usuario_apellido, usuario_correo, usuario_contrasena, usuario_fecha_registro) VALUES (?,?,?,?,current_timestamp())",
           [
             data.nombre,
             data.apellido,
             data.correo,
-            data.telefono,
             data.contrasena,
           ]
         );
@@ -76,7 +75,7 @@ class CD_UsuarioEmpresa {
     } catch (error) {
       message = "Algo salió mal en CD: " + error.message;
     }
-    return { message: message, rows: rows };
+    return { message: message, rows: rows[0] };
   }
 
   //UPDATE

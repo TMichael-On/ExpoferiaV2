@@ -8,7 +8,7 @@ import {
     updateUsuarioEmpresa,
     view
 } from "./usuario_empresa.controller.js";
-import isLoggedIn from "../authentication/auth.js";
+import  {isAuth} from "../../middleware/auth.middleware.js"
 
 const router = Router();
 //CREATE

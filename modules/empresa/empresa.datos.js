@@ -8,8 +8,10 @@ class CD_Empresa {
     try {
       [rows] = await pool.query(
         "SELECT * FROM expo_empresa WHERE empresa_numero_ruc  = ? or empresa_correo = ?",
-        [data.ruc, data.correo]
+        [data.numero_ruc, data.correo]
       );
+      if (data.numero_ruc == 'default' && data.correo == 'default')
+        rows.length = 0
       if (rows.length > 0) {
         message = "Correo o número ruc ya existente";
       } else {
@@ -122,10 +124,22 @@ class CD_Empresa {
       updates.push("empresa_historia = ?");
       params.push(data.historia);
     }
-    if (data.usuario_id !== undefined) {
-      updates.push("empresa_usuario_id = ?");
-      params.push(data.usuario_id);
+    if (data.image !== undefined) {
+      updates.push("empresa_imagen = ?");
+      params.push(data.image);
     }
+    if (data.video !== undefined) {
+      updates.push("empresa_video = ?");
+      params.push(data.video);
+    }
+    if (data.estado !== undefined) {
+      updates.push("empresa_estado = ?");
+      params.push(data.estado);
+    }
+    // if (data.usuario_id !== undefined) {
+    //   updates.push("empresa_usuario_id = ?");
+    //   params.push(data.usuario_id);
+    // }
     if (updates.length === 0) {
       return { message: "Sin datos para actualizar", rows: [] };
     } else {

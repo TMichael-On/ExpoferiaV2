@@ -2,6 +2,7 @@ import Utilidades from "../peticiones/utilidades.js";
 
 const objUtilidades = new Utilidades();
 
+let json_data
 let dataEmpresaRedes = {
   headings: [
     "Nombre",
@@ -31,22 +32,19 @@ var opciones = {
 $(document).ready(function () {
   var table;
   if (simpleDatatables) {
-    table = new simpleDatatables.DataTable("#tablaempresa_redes", opciones);
+    table = new simpleDatatables.DataTable(
+      "#tablaempresa_redes",
+      opciones
+    );
   }
 
   (async () => {
     const idEmpresa = 5;
     let ruta = "redes/list/" + idEmpresa;
     const jsonData = await objUtilidades.fetchResultListar(ruta);
+    console.log('original', jsonData)
     if (jsonData.message == "success") {
-      jsonData.rows = jsonData.rows.map((row) => {
-        for (let key in row) {
-          if (typeof row[key] === "string" && row[key].length > 6) {
-            row[key] = row[key].substring(0, 6) + "...";
-          }
-        }
-        return row;
-      });
+      json_data = { ...jsonData }
       table.insert(jsonData.rows);
     } else {
       Swal.fire({
@@ -59,20 +57,37 @@ $(document).ready(function () {
   })();
 
   $("#btn_modal").on("click", function () {
+    $("#btnGuardar").show()
+    $('#modal_empresa_redes').on('shown.bs.modal', function () {
+      $(this).find('input').val('');
+      $(this).find('input').prop('disabled', false);
+      $("#mensajeError").hide();
+    });
     $("#modal_empresa_redes").modal("show");
   });
 
   $("#btnGuardar").on("click", async function () {
-    var data_empresa = {
+    var jsonData
+    var data_empresa_redes = {
       nombre: $("#redes_nombre").val(),
       url: $("#redes_url").val(),
       empresa_id: 5,
     };
-    const jsonData = await objUtilidades.fetchResultGuardar(
-      "redes/create",
-      data_empresa
-    );
-    console.log(jsonData);
+
+    if ($('#empresa_redes_id').val() == '') {
+      jsonData = await objUtilidades.fetchResultGuardar(
+        "redes/create",
+        data_empresa_redes
+      );
+    } else {
+      var idRedes = $('#empresa_redes_id').val()
+      jsonData = await objUtilidades.fetchResultEditar(
+        "redes",
+        idRedes,
+        data_empresa_redes
+      );
+    }
+
     if (jsonData.message == "success") {
       $("#mensajeError").hide();
       location.reload();
@@ -83,80 +98,20 @@ $(document).ready(function () {
   });
 
   $(document).on("click", ".btn-ver", async function () {
-    $("#modal_ver_empresa_redes").modal("show");
     var btn = $(this);
-    // var idRow = 4;
     var idRow = btn.data("row");
-    console.log("Click ver: ", idRow);
-    try {
-      const jsonData = await objUtilidades.fetchResultVer("redes", idRow);
-      if (jsonData.message === "success") {
-        const rowData = jsonData.rows;
-        const dto = {
-          Nombre: rowData[0].Nombre,
-          Url: rowData[0].Url,
-        //   Empresa: rowData[0].Empresa,
-        };
-        $("#modal_redes_ver_nombre").text(dto.Nombre);
-        $("#modal_redes_ver_url").text(dto.Url);
-        // $("#modal_redes_ver_empresa").text(dto.Stock);
-        // debugger;
-      } else {
-        console.error("Error al obtener los datos:", jsonData.message);
-      }
-    } catch (error) {
-      console.error("Error al obtener los datos:", error);
-    }
+    $("#btnGuardar").hide()
+    mostrar_data(idRow, true)
   });
 
   $(document).on("click", ".btn-editar", function () {
-    $("#modal_editar_empresa_redes").modal("show");
+    $("#btnGuardar").show()
     var btn = $(this);
-    // var idRedes = 4;
     var idRedes = btn.data("row");
-    $("#btnGuardarEditar")
-      .off("click")
-      .on("click", async function () {
-        let data_empresa_redes = {};
-        if ($("#empresa_redes_nombre_editar").val().trim() !== "") {
-          data_empresa_redes.nombre = $(
-            "#empresa_redes_nombre_editar"
-          )
-            .val()
-            .trim();
-        }
-        if ($("#empresa_redes_url_editar").val().trim() !== "") {
-          data_empresa_redes.url = $(
-            "#empresa_redes_url_editar"
-          )
-            .val()
-            .trim();
-        }
-        // if ($("#empresa_redes_empresa_editar").val().trim() !== "") {
-        //   data_empresa_redes.empresa = $("#empresa_redes_empresa_editar")
-        //     .val()
-        //     .trim();
-        // }
-        if (data_empresa_redes.length !== 0) {
-          data_empresa_redes.empresa_id = 5;
-          const jsonData = await objUtilidades.fetchResultEditar(
-            "redes",
-            idRedes,
-            data_empresa_redes
-          );
-          if (jsonData.message == "success") {
-            $("#mensajeError").hide();
-            location.reload();
-          } else {
-            $("#mensajeError").text(jsonData.message);
-            $("#mensajeError").show();
-          }
-        } else $("#modal_editar_empresa").modal("dismiss");
-      });
+    mostrar_data(idRedes)
   });
 
   $(document).on("click", ".btn-eliminar", async function () {
-    // debugger;
     var btn = $(this);
     var idRedes = btn.data("row");
     try {
@@ -194,4 +149,17 @@ $(document).ready(function () {
       console.error("Error al obtener los datos:", error);
     }
   });
+
+  function mostrar_data(ID, isDisabled = false) {
+    $("#modal_empresa_redes").modal("show");
+    const data_fila = json_data.rows.filter(item => item.id === ID)[0];
+
+    $('#modal_empresa_redes').on('shown.bs.modal', function () {
+      $(this).find('input').prop('disabled', isDisabled);
+      $("#empresa_redes_id").val(data_fila.id)
+      $("#redes_nombre").val(data_fila.Nombre);
+      $("#redes_url").val(data_fila.Url);
+    });
+
+  }
 });

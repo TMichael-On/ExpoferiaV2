@@ -12,7 +12,7 @@ export class UsuarioEmpresaDto {
                     "nombre" : data.usuario_nombre ?? '',
                     "apellido" : data.usuario_apellido ?? '',
                     "correo" : data.usuario_correo ?? '',
-                    "telefono" : data.usuario_telefono ?? '',
+                    // "telefono" : data.usuario_telefono ?? '',
                     "contrasena" : data.usuario_contrasena ?? '',
                     "fecha_registro" : data.usuario_fecha_registro ?? '',
                 };

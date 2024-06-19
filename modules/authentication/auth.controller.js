@@ -21,7 +21,7 @@ export const register = async (req, res) => {
       sameSite: "none",
     });
 
-    res.json(result);
+    res.redirect(303, '/empresa');
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -40,12 +40,7 @@ export const login = async (req, res) => {
       secure: true,
       sameSite: "none",
     });
-
-    // res.json({
-    //   id: userFound._id,
-    //   username: userFound.username,
-    //   email: userFound.email,
-    // });
+    res.redirect(303, '/empresa');
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -77,3 +72,7 @@ export const logout = async (req, res) => {
   });
   return res.sendStatus(200);
 };
+
+export const view = async (req, res) => {
+  res.render('auth/login', {layout: false});
+}

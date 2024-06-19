@@ -5,12 +5,6 @@
     Registro de la empresa
   </div>
   <div class="card-body">
-    <div class="row">
-      <div class="col-6">
-        <button id="btn_modal" type="button" class="btn btn-success">Crear nuevo</button>
-      </div>
-    </div>
-    <hr />
     <table id="tablaEmpresa" style="white-space: nowrap;">
       <thead>
       </thead>
@@ -22,157 +16,112 @@
 <!-- end card empresa-->
 
 <!-- modal empresa-->
-<div
-  class="modal modal-lg fade"
-  id="modal_empresa"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
-  data-bs-backdrop="static"
->
-  <div class="modal-dialog">
+<div class="modal fade" id="modal_empresa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  data-bs-backdrop="static">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header bg-dark text-white">
-        <h5 class="modal-title" id="exampleModalLabel">Agregar empresa</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <h5 class="modal-title" id="exampleModalLabel">Empresa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-datos-tab" data-bs-toggle="tab" data-bs-target="#nav-datos"
+              type="button" role="tab" aria-controls="nav-datos" aria-selected="true">Informacion</button>
+            <button class="nav-link" id="nav-imagen-tab" data-bs-toggle="tab" data-bs-target="#nav-imagen" type="button"
+              role="tab" aria-controls="nav-imagen" aria-selected="false">Imagen</button>
+          </div>
+        </nav>
         <!--Input modal-->
-          <img
-            src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
-            alt="avatar"
-            id="img"
-          />
-        <div class="row">
-          <div class="col-6">
-            <label for="empresa_nombre" class="form-label">Nombre (*)</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_nombre"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-6">
-            <label for="empresa_numero_ruc" class="form-label">RUC (*)</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_numero_ruc"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-6">
-            <label for="empresa_rubro" class="form-label">Rubro (*)</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_rubro"
-              autocomplete="off"
-            />
-          </div>
+        <div class="tab-content" id="nav-tabContent">
+          {{!-- Input de datos --}}
+          <div class="tab-pane fade show active" id="nav-datos" role="tabpanel" aria-labelledby="nav-datos-tab"
+            tabindex="0">
+            <div class="row">
+              <input type="hidden" id="empresa_id">
+              <div class="col-6">
+                <label for="empresa_estado" class="form-label">Estado</label>
+                <select id="empresa_estado" class="form-select">
+                  <option value="1">Mostrar</option>
+                  <option value="0">Ocultar</option>
+                </select>
+              </div>
+              <div class="col-6"></div>
+              <div class="col-6">
+                <label for="empresa_nombre" class="form-label">Nombre </label>
+                <input type="text" class="form-control" id="empresa_nombre" autocomplete="off" />
+              </div>
+              <div class="col-6">
+                <label for="empresa_numero_ruc" class="form-label">RUC </label>
+                <input type="text" class="form-control" id="empresa_numero_ruc" autocomplete="off" />
+              </div>
+              <div class="col-6">
+                <label for="empresa_rubro" class="form-label">Rubro </label>
+                <input type="text" class="form-control" id="empresa_rubro" autocomplete="off" />
+              </div>
+              <div class="col-6">
+                <label for="empresa_direccion" class="form-label">Dirección </label>
+                <input type="text" class="form-control" id="empresa_direccion" autocomplete="off" />
+              </div>
+              <div class="col-6">
+                <label for="empresa_telefono" class="form-label">Teléfono </label>
+                <input type="text" class="form-control" id="empresa_telefono" autocomplete="off" />
+              </div>
+              <div class="col-6">
+                <label for="empresa_correo" class="form-label">Correo </label>
+                <input type="text" class="form-control" id="empresa_correo" autocomplete="off" />
+              </div>
+              <div class="col-12">
+                <label for="empresa_descripcion" class="form-label">Descripción </label>
+                <textarea type="text" class="form-control" id="empresa_descripcion" style="height: 60;"
+                  autocomplete="off"></textarea>
+              </div>
+              <div class="col-12">
+                <label for="empresa_historia" class="form-label">Historia </label>
+                <textarea type="text" class="form-control" id="empresa_historia" style="height: 60;"
+                  autocomplete="off"></textarea>
+              </div>
 
-          <div class="col-6">
-            <label for="empresa_direccion" class="form-label">Dirección (*)</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_direccion"
-              autocomplete="off"
-            />
+            </div>
           </div>
-          <div class="col-6">
-            <label for="empresa_telefono" class="form-label">Teléfono (*)</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_telefono"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-6">
-            <label for="empresa_correo" class="form-label">Correo (*)</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_correo"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-6">
-            <label for="empresa_cargarvideo" class="form-label">Subir enlace de
-              YouTube</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_cargarvideo"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-6">
-            <label for="empresa_cargarimage" class="form-label">Subir imagen</label>
-            <input
-              type="file"
-              class="form-control"
-              id="empresa_cargarimage"
-              autocomplete="off"
-              name="archivo"
-            />
-          </div>
-          <div class="col-6">
-          </div>
-          <div class="col-12">
-            <label for="empresa_descripcion" class="form-label">Descripción (*)</label>
-            <textarea
-              type="text"
-              class="form-control"
-              id="empresa_descripcion"
-              autocomplete="off"
-            ></textarea>
-          </div>
-          <div class="col-12">
-            <label for="empresa_historia" class="form-label">Historia (*)</label>
-            <textarea
-              type="text"
-              class="form-control"
-              id="empresa_historia"
-              autocomplete="off"
-            ></textarea>
+          {{!-- Input de imagen video --}}
+          <div class="tab-pane fade" id="nav-imagen" role="tabpanel" aria-labelledby="nav-imagen-tab" tabindex="0">
+            <div class="col-12">
+              <label for="empresa_cargarimage" class="form-label">Subir imagen</label>
+              <img style="width: 80%; aspect-ratio: 1.8;" class="rounded mx-auto d-block img-fluid" id="img_empresa"
+                src="" />
+              <input class="form-control mt-2" type="file" width="100%" id="empresa_cargarimage" name="archivo"
+                accept="image/png,image/jpg,image/jpeg" />
+            </div>
+            <div class="col-12">
+              <label for="empresa_cargarvideo" class="form-label">Subir enlace de YouTube</label>
+              <div class="border rounded mx-auto d-block img-fluid" style="width: 80%; aspect-ratio: 1.8">
+                <iframe id="video_empresa" class="mx-auto" width="100%" height="100%" src="" frameborder="0"
+                  style="display: none;" allowfullscreen></iframe>
+              </div>
+              <div class="input-group mt-2">
+                <input id="empresa_cargarvideo" type="text" class="form-control" placeholder="link"
+                  aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary" type="button" id="btn-cargar-video">Cargar</button>
+              </div>
+            </div>
           </div>
         </div>
         <!--Input modal end-->
         <!--Mensaje de alerta-->
         <div class="row mt-2">
           <div class="col-12">
-            <div
-              id="mensajeError"
-              class="alert alert-danger"
-              role="alert"
-              style="margin-bottom: 10px; display: none"
-            >
+            <div id="mensajeError" class="alert alert-danger" role="alert" style="margin-bottom: 10px; display: none">
               A simple danger alert—check it out!
             </div>
           </div>
         </div>
         <!--Mensaje de alerta end-->
-        <label>Campos obligatorios (*)</label>
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >Cerrar</button>
-        <button
-          id="btnGuardar"
-          type="button"
-          class="btn btn-primary"
-        >Guardar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button id="btnGuardar" type="button" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>
@@ -180,7 +129,8 @@
 <!-- end modal empresa -->
 
 <!-- Modal para recortar la imagen -->
-<div class="modal fade" id="modal_recortar_imagen" tabindex="-1" aria-labelledby="modalRecortarImagenLabel" aria-hidden="true">
+<div class="modal fade" id="modal_recortar_imagen" tabindex="-1" aria-labelledby="modalRecortarImagenLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -194,313 +144,10 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" id="btn_recortar_imagen">Recortar y Guardar</button>
+        <button type="button" class="btn btn-primary" id="btn_recortar_imagen">Recortar</button>
       </div>
     </div>
   </div>
 </div>
-
-<!-- modal ver empresa-->
-<div
-  class="modal modal-lg fade"
-  id="modal_ver_empresa"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
-  data-bs-backdrop="static"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-dark text-white">
-        <h5 class="modal-title" id="exampleModalLabel">Ver empresa</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-          <img
-            src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
-            alt="avatar"
-            id="img"
-          />
-        <!--Input modal-->
-        <div class="row">
-          <div class="col-6">
-            <label for="modal_ver_nombre" class="form-label">Nombre</label>
-            <p
-              type="text"
-              class="form-control"
-              id="modal_ver_nombre"
-              style="overflow-x: auto; white-space: nowrap;"
-              disabled
-            />
-          </div>
-          <div class="col-6">
-            <label for="modal_ver_ruc" class="form-label">RUC</label>
-            <p
-              type="text"
-              class="form-control"
-              id="modal_ver_ruc"
-              style="overflow-x: auto; white-space: nowrap;"
-              disabled
-            />
-          </div>
-          <div class="col-6">
-            <label for="modal_ver_rubro" class="form-label">Rubro</label>
-            <p
-              type="text"
-              class="form-control"
-              id="modal_ver_rubro"
-              style="overflow-x: auto; white-space: nowrap;"
-              disabled
-            />
-          </div>
-
-          <div class="col-6">
-            <label
-              for="modal_ver_direccion"
-              class="form-label"
-            >Dirección</label>
-            <p
-              type="text"
-              class="form-control"
-              id="modal_ver_direccion"
-              style="overflow-x: auto; white-space: nowrap;"
-              disabled
-            />
-          </div>
-          <div class="col-6">
-            <label for="modal_ver_telefono" class="form-label">Teléfono</label>
-            <p
-              type="text"
-              class="form-control"
-              id="modal_ver_telefono"
-              style="overflow-x: auto; white-space: nowrap;"
-              disabled
-            />
-          </div>
-          <div class="col-6">
-            <label for="modal_ver_correo" class="form-label">Correo</label>
-            <p
-              type="text"
-              class="form-control"
-              id="modal_ver_correo"
-              style="overflow-x: auto; white-space: nowrap;"
-              disabled
-            />
-          </div>
-          <div class="col-12">
-            <label
-              for="modal_ver_descripcion"
-              class="form-label"
-            >Descripción</label>
-            <textarea
-              type="text"
-              class="form-control"
-              id="modal_ver_descripcion"
-              style="overflow-x: auto; white-space: nowrap;"
-              disabled
-            ></textarea>
-          </div>
-          <div class="col-12">
-            <label for="modal_ver_historia" class="form-label">Historia</label>
-            <textarea
-              type="text"
-              class="form-control"
-              id="modal_ver_historia"
-              style="overflow-x: auto; white-space: nowrap;"
-              disabled
-            ></textarea>
-          </div>
-        </div>
-        <!--Input modal end-->
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end modal ver empresa -->
-
-<!-- modal editar empresa-->
-<div
-  class="modal modal-lg fade"
-  id="modal_editar_empresa"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
-  data-bs-backdrop="static"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-dark text-white">
-        <h5 class="modal-title" id="exampleModalLabel">Editar empresa</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <!--Input modal-->
-          <img
-            src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
-            alt="avatar"
-            id="img"
-          />
-        <div class="row">
-          <div class="col-6">
-            <label for="empresa_nombre_editar" class="form-label">Nombre</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_nombre_editar"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-6">
-            <label
-              for="empresa_numero_ruc_editar"
-              class="form-label"
-            >RUC</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_numero_ruc_editar"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-6">
-            <label for="empresa_rubro_editar" class="form-label">Rubro</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_rubro_editar"
-              autocomplete="off"
-            />
-          </div>
-
-          <div class="col-6">
-            <label
-              for="empresa_direccion_editar"
-              class="form-label"
-            >Dirección</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_direccion_editar"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-6">
-            <label
-              for="empresa_telefono_editar"
-              class="form-label"
-            >Teléfono</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_telefono_editar"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-6">
-            <label for="empresa_correo_editar" class="form-label">Correo</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_correo_editar"
-              autocomplete="off"
-            />
-          </div>
-          
-          <div class="col-6">
-            <label for="empresa_cargarvideo" class="form-label">Subir enlace de
-              YouTube</label>
-            <input
-              type="text"
-              class="form-control"
-              id="empresa_cargarvideo"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-6">
-            <label for="empresa_cargarimage" class="form-label">Subir imagen</label>
-            <input
-              type="file"
-              class="form-control"
-              id="empresa_cargarimage"
-              autocomplete="off"
-              name="archivo"
-            />
-          </div>
-          <div class="col-6">
-          </div>
-          <div class="col-12">
-            <label
-              for="empresa_descripcion_editar"
-              class="form-label"
-            >Descripción</label>
-            <textarea
-              type="text"
-              class="form-control"
-              id="empresa_descripcion_editar"
-              autocomplete="off"
-            ></textarea>
-          </div>
-          <div class="col-12">
-            <label
-              for="empresa_historia_editar"
-              class="form-label"
-            >Historia</label>
-            <textarea
-              type="text"
-              class="form-control"
-              id="empresa_historia_editar"
-              autocomplete="off"
-            ></textarea>
-          </div>
-        </div>
-        <!--Input modal end-->
-        <!--Mensaje de alerta-->
-        <div class="row mt-2">
-          <div class="col-12">
-            <div
-              id="mensajeError"
-              class="alert alert-danger"
-              role="alert"
-              style="margin-bottom: 10px; display: none"
-            >
-              A simple danger alert—check it out!
-            </div>
-          </div>
-        </div>
-        <!--Mensaje de alerta end-->
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >Cerrar</button>
-        <button
-          id="btnGuardarEditar"
-          type="button"
-          class="btn btn-primary"
-        >Guardar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end editar modal empresa -->
 
 <script src="/controladores/empresa.js" type="module"></script>

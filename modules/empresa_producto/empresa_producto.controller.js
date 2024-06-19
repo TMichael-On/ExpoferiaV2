@@ -1,8 +1,8 @@
 import CN_EmpresaProducto from "./empresa_producto.negocio.js";
 
+const objCapaEmpresaProducto = new CN_EmpresaProducto();
 // CREATE - Capa de Presentación
-export const createEmpresaProducto = async (req, res) => {
-  const objCapaEmpresaProducto = new CN_EmpresaProducto();
+export const createEmpresaProducto = async (req, res) => {  
   const data = req.body;
   let errors = [];
   if (!data.nombre) {
@@ -20,38 +20,39 @@ export const createEmpresaProducto = async (req, res) => {
   if (!data.moneda) {
     errors.push("Moneda is required");
   }
+  if (!data.estado) {
+    errors.push("Moneda is required");
+  }  
   if (!data.empresa_id) {
     errors.push("Empresa is required");
   }
   if (errors.length > 0) {
-    return res.status(400).json({ message: "Failed", error: errors, rows: [] });
+    return res.status(400).json({ message: "Datos requeridos", error: errors, rows: [] });
   }
   try {
-    const result = await objCapaEmpresaProducto.createEmpresaProducto(data);
+    const result = await objCapaEmpresaProducto.createEmpresaProducto(req);
     res.json(result);
   } catch (error) {
     return res
       .status(500)
-      .json({ message: "Algo error ocurrio en CP: " + error.message });
+      .json({ message: "Algo salió mal en CP: " + error.message });
   }
 };
 
 //READ GENERAL
-export const getEmpresaProductos = async (req, res) => {
-  const objCapaEmpresaProducto = new CN_EmpresaProducto();
+export const getEmpresaProductos = async (req, res) => {  
   try {
     const result = await objCapaEmpresaProducto.getEmpresaProductos();
     res.json(result);
   } catch (error) {
     return res
       .status(500)
-      .json({ message: "Algo error ocurrio en CP: " + error.message });
+      .json({ message: "Algo salió mal en CP: " + error.message });
   }
 };
 
 //READ GENERAL ID
-export const getEmpresaProductosId = async (req, res) => {
-  const objCapaEmpresaProducto = new CN_EmpresaProducto();
+export const getEmpresaProductosId = async (req, res) => {  
   try {
     const result = await objCapaEmpresaProducto.getEmpresaProductosId(
       req.params.id
@@ -60,13 +61,12 @@ export const getEmpresaProductosId = async (req, res) => {
   } catch (error) {
     return res
       .status(500)
-      .json({ message: "Algo error ocurrio en CP: " + error.message });
+      .json({ message: "Algo salió mal en CP: " + error.message });
   }
 };
 
 //READ
-export const getEmpresaProducto = async (req, res) => {
-  const objCapaEmpresaProducto = new CN_EmpresaProducto();
+export const getEmpresaProducto = async (req, res) => {  
   try {
     const result = await objCapaEmpresaProducto.getEmpresaProducto(
       req.params.id
@@ -75,35 +75,27 @@ export const getEmpresaProducto = async (req, res) => {
   } catch (error) {
     return res
       .status(500)
-      .json({ message: "Algo error ocurrio en CP: " + error.message });
+      .json({ message: "Algo salió mal en CP: " + error.message });
   }
 };
 
 //UPDATE
-export const updateEmpresaProducto = async (req, res) => {
-  const objCapaEmpresaProducto = new CN_EmpresaProducto();
-  const data = req.body;
-  if (Object.keys(data).length === 0) {
-    return res
-      .status(400)
-      .json({ message: "Failed", error: "Datos requeridos", rows: [] });
-  }
+export const updateEmpresaProducto = async (req, res) => {  
   try {
     const result = await objCapaEmpresaProducto.updateEmpresaProducto(
       req.params.id,
-      data
+      req
     );
     res.json(result);
   } catch (error) {
     return res
       .status(500)
-      .json({ message: "Algo error ocurrio en CP: " + error.message });
+      .json({ message: "Algo salió mal en CP: " + error.message });
   }
 };
 
 //DELETE
-export const deleteEmpresaProducto = async (req, res) => {
-  const objCapaEmpresaProducto = new CN_EmpresaProducto();
+export const deleteEmpresaProducto = async (req, res) => {  
   try {
     const result = await objCapaEmpresaProducto.deleteEmpresaProducto(
       req.params.id
@@ -112,7 +104,7 @@ export const deleteEmpresaProducto = async (req, res) => {
   } catch (error) {
     return res
       .status(500)
-      .json({ message: "Algo error ocurrio en CP: " + error.message });
+      .json({ message: "Algo salió mal en CP: " + error.message });
   }
 };
 

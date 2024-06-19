@@ -9,6 +9,7 @@ import {
     updateEmpresaColaborador,
     view
 } from "./empresa_colaborador.controller.js";
+import { isAuth } from "../../middleware/auth.middleware.js"
 
 const router = Router();
 //CREATE

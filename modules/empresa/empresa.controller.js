@@ -30,13 +30,16 @@ export const createEmpresa = async (req, res) => {
   if (!data.historia) {
     errors.push("Historia is required");
   }
+  if (!data.video) {
+    errors.push("Video is required");
+  }
   if (!data.usuario_id) {
     errors.push("Usuario is required");
   }
   if (errors.length > 0) {
     return res
       .status(400)
-      .json({ message: "Failed", error: "Datos requeridos", rows: [] });
+      .json({ message: "Datos requeridos", rows: [] });
   }
   try {
     const result = await objCapaEmpresa.createEmpresa(req);
@@ -64,8 +67,10 @@ export const getEmpresas = async (req, res) => {
 //READ GENERAL ID
 export const getEmpresasId = async (req, res) => {
   const objCapaEmpresa = new CN_Empresa();
+  // const ID_ = req.params.id
+  const ID_ = req.user.id_usuario
   try {
-    const result = await objCapaEmpresa.getEmpresasId(req.params.id);
+    const result = await objCapaEmpresa.getEmpresasId(ID_);
     res.json(result);
   } catch (error) {
     return res
@@ -97,7 +102,7 @@ export const updateEmpresa = async (req, res) => {
   //     .json({ message: "Failed", error: "Datos requeridos", rows: [] });
   // }
   try {
-    const result = await objCapaEmpresa.updateEmpresa(req.params.id, data);
+    const result = await objCapaEmpresa.updateEmpresa(req.params.id, req);
     res.json(result);
   } catch (error) {
     return res

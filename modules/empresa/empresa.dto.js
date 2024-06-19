@@ -19,6 +19,7 @@ export class EmpresaDto {
                     'Historia': data.empresa_historia ?? '',
                     'Imagen': data.empresa_imagen ?? '',
                     'Video': data.empresa_video ?? '',
+                    'Estado': data.empresa_estado ?? '',
                     'Opciones': data.empresa_id ?? '',
                 };
             });

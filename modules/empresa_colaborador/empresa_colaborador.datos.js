@@ -7,8 +7,8 @@ class CD_EmpresaColaborador {
     let rows = [];
     try {
       [rows] = await pool.query(
-        "INSERT INTO expo_empresa_colaborador (colaborador_nombre_completo , colaborador_telefono, colaborador_area, empresa_id) VALUES (?,?,?,?)",
-        [data.nombre_completo, data.telefono, data.area, data.empresa_id]
+        "INSERT INTO expo_empresa_colaborador (colaborador_nombre_completo , colaborador_telefono, colaborador_area, colaborador_imagen, empresa_id) VALUES (?,?,?,?,?)",
+        [data.nombre_completo, data.telefono, data.area, data.image, data.empresa_id]
       );
     } catch (error) {
       message = "Algo salió mal en CD: " + error.message;
@@ -82,6 +82,10 @@ class CD_EmpresaColaborador {
       updates.push("colaborador_area = ?");
       params.push(data.area);
     }
+    if (data.image !== undefined) {
+      updates.push("colaborador_imagen = ?");
+      params.push(data.image);
+    }    
     if (data.empresa_id !== undefined) {
       updates.push("empresa_id = ?");
       params.push(data.empresa_id);
