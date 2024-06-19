@@ -113,45 +113,6 @@ $(document).ready(function () {
     $('#video_empresa').show();
   });
 
-  let imgElement = $("#img_empresa")[0];
-  const defaultFile = "/sb-admin/image/default.jpg";
-
-  $("#empresa_cargarimage").on("change", function (e) {
-    if (e.target.files && e.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        const image = $('#imagen_a_recortar')[0]
-        image.src = event.target.result;
-        $('#modal_recortar_imagen').modal('show');
-
-        if (cropper) {
-          cropper.destroy();
-        }
-        cropper = new Cropper(image, {
-          aspectRatio: 1.8,
-          autoCropArea: 1,
-          viewMode: 1,
-          // minContainerWidth: 400,
-          // minContainerHeight: 400,
-        });
-        // 
-        // $('#empresa_cargarimage').val('asd');        
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    } else {
-      imgElement.src = defaultFile;
-    }
-  });
-
-  $("#btn_recortar_imagen").on("click", function () {
-    const canvas = cropper.getCroppedCanvas({
-      width: 200,
-      height: 200,
-    });
-    imgElement.src = canvas.toDataURL();
-    $('#modal_recortar_imagen').modal('hide');
-  });
-
   $("#btnGuardar").on("click", async function () {
     var jsonData
     var data_empresa = {
@@ -250,4 +211,76 @@ $(document).ready(function () {
       $('#video_empresa').show();
     });
   }
+
+  let imgElement = $("#img_empresa")[0];
+  const defaultFile = "/sb-admin/image/default.jpg";
+
+  $("#empresa_cargarimage").on("change", function (e) {
+    if (e.target.files && e.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const image = $('#imagen_a_recortar')[0]
+        image.src = event.target.result;
+        $("#opc_recortar").val(1)
+        $('#modal_recortar_imagen').modal('show');
+
+        if (cropper) {
+          cropper.destroy();
+        }
+        cropper = new Cropper(image, {
+          aspectRatio: 1.8,
+          autoCropArea: 1,
+          viewMode: 1,
+          // minContainerWidth: 400,
+          // minContainerHeight: 400,
+        });
+        // 
+        // $('#empresa_cargarimage').val('asd');        
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    } else {
+      imgElement.src = defaultFile;
+    }
+  });
+
+  $("#e_cargarimage").on("change", function (e) {
+    if (e.target.files && e.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const image = $('#imagen_a_recortar')[0]
+        image.src = event.target.result;
+        $("#opc_recortar").val(2)
+        $('#modal_recortar_imagen').modal('show');
+
+        if (cropper) {
+          cropper.destroy();
+        }
+        cropper = new Cropper(image, {
+          aspectRatio: 1.8,
+          autoCropArea: 1,
+          viewMode: 1,
+          // minContainerWidth: 400,
+          // minContainerHeight: 400,
+        });
+        // 
+        // $('#empresa_cargarimage').val('asd');        
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  });
+
+  $("#btn_recortar_imagen").on("click", function () {
+    const canvas = cropper.getCroppedCanvas({
+      width: 200,
+      height: 200,
+    });
+    debugger
+    const opc = $("#opc_recortar").val()
+    if (opc == 1) {
+      imgElement.src = canvas.toDataURL()
+    } else if (opc == 2) {
+      $("#img_historia")[0].src = canvas.toDataURL()
+    }
+    $('#modal_recortar_imagen').modal('hide');
+  });
 });

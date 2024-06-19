@@ -8,9 +8,15 @@ const objHelpers = new helpers();
 class CN_EmpresaProducto {
   //CREATE
   async createEmpresaProducto(req) {
-    const data = req.body;
+    var data = req.body;
     let message = "success";
+    data.empresa_id = req.user.id_empresa
+    
     try {
+      if (Object.values(data).some(value => value === '')) {
+        return { message: 'Datos requeridos' }
+      }
+
       const now = new Date();
       const nombre = data.nombre.replace(/\s+/g, '_');
       const img_nombre = nombre + '_' + objHelpers.formatDate(now) + '.png'
@@ -30,8 +36,8 @@ class CN_EmpresaProducto {
   //READ GENERAL
   async getEmpresaProductos() {
     const result = await objCapaDato.getEmpresaProductos();
-    var objDto = new EmpresaProductoDto(result.rows);
-    result.rows = objDto.getData();
+    // var objDto = new EmpresaProductoDto(result.rows);
+    // result.rows = objDto.getData();
     return result;
   }
 
@@ -53,7 +59,7 @@ class CN_EmpresaProducto {
 
   //UPDATE
   async updateEmpresaProducto(id, req) {
-    const data = req.body;
+    var data = req.body;
     if (Object.values(data).some(value => value === '')) {
       return { message: 'Datos requeridos' }
     }
@@ -83,7 +89,7 @@ class CN_EmpresaProducto {
         message = "Algo salió mal en CN: " + error.message;
       }
       return { message };
-    }    
+    }
   }
 
   //DELETE
@@ -102,7 +108,7 @@ class CN_EmpresaProducto {
     } catch (error) {
       message = "Algo salió mal en CN: " + error.message;
     }
-    return { message };    
+    return { message };
   }
 }
 

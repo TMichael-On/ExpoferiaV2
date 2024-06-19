@@ -8,8 +8,9 @@ const objHelpers = new helpers();
 class CN_EmpresaColaborador {
   //CREATE
   async createEmpresaColaborador(req) {
-    const data = req.body;
+    var data = req.body;
     let message = "success";
+    data.empresa_id = req.user.id_empresa
     // if (typeof data !== 'object' || data === null || Array.isArray(data)) {
     //   return { message };
     // }  
@@ -59,7 +60,7 @@ class CN_EmpresaColaborador {
 
   //UPDATE
   async updateEmpresaColaborador(id, req) {
-    const data = req.body;
+    var data = req.body;
 
     if (Object.values(data).some(value => value === '')) {
       return { message: 'Datos requeridos' }

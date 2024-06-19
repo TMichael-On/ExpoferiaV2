@@ -4,7 +4,7 @@ import {
     deleteEmpresaColaborador,
     getEmpresaColaborador,
     getEmpresasRedes,
-    getEmpresasRedesId,
+    getEmpresaColaboradoresId,
     prueba,
     updateEmpresaColaborador,
     view
@@ -13,11 +13,11 @@ import { isAuth } from "../../middleware/auth.middleware.js"
 
 const router = Router();
 //CREATE
-router.post("/create", createEmpresaColaborador);
+router.post("/create", isAuth, createEmpresaColaborador);
 //GET GENERAL
 router.get("/list", getEmpresasRedes);
 //GET GENERAL ID
-router.get("/list/:id", getEmpresasRedesId);
+router.get("/list/:id", isAuth, getEmpresaColaboradoresId);
 //GET ID
 router.get("/:id", getEmpresaColaborador);
 //UPDATE

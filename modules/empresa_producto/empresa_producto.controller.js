@@ -3,32 +3,6 @@ import CN_EmpresaProducto from "./empresa_producto.negocio.js";
 const objCapaEmpresaProducto = new CN_EmpresaProducto();
 // CREATE - Capa de Presentación
 export const createEmpresaProducto = async (req, res) => {  
-  const data = req.body;
-  let errors = [];
-  if (!data.nombre) {
-    errors.push("Nombre is required");
-  }
-  if (!data.categoria) {
-    errors.push("Categoria is required");
-  }
-  if (!data.stock) {
-    errors.push("Stock is required");
-  }
-  if (!data.precio) {
-    errors.push("Precio is required");
-  }
-  if (!data.moneda) {
-    errors.push("Moneda is required");
-  }
-  if (!data.estado) {
-    errors.push("Moneda is required");
-  }  
-  if (!data.empresa_id) {
-    errors.push("Empresa is required");
-  }
-  if (errors.length > 0) {
-    return res.status(400).json({ message: "Datos requeridos", error: errors, rows: [] });
-  }
   try {
     const result = await objCapaEmpresaProducto.createEmpresaProducto(req);
     res.json(result);
@@ -52,10 +26,12 @@ export const getEmpresaProductos = async (req, res) => {
 };
 
 //READ GENERAL ID
-export const getEmpresaProductosId = async (req, res) => {  
+export const getEmpresaProductosId = async (req, res) => {
+  // const ID_ = req.params.id
+  const ID_ = req.user.id_empresa
   try {
     const result = await objCapaEmpresaProducto.getEmpresaProductosId(
-      req.params.id
+      ID_
     );
     res.json(result);
   } catch (error) {

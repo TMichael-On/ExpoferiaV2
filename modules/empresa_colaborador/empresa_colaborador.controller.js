@@ -30,10 +30,12 @@ export const getEmpresasRedes = async (req, res) => {
 };
 
 //READ GENERAL ID
-export const getEmpresasRedesId = async (req, res) => {  
+export const getEmpresaColaboradoresId = async (req, res) => {
+  // const ID_ = req.params.id
+  const ID_ = req.user.id_empresa
   try {
     const result = await objCapaEmpresaColaborador.getEmpresaColaboradoresId(
-      req.params.id
+      ID_
     );
     res.json(result);
   } catch (error) {

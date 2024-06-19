@@ -30,7 +30,9 @@
             <button class="nav-link active" id="nav-datos-tab" data-bs-toggle="tab" data-bs-target="#nav-datos"
               type="button" role="tab" aria-controls="nav-datos" aria-selected="true">Informacion</button>
             <button class="nav-link" id="nav-imagen-tab" data-bs-toggle="tab" data-bs-target="#nav-imagen" type="button"
-              role="tab" aria-controls="nav-imagen" aria-selected="false">Imagen</button>
+              role="tab" aria-controls="nav-imagen" aria-selected="false">Stand</button>
+            <button class="nav-link" id="nav-historia-tab" data-bs-toggle="tab" data-bs-target="#nav-historia"
+              type="button" role="tab" aria-controls="nav-historia" aria-selected="false">Historia</button>
           </div>
         </nav>
         <!--Input modal-->
@@ -39,7 +41,7 @@
           <div class="tab-pane fade show active" id="nav-datos" role="tabpanel" aria-labelledby="nav-datos-tab"
             tabindex="0">
             <div class="row">
-              <input type="hidden" id="empresa_id">
+              <input type="hidden" id="empresa_id" disabled>
               <div class="col-6">
                 <label for="empresa_estado" class="form-label">Estado</label>
                 <select id="empresa_estado" class="form-select">
@@ -88,7 +90,7 @@
           {{!-- Input de imagen video --}}
           <div class="tab-pane fade" id="nav-imagen" role="tabpanel" aria-labelledby="nav-imagen-tab" tabindex="0">
             <div class="col-12">
-              <label for="empresa_cargarimage" class="form-label">Subir imagen</label>
+              <label for="empresa_cargarimage" class="form-label">Imagen principal</label>
               <img style="width: 80%; aspect-ratio: 1.8;" class="rounded mx-auto d-block img-fluid" id="img_empresa"
                 src="" />
               <input class="form-control mt-2" type="file" width="100%" id="empresa_cargarimage" name="archivo"
@@ -105,6 +107,17 @@
                   aria-describedby="button-addon2">
                 <button class="btn btn-outline-secondary" type="button" id="btn-cargar-video">Cargar</button>
               </div>
+            </div>
+          </div>
+          {{!-- Input de historia --}}
+          <div class="tab-pane fade" id="nav-historia" role="tabpanel" aria-labelledby="nav-historia-tab"
+            tabindex="0">
+            <div class="col-12">
+              <label for="e_cargarimage" class="form-label">Imagen de la historia</label>
+              <img style="width: 80%; aspect-ratio: 1.8;" class="rounded mx-auto d-block img-fluid" id="img_historia"
+                src="" />
+              <input class="form-control mt-2" type="file" width="100%" id="e_cargarimage" name="archivo"
+                accept="image/png,image/jpg,image/jpeg" />
             </div>
           </div>
         </div>
@@ -138,6 +151,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <input type="hidden" id="opc_recortar" disabled>
         <div class="img-container">
           <img id="imagen_a_recortar" src="" alt="Imagen a recortar" style="max-width: 100%;">
         </div>

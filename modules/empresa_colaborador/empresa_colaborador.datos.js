@@ -86,10 +86,10 @@ class CD_EmpresaColaborador {
       updates.push("colaborador_imagen = ?");
       params.push(data.image);
     }    
-    if (data.empresa_id !== undefined) {
-      updates.push("empresa_id = ?");
-      params.push(data.empresa_id);
-    }
+    // if (data.empresa_id !== undefined) {
+    //   updates.push("empresa_id = ?");
+    //   params.push(data.empresa_id);
+    // }
     if (updates.length === 0) {
       return { message: "Sin datos para actualizar", rows: [] };
     } else {

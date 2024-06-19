@@ -11,7 +11,7 @@ class CN_Empresa {
   async createEmpresa(req) {
     let message = "success";
     // let result
-    const data = req.body;
+    var data = req.body;
 
     if (Object.values(data).some(value => value === '')) {
       return { message: 'Datos requeridos' }
@@ -59,7 +59,7 @@ class CN_Empresa {
 
   //UPDATE
   async updateEmpresa(id, req) {
-    const data = req.body;
+    var data = req.body;
 
     if (Object.values(data).some(value => value === '')) {
       return { message: 'Datos requeridos' }
