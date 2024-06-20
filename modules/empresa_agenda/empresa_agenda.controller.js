@@ -59,21 +59,6 @@ export const getEmpresaAgenda = async (req, res) => {
   }
 };
 
-//UPDATE
-export const updateEmpresaAgenda = async (req, res) => {    
-  try {
-    const result = await objCapaEmpresaAgenda.updateEmpresaAgenda(
-      req.params.id,
-      req
-    );
-    res.json(result);
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Algo error ocurrio en CP: " + error.message });
-  }
-};
-
 //DELETE
 export const deleteEmpresaAgenda = async (req, res) => {  
   try {

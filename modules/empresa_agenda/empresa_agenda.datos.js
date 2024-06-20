@@ -36,7 +36,7 @@ class CD_EmpresaAgenda {
     let rows = [];
     try {
       [rows] = await pool.query(
-        "SELECT * FROM expo_empresa_agenda WHERE agenda_id = ? ORDER BY agenda_id",
+        "SELECT * FROM expo_empresa_agenda WHERE empresa_id = ? ORDER BY agenda_id",
         [id]
       );
     } catch (error) {
