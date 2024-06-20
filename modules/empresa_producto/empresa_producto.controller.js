@@ -27,8 +27,8 @@ export const getEmpresaProductos = async (req, res) => {
 
 //READ GENERAL ID
 export const getEmpresaProductosId = async (req, res) => {
-  // const ID_ = req.params.id
-  const ID_ = req.user.id_empresa
+  const ID_ = req.params.id
+  // const ID_ = req.user.id_empresa
   try {
     const result = await objCapaEmpresaProducto.getEmpresaProductosId(
       ID_

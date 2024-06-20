@@ -17,7 +17,7 @@ router.post("/create", isAuth, createEmpresaProducto);
 //GET GENERAL
 router.get("/list", getEmpresaProductos);
 //GET GENERAL ID
-router.get("/list/:id", isAuth, getEmpresaProductosId);
+router.get("/list/:id", getEmpresaProductosId);
 //GET ID
 router.get("/:id", getEmpresaProducto);
 //UPDATE

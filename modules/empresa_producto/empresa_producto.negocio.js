@@ -36,8 +36,8 @@ class CN_EmpresaProducto {
   //READ GENERAL
   async getEmpresaProductos() {
     const result = await objCapaDato.getEmpresaProductos();
-    // var objDto = new EmpresaProductoDto(result.rows);
-    // result.rows = objDto.getData();
+    var objDto = new EmpresaProductoDto(result.rows);
+    result.rows = objDto.getData();
     return result;
   }
 
