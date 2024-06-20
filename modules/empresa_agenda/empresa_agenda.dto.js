@@ -9,8 +9,9 @@ export class EmpresaColaboradorDto {
             return this.datos.map(data => {
                 return {
                     "id" : data.agenda_id ?? '',
-                    "asunto" : data.agenda_asunto ?? '',
-                    "motivo" : data.agenda_motivo ?? '',
+                    "Asunto" : data.agenda_asunto ?? '',
+                    "Motivo" : data.agenda_motivo ?? '',
+                    'Opciones': data.agenda_id ?? '',
                 };
             });
         } else {

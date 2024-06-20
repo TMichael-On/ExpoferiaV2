@@ -6,7 +6,6 @@ import {
     getEmpresasRedes,
     getEmpresaAgendaesId,
     prueba,
-    updateEmpresaAgenda,
     view
 } from "./empresa_agenda.controller.js";
 // import { isAuth } from "../../middleware/auth.middleware.js"
@@ -20,8 +19,6 @@ router.get("/list", getEmpresasRedes);
 router.get("/list/:id",  getEmpresaAgendaesId);
 //GET ID
 router.get("/:id", getEmpresaAgenda);
-//UPDATE
-// router.patch("/:id", updateEmpresaAgenda);
 //DELETE
 router.delete("/:id", deleteEmpresaAgenda);
 //VIEW

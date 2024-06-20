@@ -16,7 +16,7 @@
 <!-- end card empresa-->
 
 <!-- modal empresa-->
-<div class="modal fade" id="modal_empresa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+<div class="modal fade" id="modal_agenda" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
   data-bs-backdrop="static">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -29,10 +29,6 @@
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-datos-tab" data-bs-toggle="tab" data-bs-target="#nav-datos"
               type="button" role="tab" aria-controls="nav-datos" aria-selected="true">Informacion</button>
-            <button class="nav-link" id="nav-imagen-tab" data-bs-toggle="tab" data-bs-target="#nav-imagen" type="button"
-              role="tab" aria-controls="nav-imagen" aria-selected="false">Stand</button>
-            <button class="nav-link" id="nav-historia-tab" data-bs-toggle="tab" data-bs-target="#nav-historia"
-              type="button" role="tab" aria-controls="nav-historia" aria-selected="false">Historia</button>
           </div>
         </nav>
         <!--Input modal-->
@@ -51,73 +47,17 @@
               </div>
               <div class="col-6"></div>
               <div class="col-6">
-                <label for="empresa_nombre" class="form-label">Asunto </label>
+                <label for="empresa_agenda_asunto" class="form-label">Asunto </label>
                 <input type="text" class="form-control" id="empresa_nombre" autocomplete="off" />
               </div>
               <div class="col-6">
-                <label for="empresa_numero_ruc" class="form-label">Motivo </label>
+                <label for="empresa_agenda_motivo" class="form-label">Motivo </label>
                 <input type="text" class="form-control" id="empresa_numero_ruc" autocomplete="off" />
               </div>
               <div class="col-6">
-                <label for="empresa_rubro" class="form-label">Rubro </label>
+                <label for="empresa_agenda_empresa" class="form-label">Empresa </label>
                 <input type="text" class="form-control" id="empresa_rubro" autocomplete="off" />
               </div>
-              <div class="col-6">
-                <label for="empresa_direccion" class="form-label">Dirección </label>
-                <input type="text" class="form-control" id="empresa_direccion" autocomplete="off" />
-              </div>
-              <div class="col-6">
-                <label for="empresa_telefono" class="form-label">Teléfono </label>
-                <input type="text" class="form-control" id="empresa_telefono" autocomplete="off" />
-              </div>
-              <div class="col-6">
-                <label for="empresa_correo" class="form-label">Correo </label>
-                <input type="text" class="form-control" id="empresa_correo" autocomplete="off" />
-              </div>
-              <div class="col-12">
-                <label for="empresa_descripcion" class="form-label">Descripción </label>
-                <textarea type="text" class="form-control" id="empresa_descripcion" style="height: 60;"
-                  autocomplete="off"></textarea>
-              </div>
-              <div class="col-12">
-                <label for="empresa_historia" class="form-label">Historia </label>
-                <textarea type="text" class="form-control" id="empresa_historia" style="height: 60;"
-                  autocomplete="off"></textarea>
-              </div>
-
-            </div>
-          </div>
-          {{!-- Input de imagen video --}}
-          <div class="tab-pane fade" id="nav-imagen" role="tabpanel" aria-labelledby="nav-imagen-tab" tabindex="0">
-            <div class="col-12">
-              <label for="empresa_cargarimage" class="form-label">Imagen principal</label>
-              <img style="width: 80%; aspect-ratio: 1.8;" class="rounded mx-auto d-block img-fluid" id="img_empresa"
-                src="" />
-              <input class="form-control mt-2" type="file" width="100%" id="empresa_cargarimage" name="archivo"
-                accept="image/png,image/jpg,image/jpeg" />
-            </div>
-            <div class="col-12">
-              <label for="empresa_cargarvideo" class="form-label">Subir enlace de YouTube</label>
-              <div class="border rounded mx-auto d-block img-fluid" style="width: 80%; aspect-ratio: 1.8">
-                <iframe id="video_empresa" class="mx-auto" width="100%" height="100%" src="" frameborder="0"
-                  style="display: none;" allowfullscreen></iframe>
-              </div>
-              <div class="input-group mt-2">
-                <input id="empresa_cargarvideo" type="text" class="form-control" placeholder="link"
-                  aria-describedby="button-addon2">
-                <button class="btn btn-outline-secondary" type="button" id="btn-cargar-video">Cargar</button>
-              </div>
-            </div>
-          </div>
-          {{!-- Input de historia --}}
-          <div class="tab-pane fade" id="nav-historia" role="tabpanel" aria-labelledby="nav-historia-tab"
-            tabindex="0">
-            <div class="col-12">
-              <label for="e_cargarimage" class="form-label">Imagen de la historia</label>
-              <img style="width: 80%; aspect-ratio: 1.8;" class="rounded mx-auto d-block img-fluid" id="img_historia"
-                src="" />
-              <input class="form-control mt-2" type="file" width="100%" id="e_cargarimage" name="archivo"
-                accept="image/png,image/jpg,image/jpeg" />
             </div>
           </div>
         </div>
