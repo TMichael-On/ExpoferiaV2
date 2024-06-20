@@ -22,7 +22,7 @@ class CD_EmpresaAgenda {
     let rows = [];
     try {
       [rows] = await pool.query(
-        "SELECT * FROM expo_empresa_agenda ORDER BY agenda_id"
+        "SELECT * FROM expo_empresa_agenda ag INNER JOIN live_usuario us on ag.usuario_id = us.usuario_id  ORDER BY ag.agenda_id "
       );
     } catch (error) {
       message = "Algo salió mal en CD: " + error.message;
@@ -36,7 +36,7 @@ class CD_EmpresaAgenda {
     let rows = [];
     try {
       [rows] = await pool.query(
-        "SELECT * FROM expo_empresa_agenda WHERE empresa_id = ? ORDER BY agenda_id",
+        "SELECT * FROM expo_empresa_agenda ag INNER JOIN live_usuario us on ag.usuario_id = us.usuario_id  WHERE ag.empresa_id = ? ORDER BY ag.agenda_id",
         [id]
       );
     } catch (error) {
@@ -51,7 +51,7 @@ class CD_EmpresaAgenda {
     let rows = [];
     try {
       [rows] = await pool.query(
-        "SELECT * FROM expo_empresa_agenda WHERE agenda_id = ?",
+        "SELECT * FROM expo_empresa_agenda ag INNER JOIN live_usuario us on ag.usuario_id = us.usuario_id  WHERE ag.empresa_id = ? ORDER BY ag.agenda_id",
         [id]
       );
       if (rows.length == 0) {

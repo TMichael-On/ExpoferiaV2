@@ -3,7 +3,7 @@ import {
     createEmpresaAgenda,
     deleteEmpresaAgenda,
     getEmpresaAgenda,
-    getEmpresasRedes,
+    getEmpresasAgenda,
     getEmpresaAgendaesId,
     prueba,
     view
@@ -14,7 +14,7 @@ const router = Router();
 //CREATE
 router.post("/create",  createEmpresaAgenda);
 //GET GENERAL
-router.get("/list", getEmpresasRedes);
+router.get("/list", getEmpresasAgenda);
 //GET GENERAL ID
 router.get("/list/:id",  getEmpresaAgendaesId);
 //GET ID

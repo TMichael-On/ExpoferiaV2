@@ -18,7 +18,7 @@ export const createEmpresaAgenda = async (req, res) => {
 };
 
 //READ GENERAL
-export const getEmpresasRedes = async (req, res) => {  
+export const getEmpresasAgenda = async (req, res) => {  
   try {
     const result = await objCapaEmpresaAgenda.getEmpresaAgendaes();
     res.json(result);

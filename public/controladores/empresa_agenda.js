@@ -4,7 +4,7 @@ const objUtilidades = new Utilidades();
 
 let json_data;
 let dataEmpresaColaborador = {
-  headings: ["Asunto", "Motivo", "Opciones"],
+  headings: ["Nombre", "Contacto", "Asunto", "Motivo", "Opciones"],
 };
 
 var opciones = {
@@ -12,7 +12,7 @@ var opciones = {
   data: dataEmpresaColaborador,
   columns: [
     {
-      select: 2,
+      select: 4,
       render: function (data, td, id, cellIndex) {
         if (data.length !== 0) {
           return `<button type='button' class='btn btn-primary btn-sm ms-2 btn-ver' data-row='${data[0].data}'><i class='fas fa-eye'></i></button>
@@ -101,6 +101,8 @@ $(document).ready(function () {
     $("#modal_agenda").on("shown.bs.modal", function () {
       $(this).find("input").prop("disabled", isDisabled);
       $("#empresa_agenda_id").val(data_fila.id);
+      $("#empresa_agenda_usuario").val(data_fila.Nombre);
+      $("#empresa_agenda_contacto").val(data_fila.Contacto);
       $("#empresa_agenda_asunto").val(data_fila.Asunto);
       $("#empresa_agenda_motivo").val(data_fila.Motivo);
       $("#empresa_agenda_empresa").val(data_fila.Empresa);
