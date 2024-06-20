@@ -7,7 +7,7 @@ import {
     getEmpresaAgendaesId,
     prueba,
     view
-} from "./empresa_agenda.controller.js";
+} from "./empresa_visita.controller.js";
 // import { isAuth } from "../../middleware/auth.middleware.js"
 
 const router = Router();

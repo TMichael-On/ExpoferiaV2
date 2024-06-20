@@ -1,13 +1,13 @@
 import pool from "../../database/conection-db.js";
 
-class CD_EmpresaAgenda {
+class CD_EmpresaVisita {
   //CREATE
-  async createEmpresaAgenda(data) {
+  async createEmpresaVisita(data) {
     let message = "success";
     let rows = [];
     try {
       [rows] = await pool.query(
-        "INSERT INTO expo_empresa_agenda (agenda_asunto , agenda_motivo, empresa_id, usuario_id, agenda_fecha_registro) VALUES (?,?,?,?,current_time)",
+        "INSERT INTO expo_empresa_visita (empresa_id, usuario_id, visita_fecha_registro) VALUES (?,?,current_time)",
         [data.asunto, data.motivo, data.empresa_id, data.usuario_id]
       );
     } catch (error) {
@@ -17,12 +17,12 @@ class CD_EmpresaAgenda {
   }
 
   //READ GENERAL
-  async getEmpresaAgendaes() {
+  async getEmpresaVisitas() {
     let message = "success";
     let rows = [];
     try {
       [rows] = await pool.query(
-        "SELECT * FROM expo_empresa_agenda ag INNER JOIN live_usuario us on ag.usuario_id = us.usuario_id  ORDER BY ag.agenda_id "
+        "SELECT * FROM expo_empresa_visita vi INNER JOIN live_usuario us on vi.usuario_id = us.usuario_id  ORDER BY vi.visita_id"
       );
     } catch (error) {
       message = "Algo salió mal en CD: " + error.message;
@@ -31,12 +31,12 @@ class CD_EmpresaAgenda {
   }
 
   //READ GENERAL ID
-  async getEmpresaAgendaesId(id) {
+  async getEmpresaVisitasId(id) {
     let message = "success";
     let rows = [];
     try {
       [rows] = await pool.query(
-        "SELECT * FROM expo_empresa_agenda ag INNER JOIN live_usuario us on ag.usuario_id = us.usuario_id  WHERE ag.empresa_id = ? ORDER BY ag.agenda_id",
+        "SELECT * FROM expo_empresa_visita vi INNER JOIN live_usuario us on vi.usuario_id = us.usuario_id WHERE vi.empresa_id = ? ORDER BY vi.visita_id ",
         [id]
       );
     } catch (error) {
@@ -46,12 +46,12 @@ class CD_EmpresaAgenda {
   }
 
   //READ ID
-  async getEmpresaAgenda(id) {
+  async getEmpresaVisita(id) {
     let message = "success";
     let rows = [];
     try {
       [rows] = await pool.query(
-        "SELECT * FROM expo_empresa_agenda ag INNER JOIN live_usuario us on ag.usuario_id = us.usuario_id  WHERE ag.empresa_id = ? ORDER BY ag.agenda_id",
+        "SELECT * FROM expo_empresa_visita vi INNER JOIN live_usuario us on vi.usuario_id = us.usuario_id WHERE vi.empresa_id = ? ORDER BY vi.visita_id ",
         [id]
       );
       if (rows.length == 0) {
@@ -62,24 +62,6 @@ class CD_EmpresaAgenda {
     }
     return { message: message, rows: rows };
   }
-
-  //DELETE
-  async deleteEmpresaAgenda(id) {
-    let message = "success";
-    let rows = [];
-    try {
-      [rows] = await pool.query(
-        "DELETE FROM expo_empresa_agenda WHERE agenda_id = (?)",
-        [id]
-      );
-      if (rows.affectedRows == 0) {
-        message = "agenda no encontrado";
-      }
-    } catch (error) {
-      message = "Algo salió mal en CD: " + error.message;
-    }
-    return { message: message, rows: rows };
-  }
 }
 
-export default CD_EmpresaAgenda;
+export default CD_EmpresaVisita;
