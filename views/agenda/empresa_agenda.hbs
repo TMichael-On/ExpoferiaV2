@@ -5,7 +5,7 @@
     Registro de agenda
   </div>
   <div class="card-body">
-    <table id="tablaEmpresa" style="white-space: nowrap;">
+    <table id="tablaAgenda" style="white-space: nowrap;">
       <thead>
       </thead>
       <tbody>
@@ -141,27 +141,4 @@
 </div>
 <!-- end modal empresa -->
 
-<!-- Modal para recortar la imagen -->
-<div class="modal fade" id="modal_recortar_imagen" tabindex="-1" aria-labelledby="modalRecortarImagenLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalRecortarImagenLabel">Recortar Imagen</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <input type="hidden" id="opc_recortar" disabled>
-        <div class="img-container">
-          <img id="imagen_a_recortar" src="" alt="Imagen a recortar" style="max-width: 100%;">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" id="btn_recortar_imagen">Recortar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script src="/controladores/empresa.js" type="module"></script>
+<script src="/controladores/empresa_agenda.js" type="module"></script>

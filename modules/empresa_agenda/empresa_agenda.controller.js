@@ -99,5 +99,5 @@ export const view = async (req, res) => {
   // const id = 8
   // const result = await objEmpresa.getEmpresasId(id);
   // const ID = result.rows[0].id
-  res.render("empresa_colaborador/empresa_colaborador");
+  res.render("agenda/empresa_agenda");
 };

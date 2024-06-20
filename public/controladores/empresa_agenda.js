@@ -27,17 +27,16 @@ var opciones = {
 
 $(document).ready(function () {
   var table;
-  let cropper;
   if (simpleDatatables) {
     table = new simpleDatatables.DataTable(
-      "#tablaempresa_colaborador",
+      "#tablaAgenda",
       opciones
     );
   }
 
   (async () => {
     const idEmpresa = 5;
-    let ruta = "colaborador/list/" + idEmpresa;
+    let ruta = "agenda/list/" + idEmpresa;
     const jsonData = await objUtilidades.fetchResultListar(ruta);
 
     if (jsonData.message == "success") {
@@ -74,28 +73,7 @@ $(document).ready(function () {
       empresa_id: 5,
     };
 
-    if (!$('#img_colaborador').attr('src')) {
-      $("#mensajeError").text("Imagen requerida");
-      $("#mensajeError").show();
-      return
-    }
-
-    async function obtenerBlob() {
-      return new Promise((resolve, reject) => {
-        cropper.getCroppedCanvas().toBlob((blob) => {
-          resolve(blob);
-        });
-      });
-    }
-
-    if ($('#empresa_colaborador_id').val() == '') {
-      data_empresa_colaborador.image = await obtenerBlob()
-      jsonData = await objUtilidades.fetchResultGuardar(
-        "colaborador/create",
-        data_empresa_colaborador,
-        true
-      );
-    } else {
+    if ($('#empresa_colaborador_id').val() != '') {
       var idColaborador = parseInt($('#empresa_colaborador_id').val(), 10)
       const s = $('#img_colaborador').attr('src')
       const data_fila = json_data.rows.filter(item => item.id === idColaborador)[0];
@@ -128,13 +106,6 @@ $(document).ready(function () {
     var idRow = btn.data("row");
     $("#btnGuardar").hide()
     mostrar_data(idRow, true)
-  });
-
-  $(document).on("click", ".btn-editar", function () {
-    $("#btnGuardar").show()
-    var btn = $(this);
-    var idColaborador = btn.data("row");
-    mostrar_data(idColaborador)
   });
 
   $(document).on("click", ".btn-eliminar", async function () {
@@ -190,43 +161,4 @@ $(document).ready(function () {
     });
   }
 
-  let imgElement = $("#img_colaborador")[0];
-  const defaultFile = "/sb-admin/image/default.jpg";
-
-  $("#e_colaborador_cargarimage").on("change", function (e) {
-    console.log("Se cargó una imagen");
-    if (e.target.files && e.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        var image = $('#imagen_a_recortar')[0]
-        image.src = event.target.result;
-        $('#modal_recortar_imagen').modal('show');
-
-        if (cropper) {
-          cropper.destroy();
-        }
-        cropper = new Cropper(image, {
-          aspectRatio: 1.8,
-          autoCropArea: 1,
-          viewMode: 1,
-          // minContainerWidth: 400,
-          // minContainerHeight: 400,
-        });
-        // 
-        // $('#e_colaborador_cargarimage').val('asd');        
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    } else {
-      imgElement.src = defaultFile;
-    }
-  });
-
-  $("#btn_recortar_imagen").on("click", function () {
-    const canvas = cropper.getCroppedCanvas({
-      width: 200,
-      height: 200,
-    });
-    imgElement.src = canvas.toDataURL();
-    $('#modal_recortar_imagen').modal('hide');
-  });
 });
