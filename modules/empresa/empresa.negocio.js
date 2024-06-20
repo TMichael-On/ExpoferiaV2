@@ -59,40 +59,73 @@ class CN_Empresa {
 
   //UPDATE
   async updateEmpresa(id, req) {
-    var data = req.body;
+    const original = { ...req.body }
+    var data = req.body
+
+    var img_principal_nombre
+    var img_presentacion_nombre
+    var img_historia_nombre
+
+    const now = new Date();
+    const destino = 'public/imagenes/'
+    let message = "success";
 
     if (Object.values(data).some(value => value === '')) {
       return { message: 'Datos requeridos' }
     }
 
-    if (data.image) {
-      return await objCapaDato.updateEmpresa(id, data);
-    }
-    else {
-      let message = "success";
-      try {
-        //consultar imagen anterior
-        const empresa = await this.getEmpresa(id)
-        const img_ = empresa.rows[0].Imagen
-        //Actualiza la informacion
-        const now = new Date();
-        const img_nombre = data.nombre + '_' + objHelpers.formatDate(now) + '.png'
-        data.image = img_nombre
-        const result = await objCapaDato.updateEmpresa(id, data);
-        if (result.message != "success") {
-          return result
-        }
-        //Eliminar imagen anterior
-        if (img_ != 'default.png')
-          await objHelpers.eliminarImagen(img_);
-        //Guardar nueva imagen
-        const destino = 'public/imagenes/' + img_nombre;
-        await objHelpers.guardarImagen(req.files[0], destino);
-      } catch (error) {
-        message = "Algo salió mal en CN: " + error.message;
+    try {
+      //consultar imagen anterior
+      const empresa = await this.getEmpresa(id)
+      const img_principal = empresa.rows[0].Imagen
+      const img_presentacion = empresa.rows[0].Imagen_presentacion
+      const img_historia = empresa.rows[0].Imagen_historia
+
+      //Actualizar nombre de las imagenes segun la condicion
+      if (!data.image) {
+        img_principal_nombre = data.nombre + '_pri_' + objHelpers.formatDate(now) + '.png'
+        data.image = img_principal_nombre
       }
-      return { message };
+      if (!data.imagen_presentacion) {
+        img_presentacion_nombre = data.nombre + '_pre_' + objHelpers.formatDate(now) + '.png'
+        data.imagen_presentacion = img_presentacion_nombre
+      }
+      if (!data.imagen_historia) {
+        img_historia_nombre = data.nombre + '_his_' + objHelpers.formatDate(now) + '.png'
+        data.imagen_historia = img_historia_nombre
+      }
+      //Actualiza la informacion
+      const result = await objCapaDato.updateEmpresa(id, data);
+      if (result.message != "success") {
+        return result
+      }
+
+      if (!original.image) {
+        //Eliminar imagen anterior
+        if (img_principal != 'default.png')
+          await objHelpers.eliminarImagen(img_principal);
+        //Guardar nueva imagen        
+        await objHelpers.guardarImagen(req.files[0], destino + img_principal_nombre);
+      }
+      if (!original.imagen_presentacion) {
+        //Eliminar imagen anterior
+        if (img_presentacion != 'default.png')
+          await objHelpers.eliminarImagen(img_presentacion);
+        //Guardar nueva imagen        
+        await objHelpers.guardarImagen(req.files[1], destino + img_presentacion_nombre);
+      }
+      if (!original.imagen_historia) {
+        //Eliminar imagen anterior
+        if (img_historia != 'default.png')
+          await objHelpers.eliminarImagen(img_historia);
+        //Guardar nueva imagen        
+        await objHelpers.guardarImagen(req.files[2], destino + img_historia_nombre);
+      }
+
+    } catch (error) {
+      message = "Algo salió mal en CN: " + error.message;
     }
+    return { message };
   }
 
   //DELETE
@@ -124,7 +157,7 @@ class CN_Empresa {
       return await objCapaDato.createEmpresa(data);
     } catch (error) {
       message = "Algo salió mal en CN asda: " + error.message;
-    }    
+    }
   }
 }
 

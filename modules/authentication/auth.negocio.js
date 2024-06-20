@@ -27,6 +27,8 @@ class CN_Auth {
                 descripcion: 'default',
                 historia: 'default',
                 image: 'default.png',
+                imagen_presentacion: 'default.png',
+                imagen_historia: 'default.png',
                 video: 'default',
                 usuario_id: id_usuario,
             }

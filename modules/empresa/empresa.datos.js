@@ -16,7 +16,7 @@ class CD_Empresa {
         message = "Correo o número ruc ya existente";
       } else {
         [rows] = await pool.query(
-          "INSERT INTO expo_empresa (empresa_nombre , empresa_numero_ruc, empresa_rubro, empresa_direccion, empresa_telefono, empresa_correo, empresa_descripcion, empresa_historia, empresa_usuario_id, empresa_imagen, empresa_video) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+          "INSERT INTO expo_empresa (empresa_nombre , empresa_numero_ruc, empresa_rubro, empresa_direccion, empresa_telefono, empresa_correo, empresa_descripcion, empresa_historia, empresa_usuario_id, empresa_imagen,empresa_img_presentacion,empresa_img_historia, empresa_video) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
           [
             data.nombre,
             data.numero_ruc,
@@ -28,6 +28,8 @@ class CD_Empresa {
             data.historia,
             data.usuario_id,
             data.image,
+            data.imagen_presentacion,
+            data.imagen_historia,
             data.video,
           ]
         );
@@ -127,6 +129,14 @@ class CD_Empresa {
     if (data.image !== undefined) {
       updates.push("empresa_imagen = ?");
       params.push(data.image);
+    }
+    if (data.image !== undefined) {
+      updates.push("empresa_img_presentacion = ?");
+      params.push(data.image_presentacion);
+    }
+    if (data.image !== undefined) {
+      updates.push("empresa_img_historia = ?");
+      params.push(data.image_historia);
     }
     if (data.video !== undefined) {
       updates.push("empresa_video = ?");
