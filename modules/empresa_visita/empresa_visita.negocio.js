@@ -38,7 +38,7 @@ class CN_EmpresaVisita {
 
   //READ GENERAL ID
   async getEmpresaVisitasId(id) {
-    const result = await objCapaDato.getEmpresaVisitaesId(id);
+    const result = await objCapaDato.getEmpresaVisitasId(id);
     var objDto = new EmpresaVisitaDto(result.rows);
     result.rows = objDto.getData();
     return result;

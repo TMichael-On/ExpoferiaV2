@@ -3,13 +3,13 @@ import Utilidades from "../peticiones/utilidades.js";
 const objUtilidades = new Utilidades();
 
 let json_data;
-let dataEmpresaColaborador = {
+let dataEmpresaAgenda = {
   headings: ["Nombre", "Contacto", "Asunto", "Motivo", "Opciones"],
 };
 
 var opciones = {
   searchable: true,
-  data: dataEmpresaColaborador,
+  data: dataEmpresaAgenda,
   columns: [
     {
       select: 4,

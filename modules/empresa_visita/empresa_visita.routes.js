@@ -1,10 +1,9 @@
 import { Router } from "express";
 import {
-    createEmpresaAgenda,
-    deleteEmpresaAgenda,
-    getEmpresaAgenda,
-    getEmpresasAgenda,
-    getEmpresaAgendaesId,
+    createEmpresaVisita,
+    getEmpresaVisita,
+    getEmpresaVisitas,
+    getEmpresaVisitasId,
     prueba,
     view
 } from "./empresa_visita.controller.js";
@@ -12,15 +11,13 @@ import {
 
 const router = Router();
 //CREATE
-router.post("/create",  createEmpresaAgenda);
+router.post("/create",  createEmpresaVisita);
 //GET GENERAL
-router.get("/list", getEmpresasAgenda);
+router.get("/list", getEmpresaVisitas);
 //GET GENERAL ID
-router.get("/list/:id",  getEmpresaAgendaesId);
+router.get("/list/:id",  getEmpresaVisitasId);
 //GET ID
-router.get("/:id", getEmpresaAgenda);
-//DELETE
-router.delete("/:id", deleteEmpresaAgenda);
+router.get("/:id", getEmpresaVisita);
 //VIEW
 router.get("/", view);
 

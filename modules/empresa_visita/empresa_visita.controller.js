@@ -70,5 +70,5 @@ export const view = async (req, res) => {
   // const id = 8
   // const result = await objEmpresa.getEmpresasId(id);
   // const ID = result.rows[0].id
-  res.render("agenda/empresa_visita");
+  res.render("visita/empresa_visita");
 };
