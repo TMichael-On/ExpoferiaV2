@@ -22,8 +22,8 @@ router.use("/usuario", usuario_empresa);
 router.use("/agenda", empresa_agenda);
 router.use("/visita", empresa_visita);
 
-router.get("/prueba", (req, res) => {
-    res.render('new/1')
+router.get("/principal", (req, res) => {
+    res.render('otros/principal')
 })
 
 export default router;

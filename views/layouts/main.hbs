@@ -27,7 +27,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     {{!-- FONT AWESOME 5 --}}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">        
     {{!-- simple-datatables --}}
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
     {{!-- sweetalert2 --}}
@@ -39,6 +39,7 @@
 
 
     <!-- Template Main CSS File -->
+    <link href="/assets/css/style_n.css" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet">
 
     <!-- =======================================================
@@ -54,7 +55,7 @@
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="/principal" class="logo d-flex align-items-center">
                 <img src="" alt="">
                 <span class="d-none d-lg-block">Administración</span>
             </a>
@@ -91,33 +92,31 @@
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
             {{!-- Opciones nav --}}
+            <a class="nav-link " href="/principal">
+                <i class="fas fa-th-large"></i>
+                <span>Principal</span>
+            </a>
             <li class="nav-item">
                 <a class="nav-link " href="/empresa">
-                    <i class="fas fa-file-signature"></i>
+                    <i class="fas fa-building"></i>
                     <span>Empresa</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="/colaborador">
-                    <i class="fas fa-file-signature"></i>
+                <a class="nav-link " href="/colaborador">                    
+                    <i class="fas fa-users"></i>
                     <span>Colaborador</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="/producto">
-                    <i class="fas fa-file-signature"></i>
+                    <i class="fas fa-cubes"></i>
                     <span>Producto</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="/redes">
-                    <i class="fas fa-file-signature"></i>
-                    <span>Redes sociales</span>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link " href="/agenda">
-                    <i class="fas fa-file-signature"></i>
+                    <i class="fas fa-envelope"></i>
                     <span>Agenda</span>
                 </a>
             </li>

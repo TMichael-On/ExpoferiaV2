@@ -178,8 +178,7 @@ $(document).ready(function () {
     }
     if (jsonData.message == "success") {
       $("#mensajeError").hide();
-      location.reload();
-      console.log('Imagen guardada correctamente')
+      location.reload();      
     } else {
       $("#mensajeError").text(jsonData.message);
       $("#mensajeError").show();
