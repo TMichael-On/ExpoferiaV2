@@ -76,7 +76,3 @@ export const logout = async (req, res) => {
 export const view = async (req, res) => {
   res.render('auth/login', {layout: false});
 }
-
-// export const view = async (req, res) => {
-//   res.render('layouts/new', {layout: false});
-// }

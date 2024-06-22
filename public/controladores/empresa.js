@@ -74,6 +74,13 @@ var opciones = {
 $(document).ready(function () {
   var table;
   let cropper;
+
+  var data_empresa = {
+    image: "",
+    imagen_presentacion: "",
+    imagen_historia: "",
+  }
+
   if (simpleDatatables) {
     table = new simpleDatatables.DataTable("#tablaEmpresa", opciones);
   }
@@ -113,48 +120,55 @@ $(document).ready(function () {
     $('#video_empresa').show();
   });
 
-  $("#btnGuardar").on("click", async function () {
+  async function obtenerBlob() {
+    return new Promise((resolve, reject) => {
+      cropper.getCroppedCanvas().toBlob((blob) => {
+        resolve(blob);
+      });
+    });
+  }
+
+  $("#btnGuardar").on("click", async function () {    
     var jsonData
-    var data_empresa = {
-      nombre: $("#empresa_nombre").val(),
-      numero_ruc: $("#empresa_numero_ruc").val(),
-      rubro: $("#empresa_rubro").val(),
-      direccion: $("#empresa_direccion").val(),
-      telefono: $("#empresa_telefono").val(),
-      correo: $("#empresa_correo").val(),
-      descripcion: $("#empresa_descripcion").val(),
-      historia: $("#empresa_historia").val(),
-      image: "",
-      video: $("#empresa_cargarvideo").val(),
-      estado: $("#empresa_estado").val(),
-      usuario_id: 8,
-    };
+
+    data_empresa.nombre = $("#empresa_nombre").val()
+    data_empresa.numero_ruc = $("#empresa_numero_ruc").val()
+    data_empresa.rubro = $("#empresa_rubro").val()
+    data_empresa.direccion = $("#empresa_direccion").val()
+    data_empresa.telefono = $("#empresa_telefono").val()
+    data_empresa.correo = $("#empresa_correo").val()
+    data_empresa.descripcion = $("#empresa_descripcion").val()
+    data_empresa.historia = $("#empresa_historia").val()
+    data_empresa.video = $("#empresa_cargarvideo").val()
+    data_empresa.estado = $("#empresa_estado").val()
+    data_empresa.usuario_id = 8
 
     if (!$('#img_empresa').attr('src')) {
       $("#mensajeError").text("Imagen requerida");
       $("#mensajeError").show();
       return
     }
-    async function obtenerBlob() {
-      return new Promise((resolve, reject) => {
-        cropper.getCroppedCanvas().toBlob((blob) => {
-          resolve(blob);
-        });
-      });
-    }
-
+    // aquie estab la funcion
     if ($('#empresa_id').val() != '') {
       var idEmpresa = parseInt($('#empresa_id').val(), 10)
-      const s = $('#img_empresa').attr('src')
       const data_fila = json_data.rows.filter(item => item.id === idEmpresa)[0];
+      const em = $('#img_empresa').attr('src')
+      const pr = $('#img_presentacion').attr('src')
+      const hi = $('#img_historia').attr('src')
       const img_empresaO = '/imagenes/' + data_fila.Imagen
+      const img_empresa_presentacionO = '/imagenes/' + data_fila.Imagen_presentacion
+      const img_empresa_historiaO = '/imagenes/' + data_fila.Imagen_historia
 
-      if (s == img_empresaO) {
+      if (em == img_empresaO) {
         data_empresa.image = data_fila.Imagen
-      } else {
-        data_empresa.image = await obtenerBlob()
       }
-
+      if (pr == img_empresa_presentacionO) {
+        data_empresa.imagen_presentacion = data_fila.Imagen_presentacion
+      }
+      if (hi == img_empresa_historiaO) {
+        data_empresa.imagen_historia = data_fila.Imagen_historia
+      }
+      
       jsonData = await objUtilidades.fetchResultEditar(
         "empresa",
         idEmpresa,
@@ -164,8 +178,7 @@ $(document).ready(function () {
     }
     if (jsonData.message == "success") {
       $("#mensajeError").hide();
-      location.reload();
-      console.log('Imagen guardada correctamente')
+      location.reload();      
     } else {
       $("#mensajeError").text(jsonData.message);
       $("#mensajeError").show();
@@ -206,81 +219,71 @@ $(document).ready(function () {
       $("#empresa_historia").val(data_fila.Historia)
       $("#empresa_estado").val(data_fila.Estado)
       $('#img_empresa').attr('src', `/imagenes/${data_fila.Imagen}`)
+      $('#img_presentacion').attr('src', `/imagenes/${data_fila.Imagen_presentacion}`)
+      $('#img_historia').attr('src', `/imagenes/${data_fila.Imagen_historia}`)
       $('#video_empresa').attr('src', data_fila.Video)
       $("#empresa_cargarvideo").val(data_fila.Video)
       $('#video_empresa').show();
     });
   }
 
-  let imgElement = $("#img_empresa")[0];
-  const defaultFile = "/sb-admin/image/default.jpg";
+  // let imgElement = $("#img_empresa")[0];
 
-  $("#empresa_cargarimage").on("change", function (e) {
-    if (e.target.files && e.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        const image = $('#imagen_a_recortar')[0]
-        image.src = event.target.result;
-        $("#opc_recortar").val(1)
-        $('#modal_recortar_imagen').modal('show');
-
-        if (cropper) {
-          cropper.destroy();
-        }
-        cropper = new Cropper(image, {
-          aspectRatio: 1.8,
-          autoCropArea: 1,
-          viewMode: 1,
-          // minContainerWidth: 400,
-          // minContainerHeight: 400,
-        });
-        // 
-        // $('#empresa_cargarimage').val('asd');        
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    } else {
-      imgElement.src = defaultFile;
-    }
+  $("#e_img_principal").on("change", function (e) {
+    imagenCropper(e, 1)
   });
 
-  $("#e_cargarimage").on("change", function (e) {
-    if (e.target.files && e.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        const image = $('#imagen_a_recortar')[0]
-        image.src = event.target.result;
-        $("#opc_recortar").val(2)
-        $('#modal_recortar_imagen').modal('show');
-
-        if (cropper) {
-          cropper.destroy();
-        }
-        cropper = new Cropper(image, {
-          aspectRatio: 1.8,
-          autoCropArea: 1,
-          viewMode: 1,
-          // minContainerWidth: 400,
-          // minContainerHeight: 400,
-        });
-        // 
-        // $('#empresa_cargarimage').val('asd');        
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    }
+  $("#e_img_presentacion").on("change", function (e) {
+    imagenCropper(e, 2)
   });
 
-  $("#btn_recortar_imagen").on("click", function () {
+  $("#e_img_historia").on("change", function (e) {
+    imagenCropper(e, 3)
+  });
+
+  $("#btn_recortar_imagen").on("click", async function () {
+    debugger
     const canvas = cropper.getCroppedCanvas({
       width: 200,
       height: 200,
     });
-    debugger
     const opc = $("#opc_recortar").val()
     if (opc == 1) {
-      imgElement.src = canvas.toDataURL()
+      $("#img_empresa")[0].src = canvas.toDataURL()
+      data_empresa.image = await obtenerBlob()
     } else if (opc == 2) {
+      $("#img_presentacion")[0].src = canvas.toDataURL()
+      data_empresa.imagen_presentacion = await obtenerBlob()
+    } else if (opc == 3) {
       $("#img_historia")[0].src = canvas.toDataURL()
+      data_empresa.imagen_historia = await obtenerBlob()
     }
     $('#modal_recortar_imagen').modal('hide');
   });
+
+  function imagenCropper(e, opc) {
+    if (e.target.files && e.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const image = $('#imagen_a_recortar')[0]
+        image.src = event.target.result;
+        $("#opc_recortar").val(opc)
+        $('#modal_recortar_imagen').modal('show');
+
+        if (cropper) {
+          cropper.destroy();
+        }
+        cropper = new Cropper(image, {
+          aspectRatio: 1.8,
+          autoCropArea: 1,
+          viewMode: 1,
+          // minContainerWidth: 400,
+          // minContainerHeight: 400,
+        });
+        // 
+        // $('#e_img_principal').val('asd');        
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  }
 });

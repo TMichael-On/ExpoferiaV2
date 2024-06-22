@@ -5,12 +5,14 @@
     Registro de la empresa
   </div>
   <div class="card-body">
-    <table id="tablaEmpresa" style="white-space: nowrap;">
-      <thead>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table id="tablaEmpresa" style="white-space: nowrap;">
+        <thead>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 <!-- end card empresa-->
@@ -27,29 +29,53 @@
       <div class="modal-body">
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <button class="nav-link active" id="nav-datos-tab" data-bs-toggle="tab" data-bs-target="#nav-datos"
-              type="button" role="tab" aria-controls="nav-datos" aria-selected="true">Informacion</button>
-            <button class="nav-link" id="nav-imagen-tab" data-bs-toggle="tab" data-bs-target="#nav-imagen" type="button"
-              role="tab" aria-controls="nav-imagen" aria-selected="false">Stand</button>
+            <button class="nav-link active" id="nav-imagen-tab" data-bs-toggle="tab" data-bs-target="#nav-imagen"
+              type="button" role="tab" aria-controls="nav-imagen" aria-selected="false">Stand</button>
+            <button class="nav-link" id="nav-datos-tab" data-bs-toggle="tab" data-bs-target="#nav-datos" type="button"
+              role="tab" aria-controls="nav-datos" aria-selected="true">Informacion</button>
+            <button class="nav-link" id="nav-presentacion-tab" data-bs-toggle="tab" data-bs-target="#nav-presentacion"
+              type="button" role="tab" aria-controls="nav-presentacion" aria-selected="false">Presentación</button>
             <button class="nav-link" id="nav-historia-tab" data-bs-toggle="tab" data-bs-target="#nav-historia"
               type="button" role="tab" aria-controls="nav-historia" aria-selected="false">Historia</button>
           </div>
         </nav>
         <!--Input modal-->
         <div class="tab-content" id="nav-tabContent">
-          {{!-- Input de datos --}}
-          <div class="tab-pane fade show active" id="nav-datos" role="tabpanel" aria-labelledby="nav-datos-tab"
+          {{!-- Input de imagen video --}}
+          <div class="tab-pane fade show active" id="nav-imagen" role="tabpanel" aria-labelledby="nav-imagen-tab"
             tabindex="0">
-            <div class="row">
-              <input type="hidden" id="empresa_id" disabled>
-              <div class="col-6">
-                <label for="empresa_estado" class="form-label">Estado</label>
-                <select id="empresa_estado" class="form-select">
-                  <option value="1">Mostrar</option>
-                  <option value="0">Ocultar</option>
-                </select>
+            <input type="hidden" id="empresa_id" disabled>
+            <div class="col-6">
+              <label for="empresa_estado" class="form-label">Estado del stand</label>
+              <select id="empresa_estado" class="form-select">
+                <option value="1">Mostrar</option>
+                <option value="0">Ocultar</option>
+              </select>
+            </div>
+            <div class="col-6"></div>
+            <div class="col-12">
+              <label for="e_img_principal" class="form-label">Imagen principal</label>
+              <img style="width: 80%; aspect-ratio: 1.8;" class="rounded mx-auto d-block img-fluid" id="img_empresa"
+                src="" />
+              <input class="form-control mt-2" type="file" width="100%" id="e_img_principal" name="archivo"
+                accept="image/png,image/jpg,image/jpeg" />
+            </div>
+            <div class="col-12">
+              <label for="empresa_cargarvideo" class="form-label">Subir enlace de YouTube</label>
+              <div class="border rounded mx-auto d-block img-fluid" style="width: 80%; aspect-ratio: 1.8">
+                <iframe id="video_empresa" class="mx-auto" width="100%" height="100%" src="" frameborder="0"
+                  style="display: none;" allowfullscreen></iframe>
               </div>
-              <div class="col-6"></div>
+              <div class="input-group mt-2">
+                <input id="empresa_cargarvideo" type="text" class="form-control" placeholder="link"
+                  aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary" type="button" id="btn-cargar-video">Cargar</button>
+              </div>
+            </div>
+          </div>
+          {{!-- Input de datos --}}
+          <div class="tab-pane fade" id="nav-datos" role="tabpanel" aria-labelledby="nav-datos-tab" tabindex="0">
+            <div class="row">
               <div class="col-6">
                 <label for="empresa_nombre" class="form-label">Nombre </label>
                 <input type="text" class="form-control" id="empresa_nombre" autocomplete="off" />
@@ -79,44 +105,31 @@
                 <textarea type="text" class="form-control" id="empresa_descripcion" style="height: 60;"
                   autocomplete="off"></textarea>
               </div>
-              <div class="col-12">
-                <label for="empresa_historia" class="form-label">Historia </label>
-                <textarea type="text" class="form-control" id="empresa_historia" style="height: 60;"
-                  autocomplete="off"></textarea>
-              </div>
-
             </div>
           </div>
-          {{!-- Input de imagen video --}}
-          <div class="tab-pane fade" id="nav-imagen" role="tabpanel" aria-labelledby="nav-imagen-tab" tabindex="0">
+          {{!-- Input de presentacion --}}
+          <div class="tab-pane fade" id="nav-presentacion" role="tabpanel" aria-labelledby="nav-presentacion-tab"
+            tabindex="0">
             <div class="col-12">
-              <label for="empresa_cargarimage" class="form-label">Imagen principal</label>
-              <img style="width: 80%; aspect-ratio: 1.8;" class="rounded mx-auto d-block img-fluid" id="img_empresa"
-                src="" />
-              <input class="form-control mt-2" type="file" width="100%" id="empresa_cargarimage" name="archivo"
+              <label for="e_img_presentacion" class="form-label">Tarjeta de presentación</label>
+              <img style="width: 80%; aspect-ratio: 1.8;" class="rounded mx-auto d-block img-fluid"
+                id="img_presentacion" src="" />
+              <input class="form-control mt-2" type="file" width="100%" id="e_img_presentacion" name="archivo"
                 accept="image/png,image/jpg,image/jpeg" />
-            </div>
-            <div class="col-12">
-              <label for="empresa_cargarvideo" class="form-label">Subir enlace de YouTube</label>
-              <div class="border rounded mx-auto d-block img-fluid" style="width: 80%; aspect-ratio: 1.8">
-                <iframe id="video_empresa" class="mx-auto" width="100%" height="100%" src="" frameborder="0"
-                  style="display: none;" allowfullscreen></iframe>
-              </div>
-              <div class="input-group mt-2">
-                <input id="empresa_cargarvideo" type="text" class="form-control" placeholder="link"
-                  aria-describedby="button-addon2">
-                <button class="btn btn-outline-secondary" type="button" id="btn-cargar-video">Cargar</button>
-              </div>
             </div>
           </div>
           {{!-- Input de historia --}}
-          <div class="tab-pane fade" id="nav-historia" role="tabpanel" aria-labelledby="nav-historia-tab"
-            tabindex="0">
+          <div class="tab-pane fade" id="nav-historia" role="tabpanel" aria-labelledby="nav-historia-tab" tabindex="0">
             <div class="col-12">
-              <label for="e_cargarimage" class="form-label">Imagen de la historia</label>
+              <label for="empresa_historia" class="form-label">Historia </label>
+              <textarea type="text" class="form-control" id="empresa_historia" style="height: 60;"
+                autocomplete="off"></textarea>
+            </div>
+            <div class="col-12">
+              <label for="e_img_historia" class="form-label">Imagen de la historia</label>
               <img style="width: 80%; aspect-ratio: 1.8;" class="rounded mx-auto d-block img-fluid" id="img_historia"
                 src="" />
-              <input class="form-control mt-2" type="file" width="100%" id="e_cargarimage" name="archivo"
+              <input class="form-control mt-2" type="file" width="100%" id="e_img_historia" name="archivo"
                 accept="image/png,image/jpg,image/jpeg" />
             </div>
           </div>
