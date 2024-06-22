@@ -18,7 +18,7 @@ var opciones = {
 };
 
 $(document).ready(function () {
-  var table;
+  var table; //comentario1
   if (simpleDatatables) {
     table = new simpleDatatables.DataTable("#tablaVisita", opciones);
   }
